@@ -1,0 +1,11 @@
+export const ADCAT_LOGO = "../../adcat_logo.png";
+export const APP_ADMIN = "../../images/app_admin.svg";
+export const PROFILE_ICON = "../../images/profile_icon.svg";
+export const LOGO = "../../../logo.svg";
+export const LANDING_IMAGE = "../../images/LBS_Home_Image1.png";
+export const HDFC_LIFE_LOGO = "../../images/HDFC_LIFE_LOGO.png";
+export const PROFILE_LOGO = "../../images/one.png";
+export const LEFT_ARROW = "../../images/left_arrow.png";
+export const SHOW_MORE = "../../images/show_more.png";
+export const BACK_IMAGE = "../../images/back.png"
+export const ADD_COMMENT_IMAGE = "../../images/add.png"

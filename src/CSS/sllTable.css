@@ -1,0 +1,192 @@
+ .Sll_Table_expandStyles{
+    background-color: white;
+    box-sizing: border-box;
+    overflow:visible;
+    width: 83%;
+    padding-left:15px;
+   }
+
+ .Sll_Table_tableWrapper{
+    overflow:hidden;
+    height: 100%;
+    background-color: white;
+    border-top:1px solid rgba(151,151,151,0.25);
+    border-bottom:1px solid rgba(151,151,151,0.25);
+
+  },
+
+  .Sll_Table_tableHeaderWithNoBorder{
+    border-left:1px solid rgba(151,151,151,0.25) !important;
+  }
+
+  .Sll_Table_SimpleTableHeader{
+    color: #58595b;
+    font-size: 14px;
+    line-height: 1;
+    border: none;
+    font-style:italic;
+    font-weight:800;
+    text-align:center;
+    background-image:none;
+    background-color:white;
+    border-left:1px solid rgba(151,151,151,0.25);
+    border-bottom:1px solid rgba(151,151,151,0.25);
+  }
+
+  .Sll_Table_TableHeaderWithNoLeft{
+    color: #58595b;
+    font-size: 14px;
+    line-height: 1;
+    border: none;
+    font-style:italic;
+    font-weight:800;
+    text-align:center;
+    background-image:none;
+    background-color:white;
+    border-bottom:1px solid rgba(151,151,151,0.25);
+  }
+
+
+
+  .Sll_Table_SimpleTableRow{
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color:#58595b;
+    background-color:white;
+    border-left:1px solid rgba(151,151,151,0.25);
+  }
+
+  .Sll_Table_CenterAlignedRow{
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color:#58595b;
+    background-color:white;
+    border:1px solid rgba(151,151,151,0.25);
+  }
+
+  /* .Sll_Table_CenterAlignedRowInnerTable{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color:#58595b;
+    background-color:white;
+    border:1px solid rgba(151,151,151,0.25);
+  } */
+
+  .Sll_Table_AdvanceTableRow{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color:#58595b;
+    background-color:white;
+    border:1px solid rgba(151,151,151,0.25);
+  }
+
+  .Sll_Table_extraRowFeatures{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color:#58595b;
+    text-align:center;
+    background-color:rgba(151,151,151,0.2);
+    border:1px solid rgba(151,151,151,0.25);
+  }
+
+  .Sll_Table_extraRowFeaturesLeft{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color:#58595b;
+    text-align:left;
+    background-color:rgba(151,151,151,0.2);
+    border:1px solid rgba(151,151,151,0.25);
+  }
+
+  .Sll_Table_root{
+    padding:20px;
+    box-shadow:none !important;
+  }
+
+  .fixedDataTableCellLayout_main{
+    margin-left:1px;
+  }
+
+
+
+  /* #################################################### */
+
+  .Sll_CenterAlignedRowFirstName{
+    font-size: 12px;
+    font-weight: 500;
+    color:#58595b;
+    background-color:white;
+    border:1px solid rgba(151,151,151,0.25);
+    text-decoration:underline;
+    text-decoration-color: #0067AC;
+    text-align: center;
+  }
+
+  .Sll_SelectedCenterAlignedRowFirstName{
+    font-size: 12px;
+    font-weight: 500;
+    color:#58595b;
+    background-color:rgba(151,151,151,0.2) ;
+    border:1px solid rgba(151,151,151,0.25);
+    text-decoration:underline;
+    text-decoration-color: #0067AC;
+    text-align: center;
+  }
+
+  .Sll_SimpleCenterAlignedRow{
+    font-size: 12px;
+    font-weight: 500;
+    color:#58595b;
+    background-color:white;
+    border:1px solid rgba(151,151,151,0.25);
+    text-decoration-color: rgb(151,151,151);
+    text-align: center;
+  }
+
+  .Sll_SelectedSimpleCenterAlignedRow{
+    font-size: 12px;
+    font-weight: 500;
+    color:#58595b;
+    background-color:rgba(151,151,151,0.2) ;
+    border:1px solid rgba(151,151,151,0.25);
+    text-decoration-color: rgb(151,151,151);
+    text-align: center;
+  }
+
+  .Sll_SimpleLeftAlignedRow{
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color:#58595b;
+    background-color:white;
+    border:1px solid rgba(151,151,151,0.25);
+  }
+
+  .Sll_SelectedSimpleLeftAlignedRow{
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color:#58595b;
+    background-color:rgba(151,151,151,0.2) ;
+    border:1px solid rgba(151,151,151,0.25);
+  }

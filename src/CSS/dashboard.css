@@ -1,0 +1,182 @@
+  .DASHBOARD_MAIN{
+    overflow: hidden;
+    flex-grow:1;
+    padding: 0px 32px 0px 32px;
+    font-family:Lato;
+  }
+
+  .DASHBOARD_CONTAINER{
+    overflow: hidden;
+    margin-top:22px;
+    padding: 0px 0px;
+  }
+
+  .DASHBOARD_ADD_APP_BUTTON{
+    color: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #ffffff;
+    background-image:linear-gradient(58deg, #03ce87, #067ecf);
+    margin-right:20px;
+    font-family:Lato;
+    padding-bottom: 5px;
+  }
+
+  .DASHBOARD_UPPER_HEADER{
+    border-radius: 10px;
+    background-color: #ffffff;
+    border: solid 1px #e7e7e7;
+    width:100%;
+    padding-top:5px;
+    padding-bottom: 5px;
+  }
+
+  .DASHBOARD_PROFILE_IMAGE{
+    height:44px;
+    width:44px;
+    margin:10px 11px 10px 14px;
+    background-color:#d8d8d8;
+    border-radius:50%;
+    display: inline-block;
+    float:left;
+  }
+
+  .DASHBOARD_PROFILE_NAME{
+    font-size:16px;
+    font-weight:300;
+    color: #58595b;
+    margin:0px;
+    padding:0px;
+    border-right:1px solid #bbbbbb;
+
+  }
+
+  .DASHBOARD_PROFILE_DESIGNATION{
+    font-size:16px;
+    font-weight:500;
+    color:#58595b;
+    margin:0px;
+    border-right:1px solid #bbbbbb;
+
+  }
+
+  .DASHBOARD_SUB_PROFILE_DESIGNATION{
+    font-size:12px;
+    color:#58595b;
+    margin:0px;
+    padding-top:2px;
+    border-right:1px solid #bbbbbb;
+  }
+
+  .DASHBOARD_COMMA{
+    padding:0px;
+    margin:0px;
+    margin-top:-15px;
+    font-family:Arial;
+    font-size:55px;
+    font-weight:900;
+    color:#e1e1e1;
+  }
+
+  .DASHBOARD_MY_COMMITMENT{
+    padding:0px;
+    margin:0px;
+    margin-top:5px;
+    font-size:12px;
+    font-weight:300;
+    color:#dedede;
+  }
+
+  .DASHBOARD_COMMENTS_SELF{
+    padding:0px;
+    margin:0px;
+    font-size:10px;
+    font-weight:500;
+    color:#58595b;
+  }
+
+  .DASHBOARD_COMMENTS_MANAGER{
+    padding:0px;
+    margin:0px;
+    font-size:10px;
+    font-weight:500;
+    font-style: italic;
+    color:#58595b;
+  }
+
+  .DASHBOARD_COMMENTS_BUTTON{
+    font-size:8px;
+    font-weight:550;
+    color:#5ebaff;
+  }
+
+  .DASHBOARD_MARGIN_TOP_DESIG{
+    margin-top:5px !important;
+  }
+
+  .DASHBOARD_TIMINGS{
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .DASHBOARD_MANAGER_BUTON{
+    text-transform: none !important;
+    height: 16px !important ;
+    min-height: 0px !important;
+    padding: 0px 4px !important;
+    text-decoration: none !important;
+  }
+
+  /*  iphone 6/7/8 */
+
+  @media screen and (max-width: 500px) {
+
+    .DASHBOARD_MARGIN_TOP_DESIG{
+      margin-top:15px !important;
+    }
+
+    .DASHBOARD_COMMITMENT_CONTAINER{
+      margin-bottom: 10px !important;
+    }
+
+    .DASHBOARD_SUB_PROFILE_DESIGNATION{
+      border: none;
+    }
+
+    .DASHBOARD_PROFILE_NAME{
+      border: none;
+    }
+
+    .DASHBOARD_PROFILE_DESIGNATION{
+      border: none;
+    }
+
+    .DASHBOARD_COMMA{
+      padding:0px;
+      margin:0px;
+      margin-top:-15px;
+      font-family:Arial;
+      font-size:40px;
+      font-weight:900;
+      color:#e1e1e1;
+    }
+
+    .DASHBOARD_MY_COMMITMENT{
+        padding:0px;
+        margin:0px;
+        margin-top:2px;
+        font-size:10px;
+        font-weight:300;
+        color:#dedede;
+    }
+
+    .DASHBOARD_TIMINGS{
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-bottom: 10px !important;
+    }
+
+  }
+
+  @media screen and (max-width: 380px) {
+
+  }

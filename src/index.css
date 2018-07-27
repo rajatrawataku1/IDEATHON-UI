@@ -1,0 +1,168 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+a{
+  text-decoration: none;
+  color: #444;
+}
+a:hover {
+  color: #444
+}
+
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Asap';
+  background-color: "#ffffff";
+  height: 100vh;
+}
+
+#root{
+    height: 100vh;
+}
+
+.App{
+  height: 100vh;
+}
+
+.indigo-violet-gradient-bg {
+  background-image: linear-gradient(78deg, #03ce87, #067ecf);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-align-baseline {
+  align-items: baseline;
+}
+
+.flex-align-start {
+  align-items: flex-start;
+}
+
+.flex-align-end {
+  align-items: flex-end;
+}
+
+.flex-align-stretch {
+  align-items: stretch;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-start {
+  justify-content: flex-start;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.flex-justify-space-around {
+  justify-content: space-around;
+}
+
+.flex-justify-space-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.text-field-style input{
+  color: #3a3a3a;
+  text-align: center;
+}
+.tableHeaderWithNoBorder{
+  background: white;
+}
+
+.fixedDataTableCellLayout_main {
+}
+
+.tableHeaderWithNoBorder >  {
+  background: white;
+  border-left: none;
+}
+
+
+.public_fixedDataTable_header{
+  background-image: none;
+}
+
+.fixedDataTableRowLayout_main{
+  background-image: none;
+
+}
+.public_fixedDataTableRow_main{
+  background-image: none;
+
+}
+
+.fixedDataTableLayout_header{
+  background-image: none;
+
+}
+
+.public_fixedDataTable_header{
+  background-image: none;
+}
+
+.SllTableStyle .public_fixedDataTable_topShadow{
+  width: 600px;
+}
+
+.SllTableStyle .public_fixedDataTable_bottomShadow{
+  width: 600px;
+}
+
+
+
+.FllTableStyle .public_fixedDataTable_topShadow{
+  width: 720;
+}
+
+.FllTableStyle .public_fixedDataTable_bottomShadow{
+  width: 720px;
+}
+
+.FllTableStyle .fixedDataTableCellLayout_wrap3 {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.SllTableStyle .fixedDataTableCellLayout_wrap3 {
+  display: table-cell;
+  vertical-align: top;
+}

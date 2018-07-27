@@ -1,0 +1,50 @@
+ .LOGIN_LABEL{
+   color:#000000;
+   font-size:13px;
+   font-weight:500;
+   font-family:Lato;
+ }
+
+ .LOGIN_INPUT{
+        border-radius:3px;
+        border:1px solid #979797;
+        background-color:#ffffff;
+        padding:8px;
+        font-size: 24px;
+ }
+
+ .LOGIN_HEADER_TEXT{
+   color: #58595b;
+   font-family:Verdana;
+   font-size: 20px;
+   margin: 0px;
+ }
+
+ .LOGIN_WRAPPER{
+   margin-top:10px;
+ }
+
+ .LOGIN_BUTTON{
+   width:39%   !important ;
+   margin-top: 50px !important ;
+   padding:10px !important ;
+   border-radius: 30px !important ;
+   font-size: 24px !important ;
+   font-weight: 500 !important ;
+   font-family:Lato !important ;
+   color:#ffffff !important ;
+   background-color: #1095ff !important ;
+   text-transform: none !important ;
+ }
+
+ .text-field-style input{
+   color: #3a3a3a;
+   text-align: center;
+ }
+
+ /*  responsiveness handled here */
+ @media screen and (max-width: 500px) {
+   .LOGIN_BUTTON{
+     font-size: 16px !important ;
+   }
+ }

@@ -1,0 +1,116 @@
+
+.LEFT_ARROW_STYLE{
+  height:15px;
+  width:15px;
+  padding:22px 0px 0px 26px;
+}
+
+.HEADER_LEFT_PAGE_HEADING{
+  margin:0px;
+  font-size:16px;
+  font-style:italic;
+  color:#58595b;
+  padding:21px 0px 0px 9px;
+}
+
+.HEADER_RIGHT_PROFILE_NAME{
+    color:#ffffff;
+    font-size:16px;
+    cursor:pointer;
+    font-family:Lato;
+    font-weight: 1000;
+}
+
+.HEADER_RIGHT_PROFILE_ICON{
+  cursor: pointer;
+  height:44px;
+  width:44px;
+  background-color:#d8d8d8;
+  border-radius:50%;
+  margin-left:10px;
+  float: left;
+}
+
+.HEADER_RIGHT_PROFILE_SHOW_MORE_ICON{
+  margin-right:28px;
+  padding-left:10px;
+}
+
+.HEADER_WISH_TEXT{
+  font-family:Lato;
+  font-size:20px;
+  font-weight:1000;
+  color:#58595b;
+}
+
+/* Iphone 6/7/8 screen  */
+
+@media screen and (max-width: 500px) {
+
+  .HEADER_WISH_TEXT{
+    font-size: 14px;
+  }
+
+  .HEADER_RIGHT_PROFILE_SHOW_MORE_ICON{
+    margin-right:18px;
+    padding-left:5px;
+  }
+
+  .HEADER_RIGHT_PROFILE_ICON{
+    cursor: pointer;
+    height:34px;
+    width:34px;
+    background-color:#d8d8d8;
+    border-radius:50%;
+    margin-left:5px;
+    float: left;
+
+  }
+
+  .LEFT_ARROW_STYLE{
+    height:15px;
+    width:15px;
+    padding:22px 0px 0px 12px;
+  }
+
+  .HEADER_LEFT_PAGE_HEADING{
+    font-size:11px;
+    padding:24px 0px 0px 13px;
+  }
+}
+
+/*  iphone 5/se screen */
+
+
+@media screen and (max-width: 350px) {
+
+  .HEADER_WISH_TEXT{
+    font-size: 10px;
+  }
+
+  .HEADER_RIGHT_PROFILE_SHOW_MORE_ICON{
+    margin-right:18px;
+    padding-left:5px;
+  }
+
+  .HEADER_RIGHT_PROFILE_ICON{
+    cursor: pointer;
+    height:24px;
+    width:24px;
+    background-color:#d8d8d8;
+    border-radius:50%;
+    margin-left:5px;
+    float: left;
+  }
+
+  .LEFT_ARROW_STYLE{
+    height:10px;
+    width:10px;
+    padding:22px 0px 0px 12px;
+  }
+
+  .HEADER_LEFT_PAGE_HEADING{
+    font-size:9px;
+    padding:25px 0px 0px 12px;
+  }
+}

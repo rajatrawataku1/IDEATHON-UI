@@ -1,0 +1,70 @@
+  .Enhanced_Table_Root{
+    padding:20px;
+    box-shadow:none !important;
+  }
+
+ .Enhanced_tableWrapper{
+    overflow:scroll;
+    height: 100%;
+    width: 720px !important;
+    border:1px solid rgba(151,151,151,0.25);
+    font-size:14px;
+  }
+
+  .Enhanced_newTableHeaderImp{
+    color: #58595b;
+    line-height: 1;
+    background: #979797;
+    border: none;
+    font-style:italic;
+    font-weight:normal;
+    text-align:center;
+    box-shadow:3px 0 4px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .Enhanced_newTableHeaderNotImp{
+    color: #58595b;
+    line-height: 1;
+    background: #cfe5ff;
+    border: none;
+    font-style:italic;
+    font-weight:normal;
+    text-align:center;
+  }
+
+  .Enhanced_SimpleTableHeader{
+    color: #58595b;
+    line-height: 1;
+    border: none;
+    font-style:italic;
+    font-weight:normal;
+    text-align:center;
+    background-image:none;
+  }
+
+  .Enhanced_SimpleTableRow{
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color:#58595b;
+    background-color:white;
+    border-right:1px solid rgba(151,151,151,0.25);
+    border-top:1px solid rgba(151,151,151,0.25);
+    border-bottom:1px solid rgba(151,151,151,0.25);
+
+  }
+
+  .Enhanced_AdvanceTableRow{
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color:#58595b;
+    background-color:white;
+    border:1px solid rgba(151,151,151,0.25);
+  }
