@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, withRouter } from 'react-router-dom';
-import { MuiThemeColors } from './classes';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+
 import Snackbar from 'material-ui/Snackbar';
-import { COLORS } from './constants';
 import { Header, AppDialog } from './components';
 import { SnackbarAction, UserAction } from './actions';
 import Routes from './routes';
 import './App.css';
 
-const TEMPLATE_THEME = new MuiThemeColors(COLORS.LOGIN_COLOR);
+// const TEMPLATE_THEME = new MuiThemeColors(COLORS.LOGIN_COLOR);
 
 const theme = createMuiTheme({
   palette: {
@@ -57,7 +56,6 @@ class App extends Component {
     this.closeHeaderMenu();
     this.props.actions.logout();
     history.push('/');
-    console.log("I am logged out APP" );
   }
 
   onSnackbarClose() {

@@ -10,74 +10,79 @@ export default function SllReducer(state = {}, action) {
   switch (action.type) {
 
     case SLL_ACTION_TYPES.GET_SLL_INFO_SUCCESS:
+    {
+      responseBody  = action.resBody;
+      responseData = responseBody.data;
+      console.log(Auth.getUserDataByKey('Id'));
 
-        responseBody  = action.resBody;
-        responseData = responseBody.data;
-        console.log(Auth.getUserDataByKey('Id'));
+      let finaArray =  [
+        {  AgentId:Auth.getUserDataByKey('Id'),
+           Name: Auth.getUserDataByKey('Name'),
+           CommentCurrentWeekManagerComment:"",
+           CommentCurrentWeekSelfComment:"",
+           CommentPreviousWeekManagerComment:"",
+           CommentPreviousWeekSelfComment:"",
+        }
+      ]
 
-        var finaArray =  [
-          {  AgentId:Auth.getUserDataByKey('Id'),
-             Name: Auth.getUserDataByKey('Name'),
-             CommentCurrentWeekManagerComment:"",
-             CommentCurrentWeekSelfComment:"",
-             CommentPreviousWeekManagerComment:"",
-             CommentPreviousWeekSelfComment:"",
-          }
-        ]
+      let allUnderHim = responseData[1];
 
-        var allUnderHim = responseData[1];
+      let apps = [];
+      allUnderHim.forEach((app) => {
+        apps.push(new Sll(app))
+      })
 
-        var apps = [];
-        allUnderHim.forEach((app) => {
-          apps.push(new Sll(app))
-        })
+      console.log(apps);
 
-        console.log(apps);
+      finaArray.push(...apps);
+      console.log(finaArray);
+      sllStore.sllInfo = finaArray;
 
-        finaArray.push(...apps);
-        console.log(finaArray);
-        sllStore.sllInfo = finaArray;
-      break;
+    }
+
+    break;
+
 
     case SLL_ACTION_TYPES.GET_SLL_INFO_FAILURE:
       delete sllStore.sllInfo;
       break;
 
     case SLL_ACTION_TYPES.GET_SLL_EXPAND_SUCCESS:
-        responseBody  = action.resBody;
-        responseData = responseBody.data;
+    {
+      responseBody  = action.resBody;
+      responseData = responseBody.data;
 
-        // console.log(Auth.getUserDataByKey('Id'));
-        //
-        // var finaArray =  [
-        //   {  AgentId:Auth.getUserDataByKey('Id'),
-        //      Name: Auth.getUserDataByKey('Name'),
-        //      CommentCurrentWeekManagerComment:"",
-        //      CommentCurrentWeekSelfComment:"",
-        //      CommentPreviousWeekManagerComment:"",
-        //      CommentPreviousWeekSelfComment:"",
-        //   }
-        // ]
+      // console.log(Auth.getUserDataByKey('Id'));
+      //
+      // var finaArray =  [
+      //   {  AgentId:Auth.getUserDataByKey('Id'),
+      //      Name: Auth.getUserDataByKey('Name'),
+      //      CommentCurrentWeekManagerComment:"",
+      //      CommentCurrentWeekSelfComment:"",
+      //      CommentPreviousWeekManagerComment:"",
+      //      CommentPreviousWeekSelfComment:"",
+      //   }
+      // ]
 
-        var allUnderHim = responseData[1];
+      let allUnderHim = responseData[1];
 
-        var  apps = [];
-        allUnderHim.forEach((app) => {
-          apps.push(new Sll(app))
-        })
+      let  apps = [];
+      allUnderHim.forEach((app) => {
+        apps.push(new Sll(app))
+      })
 
-        console.log(apps);
+      console.log(apps);
 
-        // finaArray.push(...apps);
-        // console.log(finaArray);
-        sllStore.sllExpandInfo = apps;
+      // finaArray.push(...apps);
+      // console.log(finaArray);
+      sllStore.sllExpandInfo = apps;
 
-      break;
+    }
+    break;
 
     case SLL_ACTION_TYPES.GET_SLL_EXPAND_FAILURE:
       delete sllStore.sllExpandInfo;
       break;
-
 
     default:
       return state;

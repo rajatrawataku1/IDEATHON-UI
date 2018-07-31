@@ -1,22 +1,27 @@
  .Sll_Table_expandStyles{
     background-color: white;
     box-sizing: border-box;
-    overflow:visible;
-    width: 83%;
-    padding-left:15px;
+    overflow:hidden;
+    width: 100%;
+    font-size: 12px;
    }
 
  .Sll_Table_tableWrapper{
-    overflow:hidden;
+    overflow:scroll;
     height: 100%;
     background-color: white;
     border-top:1px solid rgba(151,151,151,0.25);
     border-bottom:1px solid rgba(151,151,151,0.25);
-
+    font-size: 11px;
   },
 
   .Sll_Table_tableHeaderWithNoBorder{
     border-left:1px solid rgba(151,151,151,0.25) !important;
+  }
+
+  .SLL_Previous_Comment{
+    font-size: 10px;
+    font-style:italic;
   }
 
   .Sll_Table_SimpleTableHeader{
@@ -49,7 +54,6 @@
 
 
   .Sll_Table_SimpleTableRow{
-    font-size: 12px;
     font-weight: 500;
     text-align: center;
     color:#58595b;
@@ -58,7 +62,6 @@
   }
 
   .Sll_Table_CenterAlignedRow{
-    font-size: 12px;
     font-weight: 500;
     text-align: center;
     color:#58595b;
@@ -80,7 +83,6 @@
   } */
 
   .Sll_Table_AdvanceTableRow{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -93,7 +95,6 @@
   }
 
   .Sll_Table_extraRowFeatures{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -106,7 +107,6 @@
   }
 
   .Sll_Table_extraRowFeaturesLeft{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -132,7 +132,6 @@
   /* #################################################### */
 
   .Sll_CenterAlignedRowFirstName{
-    font-size: 12px;
     font-weight: 500;
     color:#58595b;
     background-color:white;
@@ -143,7 +142,6 @@
   }
 
   .Sll_SelectedCenterAlignedRowFirstName{
-    font-size: 12px;
     font-weight: 500;
     color:#58595b;
     background-color:rgba(151,151,151,0.2) ;
@@ -154,7 +152,6 @@
   }
 
   .Sll_SimpleCenterAlignedRow{
-    font-size: 12px;
     font-weight: 500;
     color:#58595b;
     background-color:white;
@@ -164,7 +161,6 @@
   }
 
   .Sll_SelectedSimpleCenterAlignedRow{
-    font-size: 12px;
     font-weight: 500;
     color:#58595b;
     background-color:rgba(151,151,151,0.2) ;
@@ -174,7 +170,6 @@
   }
 
   .Sll_SimpleLeftAlignedRow{
-    font-size: 12px;
     font-weight: 500;
     text-align: left;
     color:#58595b;
@@ -183,10 +178,22 @@
   }
 
   .Sll_SelectedSimpleLeftAlignedRow{
-    font-size: 12px;
     font-weight: 500;
     text-align: left;
     color:#58595b;
     background-color:rgba(151,151,151,0.2) ;
     border:1px solid rgba(151,151,151,0.25);
+  }
+
+
+  @media screen and (max-width: 600px) {
+
+    .Sll_Table_tableWrapper{
+      font-size: 10px;
+    }
+
+    .SLL_Previous_Comment{
+      font-size: 9px;
+    }
+
   }

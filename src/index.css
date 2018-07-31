@@ -13,7 +13,7 @@ a:hover {
 body{
   margin: 0px;
   padding: 0px;
-  font-family: 'Asap';
+  font-family: 'Lato';
   background-color: "#ffffff";
   height: 100vh;
 }
@@ -140,21 +140,27 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .SllTableStyle .public_fixedDataTable_topShadow{
-  width: 600px;
+  width: auto;
 }
 
 .SllTableStyle .public_fixedDataTable_bottomShadow{
-  width: 600px;
+  width: auto;
 }
 
 
 
 .FllTableStyle .public_fixedDataTable_topShadow{
-  width: 720;
+  width: auto;
+  /* width: 715px; */
+  /* display:none; */
 }
 
 .FllTableStyle .public_fixedDataTable_bottomShadow{
-  width: 720px;
+  width: auto;
+
+  /* width: 715px; */
+
+  /* display:none; */
 }
 
 .FllTableStyle .fixedDataTableCellLayout_wrap3 {
@@ -165,4 +171,18 @@ input[type=number]::-webkit-outer-spin-button {
 .SllTableStyle .fixedDataTableCellLayout_wrap3 {
   display: table-cell;
   vertical-align: top;
+}
+
+.Sll_Table_expandStyles .public_fixedDataTable_topShadow{
+  display: none;
+}
+
+.Sll_Table_expandStyles .public_fixedDataTable_bottomShadow{
+  display: none;
+}
+
+.ScreensPosition{
+  position: absolute;
+  top: 7%;
+  width: 100%;
 }

@@ -12,15 +12,21 @@ export default function leadReducer(state = {}, action) {
 
         responseBody  = action.resBody;
         responseData = responseBody.data;
+
+        console.log(responseData);
+
         let apps = [];
         responseData.forEach((app) => {
           apps.push(new Lead(app))
         })
 
+        console.log("##########################");
+        console.log(apps);
+
         leadViewStore.leadData = apps;
       break;
 
-    case LEAD_ACTION_TYPES.GET_LEADS_SUCCESS:
+    case LEAD_ACTION_TYPES.GET_LEADS_FAILURE:
       delete leadViewStore.leadData;
       break;
 

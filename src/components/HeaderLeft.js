@@ -1,18 +1,18 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
+// import { Link } from "react-router-dom";
+// import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
 import { withRouter } from 'react-router'
-import {LEFT_ARROW, PROFILE_ICON, COLORS, FONTS} from '../constants';
-import { Auth } from '../helpers';
+// import {LEFT_ARROW, PROFILE_ICON, COLORS, FONTS} from '../constants';
+// import { Auth } from '../helpers';
 import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 
 class HeaderLeft extends React.Component {
 
-  constructor(props){
-    super(props);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
 
   goBack = ()=>{
     const { history } = this.props
@@ -21,7 +21,7 @@ class HeaderLeft extends React.Component {
 
   render(){
 
-    const { match, location, history } = this.props
+    const { location } = this.props
 
     return(
 
@@ -32,9 +32,10 @@ class HeaderLeft extends React.Component {
             </Grid>
           :
           <Grid item xs={2}>
-            <IconButton onClick={this.goBack}color="#58595b" aria-label="Show More" style={{borderRadius:"50%",marginTop:"7px"}}>
+            <IconButton onClick={this.goBack} color="default" aria-label="Show More" style={{borderRadius:"50%",marginTop:"7px"}}>
               <Icon style={{fontSize:"34px"}}>arrow_left</Icon>
             </IconButton>
+            {/* #58595b */}
             {/* <img src={LEFT_ARROW} className="LEFT_ARROW_STYLE"/> */}
           </Grid>
 

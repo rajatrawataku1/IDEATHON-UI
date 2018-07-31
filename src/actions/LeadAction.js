@@ -10,7 +10,7 @@ export const LeadAction = {
 
 // Get Lead Info
 
-function getLeadsInfo(week,agentId,options={}){
+function getLeadsInfo(type,week,agentId,options={}){
 
 
   let { afterSuccess, afterError } = options;
@@ -23,9 +23,10 @@ function getLeadsInfo(week,agentId,options={}){
     afterError = undefined;
   }
 
-  const actualPath = "/week-no/"+week+"/agent-id/"+agentId;
+  const actualPath = "/type/"+type+"/week-no/"+week+"/agent-id/"+agentId;
 
-  // console.log(DASHBOARD_API.GET_LEADS_INFO+actualPath);
+
+  // console.log(LEAD_API.GET_LEADS_INFO+actualPath);
 
   return {
     [CALL_API]: {
@@ -54,15 +55,18 @@ function addLeadComments(text,leadId,options={}){
   }
 
   let body = {
-      comment:text,
+      id:leadId,
+      comment:text
   }
+
+
 
   // const actualPath = "/week-no/"+week+"/agentId/"+agentId;
 
   return {
     [CALL_API]: {
       method: 'post',
-      path: LEAD_API.SET_SELF_COMMENTS+"/"+leadId,
+      path: LEAD_API.ADD_LEADS_COMMENTS,
       body,
       auth: Auth.getToken(),
       successType: LEAD_ACTION_TYPES.SET_LEADS_COMMENT_SUCCESS,

@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import Tooltip from 'material-ui/Tooltip';
 import Button from 'material-ui/Button';
 import { DialogAction, SnackbarAction, SllAction } from '../actions';
 import { connect } from 'react-redux';
-import {  FONTS } from '../constants';
-import { Table, Column, Cell ,CollapseCell } from 'fixed-data-table-2';
-import { StyleSheet, css }  from 'aphrodite';
+import { Table, Column, Cell} from 'fixed-data-table-2';
+import { getTablerowHeight ,getTableHeight,getTableWidth,getExpandTableWidth} from '../helpers';
+
+// import { StyleSheet, css }  from 'aphrodite';
 import moment from 'moment';
 import Icon from 'material-ui/Icon';
 import '../CSS/SllView.css';
@@ -49,8 +48,8 @@ class SllTable extends React.Component {
 }
 
 _subRowHeightGetter(index) {
-  let totalRows =  this.props.sllExpandInfoFinal.length;
-  return this.state.collapsedRows.has(index) ? totalRows*100 : 0;
+  // let totalRows =  this.props.sllExpandInfoFinal.length;
+  return this.state.collapsedRows.has(index) ? 400 : 0;
 }
 
 _rowExpandedGetter({rowIndex, width, height}) {
@@ -58,22 +57,24 @@ _rowExpandedGetter({rowIndex, width, height}) {
     return null;
   }
 
-  const style = {
-    height: height,
-    width: width - 2,
-  };
 
   let data = this.props.sllExpandInfoFinal;
-  let {collapsedRows, scrollToRow} = this.state;
+  // let {collapsedRows, scrollToRow} = this.state;
+  // let { scrollToRow} = this.state;
 
 // logic to create header Coloumn
-  let currentWeekNumber = moment().week();
-  let PreviousWeekNumber = currentWeekNumber -1;
+  // let currentWeekNumber = moment().week();
+  // let PreviousWeekNumber = currentWeekNumber -1;
 
-  let CurrentWeekMondayArray = String(moment().isoWeekday(1)).split(" ");
-  let CurrentWeekSundayArray = String(moment().isoWeekday(7)).split(" ");
-  let PreviousWeekMondayArray = String(moment().week(PreviousWeekNumber).isoWeekday(1)).split(" ");
-  let PreviousWeekSundayArray = String(moment().week(PreviousWeekNumber).isoWeekday(7)).split(" ");
+  // let CurrentWeekMondayArray = String(moment().isoWeekday(1)).split(" ");
+  // let CurrentWeekSundayArray = String(moment().isoWeekday(7)).split(" ");
+  // let PreviousWeekMondayArray = String(moment().week(PreviousWeekNumber).isoWeekday(1)).split(" ");
+  // let PreviousWeekSundayArray = String(moment().week(PreviousWeekNumber).isoWeekday(7)).split(" ");
+
+  let tablerowHeight = getTablerowHeight()+15;
+  // let tableHeight = getTableHeight();
+  let tableWidth = getTableWidth();
+  let expandTableWidth = getExpandTableWidth();
 
     return (
       <div>
@@ -82,12 +83,13 @@ _rowExpandedGetter({rowIndex, width, height}) {
             showScrollbarX={true}
             showScrollbarY={true}
             rowsCount={data.length}
-            rowHeight={100}
+            rowHeight={tablerowHeight}
             headerHeight={5}
-            className={" SllTableStyle" +" SllTableStyleInner" }
+            className="SllTableStyle SllTableStyleInner"
             touchScrollEnabled={true}
-            width={600}
+            width={tableWidth-expandTableWidth}
             height={400}
+            stopScrollPropagation={true}
             {...this.props}>
 
           <Column
@@ -96,7 +98,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
             <Cell className="Sll_CenterAlignedRowFirstName"  {...props}>
               <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
               </Cell>}
-            width={85}
+            width={90}
           />
 
           <Column
@@ -105,7 +107,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
             <Cell className="Sll_SimpleCenterAlignedRow" {...props}>
                 {data[rowIndex][columnKey]}
             </Cell>}
-            width={100}
+            width={80}
           />
 
           <Column
@@ -120,13 +122,13 @@ _rowExpandedGetter({rowIndex, width, height}) {
                   :
                   <div>
                     <Grid container>
-                      <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-start"}}>
-                        <span style={{textAlign:"left",fontSize:"12px"}}> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span> <br/> <br/>
+                      <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-start"}}>
+                        <span> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span> <br/> <br/>
                       </Grid>
-                      <Grid item xs={4}></Grid>
-                      <Grid item xs={4}></Grid>
-                      <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-end"}}>
-                        <span style={{textAlign:"right",fontSize:"11px",fontStyle:"italic"}}> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
+                      <Grid item xs={2}></Grid>
+                      <Grid item xs={2}></Grid>
+                      <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-end"}}>
+                        <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
                       </Grid>
                     </Grid>
                   </div>
@@ -134,7 +136,8 @@ _rowExpandedGetter({rowIndex, width, height}) {
                 }
 
               </Cell>}
-            width={200}
+            width={235}
+            flexGrow={2}
           />
 
           <Column
@@ -148,13 +151,13 @@ _rowExpandedGetter({rowIndex, width, height}) {
                 :
                 <div>
                   <Grid container>
-                    <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-start"}}>
-                      <span style={{textAlign:"left",fontSize:"12px"}}> {data[rowIndex]['CommentCurrentWeekSelfComment']} </span> <br/> <br/>
+                    <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-start"}}>
+                      <span > {data[rowIndex]['CommentCurrentWeekSelfComment']} </span> <br/> <br/>
                     </Grid>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-end"}}>
-                      <span style={{textAlign:"right",fontSize:"11px",fontStyle:"italic"}}> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-end"}}>
+                      <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
                     </Grid>
                   </Grid>
                 </div>
@@ -162,7 +165,9 @@ _rowExpandedGetter({rowIndex, width, height}) {
               }
 
               </Cell>}
-            width={180}
+            width={235}
+            flexGrow={2}
+
           />
 
         </Table>
@@ -227,7 +232,8 @@ _rowExpandedGetter({rowIndex, width, height}) {
 
   render() {
     let data = this.props.sllInfoFinal;
-    let {collapsedRows, scrollToRow} = this.state;
+    // let {collapsedRows, scrollToRow} = this.state;
+    let {collapsedRows} = this.state;
 
 // logic to create header Coloumn
     let currentWeekNumber = moment().week();
@@ -238,7 +244,12 @@ _rowExpandedGetter({rowIndex, width, height}) {
     let PreviousWeekMondayArray = String(moment().week(PreviousWeekNumber).isoWeekday(1)).split(" ");
     let PreviousWeekSundayArray = String(moment().week(PreviousWeekNumber).isoWeekday(7)).split(" ");
 
-    console.log(CurrentWeekMondayArray,CurrentWeekSundayArray,PreviousWeekMondayArray,PreviousWeekSundayArray);
+    let tablerowHeight = getTablerowHeight()+15;
+    let tableHeight = getTableHeight();
+    let tableWidth = getTableWidth();
+
+    // console.log(CurrentWeekMondayArray,CurrentWeekSundayArray,PreviousWeekMondayArray,PreviousWeekSundayArray);
+
     return (
 
       <Paper className="Sll_Table_root">
@@ -248,14 +259,14 @@ _rowExpandedGetter({rowIndex, width, height}) {
             showScrollbarX={false}
             showScrollbarY={false}
             rowsCount={data.length}
-            rowHeight={100}
+            rowHeight={tablerowHeight}
             subRowHeightGetter={this._subRowHeightGetter}
             rowExpanded={this._rowExpandedGetter}
             headerHeight={50}
-            className={"Sll_Table_tableWrapper" + " SllTableStyle"}
+            className={"Sll_Table_tableWrapper SllTableStyle"}
             touchScrollEnabled={true}
-            width={720}
-            maxHeight={768}
+            width={tableWidth}
+            maxHeight={tableHeight}
             onRowClick={this.rowHandler}
             {...this.props}>
 
@@ -266,7 +277,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
             <Cell className={ this.state.collapsedRows.has(rowIndex) ? "Sll_SelectedCenterAlignedRowFirstName":"Sll_CenterAlignedRowFirstName" }   {...props}>
                 <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
               </Cell>}
-            width={100}
+            width={90}
           />
 
           <Column
@@ -276,7 +287,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
             <Cell className={ this.state.collapsedRows.has(rowIndex) ? "Sll_SelectedSimpleCenterAlignedRow":"Sll_SimpleCenterAlignedRow" }   {...props}>
                 {data[rowIndex][columnKey]}
             </Cell>}
-            width={100}
+            width={80}
           />
 
           <Column
@@ -297,13 +308,13 @@ _rowExpandedGetter({rowIndex, width, height}) {
                   :
                   <div>
                     <Grid container>
-                      <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-start"}}>
-                        <span style={{fontSize:"12px"}}> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span> <br/> <br/>
+                      <Grid item xs={11} className="flex-row" style={{justifyContent:"flex-start"}}>
+                        <span> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span> <br/> <br/>
                       </Grid>
-                      <Grid item xs={4}></Grid>
-                      <Grid item xs={4}></Grid>
-                      <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-end"}}>
-                        <span style={{fontSize:"11px",fontStyle:"italic"}}> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
+                      <Grid item xs={1}></Grid>
+                      <Grid item xs={1}></Grid>
+                      <Grid item xs={11} className="flex-row" style={{justifyContent:"flex-end"}}>
+                        <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
                       </Grid>
                     </Grid>
                   </div>
@@ -311,7 +322,8 @@ _rowExpandedGetter({rowIndex, width, height}) {
                 }
 
               </Cell>}
-            width={200}
+            width={235}
+            flexGrow={2}
           />
 
 
@@ -333,13 +345,13 @@ _rowExpandedGetter({rowIndex, width, height}) {
                 :
                 <div>
                   <Grid container>
-                    <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-start"}}>
-                      <span style={{textAlign:"left",fontSize:"12px"}}> {data[rowIndex]['CommentCurrentWeekSelfComment']} </span> <br/> <br/>
+                    <Grid item xs={11} className="flex-row" style={{justifyContent:"flex-start"}}>
+                      <span > {data[rowIndex]['CommentCurrentWeekSelfComment']} </span> <br/> <br/>
                     </Grid>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-end"}}>
-                      <span style={{textAlign:"right",fontSize:"11px",fontStyle:"italic"}}> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
+                    <Grid item xs={1}></Grid>
+                    <Grid item xs={1}></Grid>
+                    <Grid item xs={11} className="flex-row" style={{justifyContent:"flex-end"}}>
+                      <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
                     </Grid>
                   </Grid>
                 </div>
@@ -347,7 +359,8 @@ _rowExpandedGetter({rowIndex, width, height}) {
               }
 
               </Cell>}
-            width={200}
+            flexGrow={2}
+            width={235}
           />
 
 
@@ -356,9 +369,9 @@ _rowExpandedGetter({rowIndex, width, height}) {
               <span style={{fontSize:"14px",color:"#58595b",fontWeight:"800",}}>More Details</span>
             </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-              <Cell className={"Sll_Table_SimpleTableRow" + " MORE_DETAILS_SLL"} {...props}>
+              <Cell className={"Sll_Table_SimpleTableRow MORE_DETAILS_SLL"} {...props}>
                 {
-                  (rowIndex !=0) ?
+                  (rowIndex !==0) ?
                     <a style={{cursor:"pointer"}} onClick={() => this._handleCollapseClick(rowIndex)}>
                       {collapsedRows.has(rowIndex) ?
                         <Button mini style={{ color: "white", boxShadow: "none",border:"1px solid rgb(151,151,151)", backgroundColor: "rgb(151,151,151)" }}  variant="fab"  aria-label="Add" >
@@ -376,7 +389,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
 
                 }
               </Cell>}
-            width={100}
+            width={60}
           />
 
 

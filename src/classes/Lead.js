@@ -31,13 +31,13 @@ const KEY_MAP = {
   LdMeetingStatus:"ld_meeting_status",
 }
 
-// const keyMapApiLoc='location';
-//
-// const KEY_MAP_LOC = {
-//   Lat:'lat',
-//   Lon:'lon'
-// }
+const KEY_MAP_COMMENT_API='comment';
+const KEY_MAP_COMMENT_LOCAL="Comment";
 
+const KEY_MAP_COMMENT_SAMPLE= {
+  Current:"current",
+  Previous:"previous"
+}
 
 export class Lead {
   constructor(apiObj = {}) {
@@ -46,6 +46,23 @@ export class Lead {
          const keyMap = KEY_MAP[key];
         _this[key] = (!!apiObj[keyMap] && apiObj[keyMap] ) || '';
     });
+
+    Object.keys(KEY_MAP_COMMENT_SAMPLE).forEach((keyCommentLocal) => {
+      const keyCommentApi = KEY_MAP_COMMENT_SAMPLE[keyCommentLocal];
+
+      let keyFinal = KEY_MAP_COMMENT_LOCAL + keyCommentLocal;
+
+      // console.log( apiObj[KEY_MAP_COMMENT_API]);
+      // console.log(apiObj[KEY_MAP_COMMENT_API][KEY_MAP_COMMENT_CURRENT_API][keyCommentCurrentApi]);
+    console.log("####"+apiObj[KEY_MAP_COMMENT_API][keyCommentApi]);
+    
+    (!!apiObj[KEY_MAP_COMMENT_API] && !!apiObj[KEY_MAP_COMMENT_API][keyCommentApi])
+      ?
+      _this[keyFinal] = apiObj[KEY_MAP_COMMENT_API][keyCommentApi]
+      : _this[keyFinal] ='';
+
+    });
+
 
     // Object.keys(KEY_MAP_LOC).forEach((keyLoc) => {
     //   const keyMapLoc = KEY_MAP_LOC[keyLoc];

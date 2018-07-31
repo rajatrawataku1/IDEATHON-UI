@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import { Accordian, TableHeader,FllTable } from '../../components';
+// import Paper from 'material-ui/Paper';
+// import Button from 'material-ui/Button';
+import { FllTable } from '../../components';
 import { DialogAction, SnackbarAction, FllAction } from '../../actions';
-import { CopyToClipboardHelper, Auth } from '../../helpers';
-import Avatar from 'material-ui/Avatar';
-import { PROFILE_ICON, PROFILE_LOGO, COLORS, FONTS} from '../../constants';
-import Typography from 'material-ui/Typography';
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Select from 'material-ui/Select';
+import { Auth } from '../../helpers';
+// import Avatar from 'material-ui/Avatar';
+// import { PROFILE_ICON, PROFILE_LOGO, COLORS, FONTS} from '../../constants';
+// import Typography from 'material-ui/Typography';
+// import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
+// import { FormControl, FormHelperText } from 'material-ui/Form';
+// import Select from 'material-ui/Select';
 import orderBy from "lodash/orderBy";
-import Input, { InputLabel,InputAdornment } from 'material-ui/Input';
+import Input, { InputAdornment } from 'material-ui/Input';
 import Icon from 'material-ui/Icon';
-import Fade from 'material-ui/transitions/Fade';
+// import Fade from 'material-ui/transitions/Fade';
 
 const STYLES = {
   BOX_PADDING:{
     marginBottom:"10px"
   },
   MAIN: {
-    overflow: 'scroll',
     flexGrow: 1,
     padding: '0px',
     fontFamily: 'Lato'
@@ -33,12 +32,12 @@ const STYLES = {
     padding: '0px 0px'
   },
   ADD_APP_BUTTON: {
-    color: COLORS.WHITE,
+    color: "white",
     borderRadius: '6px',
-    border: '1px solid '+ COLORS.WHITE,
+    border: '1px solid white',
     backgroundImage:"linearGradient(58deg, #03ce87, #067ecf)",
     marginRight:"20px",
-    fontFamily: FONTS.MAINFONT,
+    fontFamily: "Lato",
   },
   UPPER_HEADER:{
     height:"63px",
@@ -79,16 +78,6 @@ const STYLES = {
     borderRight:"1px solid #bbbbbb"
   }
 };
-
-const columnData = [
-  { id: 'Sno', numeric: true, disablePadding: false, label: 'Sno' },
-  { id: 'BranchID', numeric: false, disablePadding: false, label: 'Branch ID' },
-  { id: 'BranchName', numeric: false, disablePadding: true, label: 'Branch Name' },
-  { id: 'Radius', numeric: true, disablePadding: false, label: 'Radius' },
-  { id: 'Lat', numeric: true, disablePadding: false, label: 'Latitude' },
-  { id: 'Lon', numeric: true, disablePadding: false, label: 'Longitude' },
-  { id: 'Status', numeric: true, disablePadding: false, label: 'Status',CurrentComments:null},
-];
 
 
 class FllView extends Component {
@@ -138,14 +127,14 @@ class FllView extends Component {
       afterError: () => {}
     };
 
-    const fllId = Auth.getUserDataByKey('Id');
+    // const fllId = Auth.getUserDataByKey('Id');
 
     // this.props.actions.getFllInfo(fllId,options);
   }
 
 
   onInputChange= (event)=>{
-    let  { value, name } = event.target;
+    let  { value } = event.target;
     console.log(value);
     this.setState({ query:value });
   }
@@ -160,8 +149,8 @@ class FllView extends Component {
 
   render() {
 
-    let arraObject=[1,2,3];
-    const { expanded } = this.state;
+    // let arraObject=[1,2,3];
+    // const { expanded } = this.state;
 
      // use this to send data further
 
@@ -175,7 +164,7 @@ class FllView extends Component {
     const applications= [
       {
         AgentId:"101",
-        CommentCurrentWeekManagerComment:" I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.",
+        CommentCurrentWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.",
         CommentCurrentWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.",
         CommentPreviousWeekManagerComment:" my previous manager comment",
         CommentPreviousWeekSelfComment:"my previous self comment",
@@ -440,9 +429,9 @@ class FllView extends Component {
     //   }
     // ]
 
-    applications.map((value,index)=>{
-      applications[index].Sno=index+1;
-    })
+      // applications.map((value,index)=>{
+      //   applications[index].Sno=index+1;
+      // })
 
     const lowerCaseQuery = this.state.query.toLowerCase();
 
@@ -471,10 +460,9 @@ class FllView extends Component {
                 name='query'
                 value={this.state.query}
                 onChange={this.onInputChange}
-                disableUnderline="true"
+                disableUnderline={true}
                 style={{ border:"1px solid #d8d8d8",borderRadius:"5px",padding:"4px",color:"#58595b"}}
                 placeholder="Search by Agent ID"
-                disableUnderline="true"
                 startAdornment={
                   <InputAdornment position="start">
                     <Icon style={{color:"#e4e4e4"}}> search</Icon>
@@ -489,7 +477,7 @@ class FllView extends Component {
 
           <Grid container className="LEAD_CONTAINER">
 
-            <Grid item xs={12} >
+            <Grid item xs={12} className="flex-row" style={{justifyContent:"center"}} >
               <FllTable
                 finalData={orderBy(
                   this.state.query

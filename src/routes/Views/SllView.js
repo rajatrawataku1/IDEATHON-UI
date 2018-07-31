@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import { Accordian, TableHeader,SllTable } from '../../components';
+// import Paper from 'material-ui/Paper';
+// import Button from 'material-ui/Button';
+import {SllTable } from '../../components';
 import { DialogAction, SnackbarAction, SllAction } from '../../actions';
-import { CopyToClipboardHelper, Auth } from '../../helpers';
-import Avatar from 'material-ui/Avatar';
-import { PROFILE_ICON, PROFILE_LOGO, COLORS, FONTS} from '../../constants';
-import Typography from 'material-ui/Typography';
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Select from 'material-ui/Select';
+import { Auth } from '../../helpers';
+// import Avatar from 'material-ui/Avatar';
+
+// import { PROFILE_ICON, PROFILE_LOGO, COLORS, FONTS} from '../../constants';
+
+// import Typography from 'material-ui/Typography';
+  // import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
+// import { FormControl, FormHelperText } from 'material-ui/Form';
+// import Select from 'material-ui/Select';
 import orderBy from "lodash/orderBy";
-import Input, { InputLabel,InputAdornment } from 'material-ui/Input';
+import Input, {InputAdornment } from 'material-ui/Input';
 import Icon from 'material-ui/Icon';
-import Fade from 'material-ui/transitions/Fade';
+// import Fade from 'material-ui/transitions/Fade';
 
 
 class SllView extends Component {
@@ -31,7 +33,7 @@ class SllView extends Component {
   }
 
   componentDidMount() {
-    const { history } = this.props;
+    // const { history } = this.props;
 
     const sllId = Auth.getUserDataByKey('Id');
 
@@ -76,8 +78,8 @@ class SllView extends Component {
 
 
   onInputChange= (event)=>{
-    let  { value, name } = event.target;
-    console.log(value);
+    let  { value } = event.target;
+    // console.log(value);
     this.setState({ query:value });
   }
 
@@ -91,8 +93,8 @@ class SllView extends Component {
 
   render() {
 
-    let arraObject=[1,2,3];
-    const { expanded } = this.state;
+    // let arraObject=[1,2,3];
+    // const { expanded } = this.state;
 
     // const { sllInfo,sllExpandInfo } = this.props;
 
@@ -105,8 +107,8 @@ class SllView extends Component {
         AgentId:"101",
         CommentCurrentWeekManagerComment:" my current",
         CommentCurrentWeekSelfComment:"my current ",
-        CommentPreviousWeekManagerComment:" my previous ",
-        CommentPreviousWeekSelfComment:"my previous self comment",
+        CommentPreviousWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
+        CommentPreviousWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
         Name:"Rajat Rawat"
       },
       {
@@ -124,7 +126,57 @@ class SllView extends Component {
         CommentPreviousWeekManagerComment:" my previous manager comment",
         CommentPreviousWeekSelfComment:"my previous self comment",
         Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"104",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"105",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"106",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"107",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"108",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"109",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
       }
+
+
     ]
 
 
@@ -133,8 +185,8 @@ class SllView extends Component {
         AgentId:"101",
         CommentCurrentWeekManagerComment:" my current",
         CommentCurrentWeekSelfComment:"my current ",
-        CommentPreviousWeekManagerComment:" my previous ",
-        CommentPreviousWeekSelfComment:"my ",
+        CommentPreviousWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
+        CommentPreviousWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
         Name:"Rajat Rawat"
       },
       {
@@ -152,16 +204,65 @@ class SllView extends Component {
         CommentPreviousWeekManagerComment:" my previous manager comment",
         CommentPreviousWeekSelfComment:"my previous self comment",
         Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"104",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"105",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"106",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"107",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"108",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
+      },
+      {
+        AgentId:"109",
+        CommentCurrentWeekManagerComment:" my current manager comment",
+        CommentCurrentWeekSelfComment:"my current self Comment",
+        CommentPreviousWeekManagerComment:" my previous manager comment",
+        CommentPreviousWeekSelfComment:"my previous self comment",
+        Name:"Swastik Shrivastava"
       }
+
     ]
 
-    sllInfo.map((value,index)=>{
-      sllInfo[index].Sno=index+1;
-    })
-
-    sllExpandInfo.map((value,index)=>{
-      sllExpandInfo[index].Sno=index+1;
-    })
+    // sllInfo.map((value,index)=>{
+    //   sllInfo[index].Sno=index+1;
+    // })
+    //
+    // sllExpandInfo.map((value,index)=>{
+    //   sllExpandInfo[index].Sno=index+1;
+    // })
 
 
     const lowerCaseQuery = this.state.query.toLowerCase();
@@ -192,10 +293,9 @@ class SllView extends Component {
                 name='query'
                 value={this.state.query}
                 onChange={this.onInputChange}
-                disableUnderline="true"
+                disableUnderline={true}
                 style={{ border:"1px solid #d8d8d8",borderRadius:"5px",padding:"4px",color:"#58595b"}}
                 placeholder="Search by Agent ID"
-                disableUnderline="true"
                 startAdornment={
                   <InputAdornment position="start">
                     <Icon style={{color:"#e4e4e4"}}>search</Icon>
@@ -209,7 +309,7 @@ class SllView extends Component {
 
           <Grid container className="LEAD_CONTAINER">
 
-            <Grid item xs={12} >
+            <Grid item xs={12} className="flex-row" style={{justifyContent:"center"}} >
               <SllTable
                 getExpandSllInfo = {this.props.actions.getExpandSllInfo}
 

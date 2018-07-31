@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
-import { COLORS, FONTS } from '../../constants';
+import { COLORS } from '../../constants';
 import { DialogAction, SnackbarAction, DashboardAction } from '../../actions';
 import { ApplicationForm } from '../../classes';
-import { Application } from '../../classes';
-import moment from 'moment';
-import Auth from '../../helpers';
+// import { Application } from '../../classes';
+// import moment from 'moment';
+// import Auth from '../../helpers';
 
 const STYLES = {
  ADD_APP_FORM: {
@@ -16,7 +16,7 @@ const STYLES = {
      color:COLORS.BLACK,
      fontSize:"12px",
      fontWeight:"500",
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
    },
    CONTAINER: {
      width: '240px',
@@ -28,7 +28,7 @@ const STYLES = {
    },
    HEADER: {
      color: COLORS.BLACK,
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
      paddingTop: '25px',
      fontSize: '18px',
    },
@@ -40,7 +40,7 @@ const STYLES = {
      borderRadius: '6px',
      fontSize: '14px',
      fontWeight: '500',
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
      backgroundColor: COLORS.BUTTON_COLOR,
      boxShadow: "0 12px 18px 0 rgba(168, 168, 168, 0.56)"
    }
@@ -137,7 +137,8 @@ class ManagerComments extends Component {
   render() {
 
 
-    const { LeadID,columnKey } = this.props.dialogData;
+    // const { LeadID,columnKey } = this.props.dialogData;
+
     const { Comments } = this.state.form;
     return (
       <div style={STYLES.ADD_APP_FORM.CONTAINER}>

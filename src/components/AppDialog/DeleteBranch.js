@@ -15,7 +15,7 @@ const STYLES = {
      color:COLORS.BLACK,
      fontSize:"12px",
      fontWeight:"500",
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
    },
 
    CONTAINER: {
@@ -28,7 +28,7 @@ const STYLES = {
    },
    HEADER: {
      color: COLORS.BLACK,
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
      paddingTop: '25px',
      fontSize: '18px',
    },
@@ -39,7 +39,7 @@ const STYLES = {
      borderRadius: '6px',
      fontSize: '18px',
      fontWeight: '500',
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
      backgroundColor: COLORS.BUTTON_COLOR,
      boxShadow: "0 12px 18px 0 rgba(168, 168, 168, 0.56)"
    }

@@ -8,9 +8,9 @@ export default function userReducer(state = {}, action) {
   switch (action.type) {
     case USER_ACTION_TYPES.LOGIN_SUCCESS:
     console.log('LOGDDD');
-      const { resBody } = action,
-        data = resBody.data;
-
+      // const { resBody } = action,
+      //   data = resBody.data;
+      //
         let dummyData={
           id:201,
           role:"FLL",

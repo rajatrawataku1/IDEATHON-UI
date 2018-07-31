@@ -1,7 +1,7 @@
 import React from 'react';
 import { DialogTitle, DialogActions } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
-import { COLORS, FONTS } from '../../constants';
+import { COLORS } from '../../constants';
 
 const STYLES = {
   MAIN: {

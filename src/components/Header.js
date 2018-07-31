@@ -10,12 +10,17 @@ import { Auth } from '../helpers';
 import { COLORS } from '../constants'
 const STYLES = {
   ROOT: {
+    position:"fixed",
+    top:"0",
+    width:"100%",
+    height:"auto",
     overflow: 'hidden',
     flexGrow: '1',
     backgroundColor:COLORS.HEADER_COLOR,
     paddingTop:"2px",
     paddingBottom:"2px",
-    fontFamily:"Lato"
+    fontFamily:"Lato",
+    zIndex:"2"
     // padding: '50px 121px 30px 115px',
   },
   LOGO_IMAGE:{

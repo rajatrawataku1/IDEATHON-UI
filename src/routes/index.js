@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Auth } from '../helpers';
 
 import Login from './Login/';
-import Profile from './Profile/';
 
 import { LeadListView, View, Dashboard } from './Views'
 
@@ -31,7 +30,7 @@ const WrongRoute = ({ component: Component, ...rest }) => (
 
 const Routes = () => {
   return(
-    <main>
+    <main className="ScreensPosition">
       <Switch>
         <Route exact path="/" component={Login} />
         <PrivateRoute  path="/dashboard" component={Dashboard} />

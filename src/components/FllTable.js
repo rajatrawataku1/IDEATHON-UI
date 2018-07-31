@@ -1,109 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import Tooltip from 'material-ui/Tooltip';
-import Button from 'material-ui/Button';
 import { DialogAction, SnackbarAction, ApplicationAction } from '../actions';
 import { connect } from 'react-redux';
-import {  FONTS } from '../constants';
-import { Table, Column, Cell ,CollapseCell } from 'fixed-data-table-2';
-import  {StyleSheet, css}  from 'aphrodite';
+import { Table, Column, Cell } from 'fixed-data-table-2';
 import moment from 'moment';
-import Icon from 'material-ui/Icon';
 import Grid from 'material-ui/Grid';
+import { getTablerowHeight ,getTableHeight,getTableWidth} from '../helpers';
 import '../CSS/SllView.css';
 import '../CSS/fllTable.css';
 
-const stylesheet = StyleSheet.create({
-  CenterAlignedRow:{
-    fontSize: "12px",
-    fontWeight: 500,
-    fontStyle: "normal",
-    fontStretch: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    textAlign: "center",
-    color:"#58595b",
-    backgroundColor:"white",
-    border:"1px solid rgba(151,151,151,0.25)"
-  },
-  AdvanceTableRow:{
-    fontSize: "12px",
-    fontWeight: 500,
-    fontStyle: "normal",
-    fontStretch: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    textAlign: "left",
-    color:"#58595b",
-    backgroundColor:"white",
-    border:"1px solid rgba(151,151,151,0.25)"
-  },
-  extraRowFeatures:{
-    fontSize: "12px",
-    fontWeight: 500,
-    fontStyle: "normal",
-    fontStretch: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    color:"#58595b",
-    textAlign:"center",
-    backgroundColor:"rgba(151,151,151,0.65) ",
-    border:"1px solid rgba(151,151,151,0.25)"
-  },
-  extraRowFeaturesLeft:{
-    fontSize: "12px",
-    fontWeight: 500,
-    fontStyle: "normal",
-    fontStretch: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    color:"#58595b",
-    textAlign:"left",
-    backgroundColor:"rgba(151,151,151,0.65) ",
-    border:"1px solid rgba(151,151,151,0.25)"
-  }
-
-});
 
 class FllTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      scrollToRow: null,
-      collapsedRows: new Set(),
-      orderBy: 'BranchId'
     };
-    this._handleCollapseClick = this._handleCollapseClick.bind(this);
-    this._subRowHeightGetter = this._subRowHeightGetter.bind(this);
     this.reloadPage = this.reloadPage.bind(this);
   }
-
-
-  _handleCollapseClick(rowIndex) {
-  const {collapsedRows} = this.state;
-  let shallowCopyOfCollapsedRows = new Set([...collapsedRows]);
-  let scrollToRow = rowIndex;
-  if (shallowCopyOfCollapsedRows.has(rowIndex)) {
-    shallowCopyOfCollapsedRows.delete(rowIndex);
-    scrollToRow = null
-  } else {
-    shallowCopyOfCollapsedRows= new Set();
-    shallowCopyOfCollapsedRows.add(rowIndex);
-  }
-
-  this.setState({
-    scrollToRow: scrollToRow,
-    collapsedRows: shallowCopyOfCollapsedRows
-  });
-}
-
-_subRowHeightGetter(index) {
-  let totalRows =  this.props.finalData.length;
-  return this.state.collapsedRows.has(index) ? 400 : 0;
-}
-
-
 
 
   reloadPage() {
@@ -139,7 +52,6 @@ _subRowHeightGetter(index) {
 
   render() {
     let data = this.props.finalData;
-    let {collapsedRows, scrollToRow} = this.state;
 
 // logic to create header Coloumn
     let currentWeekNumber = moment().week();
@@ -150,23 +62,37 @@ _subRowHeightGetter(index) {
     let PreviousWeekMondayArray = String(moment().week(PreviousWeekNumber).isoWeekday(1)).split(" ");
     let PreviousWeekSundayArray = String(moment().week(PreviousWeekNumber).isoWeekday(7)).split(" ");
 
-    console.log(CurrentWeekMondayArray,CurrentWeekSundayArray,PreviousWeekMondayArray,PreviousWeekSundayArray);
+    const  tableHeight = getTableHeight();
+    let  tableWidth = getTableWidth();
+
+    //  because there are only four coloumns and maximum can be this only
+    // if(tableWidth>720){
+    //   tableWidth= 720;
+    // }
+
+
+    // adding 30 to accomdate big comments
+    const  rowHeight =  getTablerowHeight()+15;
+
+
+    // console.log(CurrentWeekMondayArray,CurrentWeekSundayArray,PreviousWeekMondayArray,PreviousWeekSundayArray);
+
     return (
 
       <Paper className="Fll_Table_Root">
         <div className="Fll_Table_tableWrapper">
 
           <Table
-            onHorizontalScroll={ ()=>{return false}}
+            onHorizontalScroll={ ()=>{return true}}
             showScrollbarX={false}
             showScrollbarY={false}
             rowsCount={data.length}
-            rowHeight={100}
+            rowHeight={rowHeight}
             headerHeight={50}
-            className={css(stylesheet.tableWrapper) + " FllTableStyle"}
+            className={"FllTableStyle"}
             touchScrollEnabled={true}
-            width={130+90+250+250}
-            maxHeight={768}
+            width={tableWidth}
+            maxHeight={tableHeight}
             {...this.props}>
 
 
@@ -174,10 +100,10 @@ _subRowHeightGetter(index) {
             columnKey="Name"
             header={<Cell className="Fll_Table_SimpleTableHeader"> Name</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ? css(Object.assign({},stylesheet.CenterAlignedRow,stylesheet.extraRowFeatures)):css(stylesheet.CenterAlignedRow) }   {...props}>
+            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
               <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
             </Cell>}
-            width={130}
+            width={110}
           />
 
 
@@ -185,7 +111,7 @@ _subRowHeightGetter(index) {
             columnKey="AgentId"
             header={<Cell className="Fll_Table_SimpleTableHeader"> ID</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ? css(Object.assign({},stylesheet.CenterAlignedRow,stylesheet.extraRowFeatures,{textAlign:"center"})):css(stylesheet.CenterAlignedRow) }   {...props}>
+            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
                 <a cursor="pointer" href={"/dashboard?agentId="+data[rowIndex][columnKey]}> {data[rowIndex][columnKey]}</a>
             </Cell>}
             width={90}
@@ -205,7 +131,7 @@ _subRowHeightGetter(index) {
               <span style={{color:"#cdcdcd"}} >{PreviousWeekSundayArray[0]}</span> <span>{PreviousWeekSundayArray[2]}</span> <span>{PreviousWeekSundayArray[1]}</span>
                     </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ? css(Object.assign({},stylesheet.AdvanceTableRow,stylesheet.extraRowFeaturesLeft)):css(stylesheet.AdvanceTableRow) }   {...props}>
+            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
 
                 {
 
@@ -215,12 +141,12 @@ _subRowHeightGetter(index) {
                   <div>
                     <Grid container>
                       <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-start"}}>
-                        <span style={{textAlign:"left",fontSize:"12px"}}> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span>
+                        <span style={{textAlign:"left",}}> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span>
                       </Grid>
                       <Grid item xs={4}></Grid>
                       <Grid item xs={4}></Grid>
                       <Grid item xs={8} className="flex-row" style={{justifyContent:"flex-end"}}>
-                        <span style={{textAlign:"right",fontSize:"11px",fontStyle:"italic"}}> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
+                        <span className="Fll_Previous_Week_comment"> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
                       </Grid>
                     </Grid>
                   </div>
@@ -228,7 +154,8 @@ _subRowHeightGetter(index) {
                 }
 
               </Cell>}
-            width={250}
+            width={256}
+            flexGrow={2}
           />
 
           <Column
@@ -241,7 +168,7 @@ _subRowHeightGetter(index) {
 
             </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ? css(Object.assign({},stylesheet.AdvanceTableRow,stylesheet.extraRowFeaturesLeft)):css(stylesheet.AdvanceTableRow) }   {...props}>
+            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
               {
 
                 ( !data[rowIndex]['CommentCurrentWeekManagerComment'] && !data[rowIndex]['CommentCurrentWeekSelfComment']) ?
@@ -250,12 +177,12 @@ _subRowHeightGetter(index) {
                 <div>
                   <Grid container>
                     <Grid item xs={9} className="flex-row" style={{justifyContent:"flex-start"}}>
-                      <span style={{textAlign:"left",fontSize:"12px"}}> {data[rowIndex]['CommentCurrentWeekSelfComment']} </span>
+                      <span style={{textAlign:"left"}}> {data[rowIndex]['CommentCurrentWeekSelfComment']} </span>
                     </Grid>
                     <Grid item xs={3}></Grid>
                     <Grid item xs={3}></Grid>
                     <Grid item xs={9} className="flex-row" style={{justifyContent:"flex-end"}}>
-                      <span style={{textAlign:"right",fontSize:"11px",fontStyle:"italic"}}> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
+                      <span className="Fll_Previous_Week_comment"> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
                     </Grid>
                   </Grid>
                 </div>
@@ -263,7 +190,8 @@ _subRowHeightGetter(index) {
               }
 
               </Cell>}
-            width={250}
+            width={256}
+            flexGrow={2}
           />
 
         </Table>

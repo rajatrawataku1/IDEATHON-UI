@@ -201,7 +201,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  overflow: visible;
+  overflow: hidden !important;
   position: relative;
 }
 

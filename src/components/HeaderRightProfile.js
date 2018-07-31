@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-import {SHOW_MORE,PROFILE_LOGO, PROFILE_ICON, COLORS, FONTS} from '../constants';
+import Menu, { MenuItem } from 'material-ui/Menu';
+// import {SHOW_MORE,PROFILE_LOGO, PROFILE_ICON, COLORS, FONTS} from '../constants';
 import { Auth } from '../helpers';
-import Grid from 'material-ui/Grid';
+// import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 
 const HeaderRightProfile = ({onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl}) => {
-  const userName = (!!Auth.isLoggedIn() && Auth.getUserDataByKey('Name')) || '';
-  const altImageText = ['user-profile', userName].join('-');
+  // const userName = (!!Auth.isLoggedIn() && Auth.getUserDataByKey('Name')) || '';
+  // const altImageText = ['user-profile', userName].join('-');
 
   const UserName = Auth.getUserDataByKey('Name');
 
@@ -22,7 +22,8 @@ const HeaderRightProfile = ({onLogoutClick, showHeaderMenu, closeHeaderMenu, hea
 
       <span onClick={showHeaderMenu}>
         {/* <img className="HEADER_RIGHT_PROFILE_ICON"  src={PROFILE_LOGO} alt={altImageText} /> */}
-        <IconButton color="#58595b" aria-label="Show More" style={{borderRadius:"50%",marginTop:"2px",color:"#58595b !important"}}>
+        <IconButton color="default" aria-label="Show More" style={{borderRadius:"50%",marginTop:"2px",color:"#58595b !important"}}>
+          {/* #58595b */}
           <Icon >more_vert</Icon>
         </IconButton>
       </span>

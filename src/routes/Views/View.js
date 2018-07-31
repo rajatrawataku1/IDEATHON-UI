@@ -5,9 +5,9 @@ import SllView from './SllView';
 
 export default class View extends Component {
 
-  constructor(props){
-    super(props);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
 
   render() {
 
@@ -17,7 +17,7 @@ export default class View extends Component {
       <div>
         {
           // <SllView/>
-          (Auth.getUserDataByKey('Role') === 'SLL')? <SllView/> : <SllView/>
+          (Auth.getUserDataByKey('Role') === 'SLL')? <SllView/> : <FllView/>
         }
       </div>
     )

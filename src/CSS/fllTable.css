@@ -1,7 +1,8 @@
 
   .Fll_Table_Root{
-    padding:20px;
+    padding:10px;
     box-shadow:none !important;
+    font-size: 11px;
   }
 
   .Fll_Table_expandStyles{
@@ -13,8 +14,7 @@
    }
 
  .Fll_Table_tableWrapper{
-    overflow:scroll;
-    height: 100%;
+   overflow:hidden !important;
     background-color:white;
   }
 
@@ -24,8 +24,8 @@
   }
 
   .Fll_Table_SimpleTableHeader{
-    color: #58595b;
     font-size: 14px;
+    color: #58595b;
     line-height: 1;
     border: none;
     font-style:italic;
@@ -37,7 +37,6 @@
   }
 
   .Fll_Table_SimpleTableRow{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -50,7 +49,6 @@
   }
 
   .Fll_Table_CenterAlignedRow{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -63,7 +61,6 @@
   }
 
   .Fll_Table_CenterAlignedRowInnerTable{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -76,7 +73,6 @@
   }
 
   .Fll_Table_AdvanceTableRow{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -88,7 +84,6 @@
   }
 
   .Fll_Table_extraRowFeatures{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -101,7 +96,6 @@
   }
 
   .Fll_Table_extraRowFeaturesLeft{
-    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
@@ -114,6 +108,31 @@
   }
 
   .Fll_Table_tableWrapper .fixedDataTableLayout_main{
-    border-right:1px solid rgba(151,151,151,0.25);
+    /* border-right:1px solid rgba(151,151,151,0.25); */
     border-bottom:1px solid rgba(151,151,151,0.25);
+  }
+
+  .Fll_Previous_Week_comment{
+    text-align:right;
+    font-size:10px;
+    font-style:italic;
+  }
+
+  .Fll_Table_SimpleTableHeader .public_fixedDataTableCell_wrap3{
+    border-bottom:1px solid rgba(151,151,151,0.25);
+  }
+
+
+  @media screen and (max-width: 600px) {
+
+    .Fll_Table_Root{
+      font-size: 10px !important
+    }
+
+    .Fll_Previous_Week_comment{
+      text-align:right;
+      font-size:9px;
+      font-style:italic;
+    }
+
   }

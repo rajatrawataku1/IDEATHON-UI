@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-import {SHOW_MORE,PROFILE_LOGO, PROFILE_ICON, COLORS, FONTS} from '../constants';
-import { Auth } from '../helpers';
+// import { Link } from "react-router-dom";
+// import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
+// import {SHOW_MORE,PROFILE_LOGO, PROFILE_ICON, COLORS, FONTS} from '../constants';
+// import { Auth } from '../helpers';
 import Grid from 'material-ui/Grid';
 
 const STYLES = {
@@ -21,11 +21,10 @@ const STYLES = {
   },
   PROFILE: {
     NAME: {
-      color: COLORS.WHITE,
-      fontFamily: 'Asap',
+      color: 'white',
       fontSize: '16px',
       cursor: 'pointer',
-      fontFamily:FONTS.MAINFONT,
+      fontFamily:"Lato",
     },
     ICON: {
       cursor: 'pointer',

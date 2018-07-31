@@ -2,26 +2,17 @@ import React, { Component } from 'react';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import { Accordian, TableHeader,EnhancedTable } from '../../components';
+import { EnhancedTable } from '../../components';
 import { DialogAction, SnackbarAction, LeadAction } from '../../actions';
-import { CopyToClipboardHelper, Auth } from '../../helpers';
-import Avatar from 'material-ui/Avatar';
-import { PROFILE_ICON, PROFILE_LOGO, COLORS, FONTS} from '../../constants';
-import Typography from 'material-ui/Typography';
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Select from 'material-ui/Select';
 import orderBy from "lodash/orderBy";
-import Input, { InputLabel,InputAdornment } from 'material-ui/Input';
+import Input, { InputAdornment } from 'material-ui/Input';
 import Icon from 'material-ui/Icon';
-import Fade from 'material-ui/transitions/Fade';
 import '../../CSS/leadListView.css';
 
 const urlPropsQueryConfig = {
   agentId: { type: UrlQueryParamTypes.string},
-  week:{type:UrlQueryParamTypes.string}
+  week:{type:UrlQueryParamTypes.string},
+  type:{type:UrlQueryParamTypes.string}
 };
 
 
@@ -38,7 +29,7 @@ class LeadListView extends Component {
   }
 
   componentDidMount() {
-    const { history } = this.props;
+    // const { history } = this.props;
 
     // if(!!Auth.isLoggedIn && Auth.getUserDataByKey('Role') !== 'SUPERADMIN') {
     //   history.push('/profile');
@@ -55,9 +46,9 @@ class LeadListView extends Component {
 
     let { agentId } = this.props;
     let { week } = this.props;
+    let { type } = this.props;
 
-    // console.log(agentId,week);
-    // this.props.actions.getLeadsInfo(week,agentId,options);
+    this.props.actions.getLeadsInfo(type,week,agentId,options);
   }
 
   reloadPage() {
@@ -66,8 +57,8 @@ class LeadListView extends Component {
       afterError: () => {}
     };
 
-    let { agentId } = this.props;
-    let { week } = this.props;
+    // let { agentId } = this.props;
+    // let { week } = this.props;
 
     // this.props.actions.getLeadsInfo(week,agentId,options);
   }
@@ -82,7 +73,7 @@ class LeadListView extends Component {
 
 
   onInputChange= (event)=>{
-    let  { value, name } = event.target;
+    let  { value } = event.target;
     console.log(value);
     this.setState({ query:value });
   }
@@ -97,21 +88,23 @@ class LeadListView extends Component {
 
   render() {
 
-    let arraObject=[1,2,3];
-    let { agentId } = this.props;
+    // let arraObject=[1,2,3];
+    // let { agentId } = this.props;
     let { week } = this.props;
 
-    //  cosnt { leadDataStore  } = this.props;
+    // const { leadDataStore  } = this.props ? this.props : [];
+
     //  pass this leadStore to the data
     // const { applications } = this.props ? this.props : [];
 
     // BranchId: Number(value.BranchId)
 
+    // const applications = leadDataStore;
 
     const applications=[
       {
         LeadId:"S_1234",
-        CustomerName:"Rajat Rawat",
+        CustomerName:"Swastik Shrivastava",
         DOB:"12/21/1997",
         Contact:"9897507488",
         Status:"Taken",
@@ -121,14 +114,15 @@ class LeadListView extends Component {
         Remarks:"Agrred",
         ExpectedPremium:"7500",
         AnnualIncome:"500000",
-        LastMeetingDate:"21/6/198",
-        NextMeetingDate:"21/6/198",
+        LastMeetingDate:"2018-07-22T18:30:00.000Z",
+        NextMeetingDate:"2018-07-22T18:30:00.000Z",
         ProductName:"Cancer Care",
         Location:"Mumbai",
-        LastWeekComments:"I will be able to take it and will make it happen as soon as possible",
-        CurrentWeekComments:"I will be able to take it and will make it happen as soon as possible",
+        CommentCurrent:"",
+        CommentPrevious:"I will be able to take it and will make it happen as soon as possible",
         LGCode:"asdf",
-        BankBranchCode:"Mumbai"
+        BankBranchCode:"Mumbai",
+        MeetinDoneOn:"2018-07-22T18:30:00.000Z"
       },
       {
         LeadId:"S_2345",
@@ -142,8 +136,8 @@ class LeadListView extends Component {
         Remarks:"Agrred",
         ExpectedPremium:"7500",
         AnnualIncome:"500000",
-        LastMeetingDate:"21/6/198",
-        NextMeetingDate:"21/6/198",
+        LastMeetingDate:"21/6/1998",
+        NextMeetingDate:"21/6/1998",
         ProductName:"Cancer Care",
         Location:"Mumbai",
         LastWeekComments:"I will be able to take it and will make it happen as soon as possible",
@@ -163,8 +157,8 @@ class LeadListView extends Component {
         Remarks:"Agrred",
         ExpectedPremium:"7500",
         AnnualIncome:"500000",
-        LastMeetingDate:"21/6/198",
-        NextMeetingDate:"21/6/198",
+        LastMeetingDate:"21/6/1998",
+        NextMeetingDate:"21/6/1998",
         ProductName:"Cancer Care",
         Location:"Mumbai",
         LastWeekComments:null,
@@ -174,6 +168,90 @@ class LeadListView extends Component {
       },
       {
         LeadId:"457_iosdf",
+        CustomerName:"Rajat Rawat",
+        DOB:"12/21/1997",
+        Contact:"9897507488",
+        Status:"Taken",
+        Met:"Yes",
+        NoMeetingDone:"5",
+        JointCall:"Yes",
+        Remarks:"Agrred",
+        ExpectedPremium:"7500",
+        AnnualIncome:"500000",
+        LastMeetingDate:"21/6/1998",
+        NextMeetingDate:"21/6/1998",
+        ProductName:"Cancer Care",
+        Location:"Mumbai",
+        LastWeekComments:null,
+        CurrentWeekComments:null,
+        LGCode:"asdf",
+        BankBranchCode:"Mumbai"
+      },
+      {
+        LeadId:"123sfdsf",
+        CustomerName:"Rajat Rawat",
+        DOB:"12/21/1997",
+        Contact:"9897507488",
+        Status:"Taken",
+        Met:"Yes",
+        NoMeetingDone:"5",
+        JointCall:"Yes",
+        Remarks:"Agrred",
+        ExpectedPremium:"7500",
+        AnnualIncome:"500000",
+        LastMeetingDate:"21/6/1998",
+        NextMeetingDate:"21/6/1998",
+        ProductName:"Cancer Care",
+        Location:"Mumbai",
+        LastWeekComments:null,
+        CurrentWeekComments:null,
+        LGCode:"asdf",
+        BankBranchCode:"Mumbai"
+      },
+      {
+        LeadId:"123sfdsf",
+        CustomerName:"Rajat Rawat",
+        DOB:"12/21/1997",
+        Contact:"9897507488",
+        Status:"Taken",
+        Met:"Yes",
+        NoMeetingDone:"5",
+        JointCall:"Yes",
+        Remarks:"Agrred",
+        ExpectedPremium:"7500",
+        AnnualIncome:"500000",
+        LastMeetingDate:"21/6/1998",
+        NextMeetingDate:"21/6/1998",
+        ProductName:"Cancer Care",
+        Location:"Mumbai",
+        LastWeekComments:null,
+        CurrentWeekComments:null,
+        LGCode:"asdf",
+        BankBranchCode:"Mumbai"
+      },
+      {
+        LeadId:"123sfdsf",
+        CustomerName:"Rajat Rawat",
+        DOB:"12/21/1997",
+        Contact:"9897507488",
+        Status:"Taken",
+        Met:"Yes",
+        NoMeetingDone:"5",
+        JointCall:"Yes",
+        Remarks:"Agrred",
+        ExpectedPremium:"7500",
+        AnnualIncome:"500000",
+        LastMeetingDate:"21/6/1998",
+        NextMeetingDate:"21/6/1998",
+        ProductName:"Cancer Care",
+        Location:"Mumbai",
+        LastWeekComments:null,
+        CurrentWeekComments:null,
+        LGCode:"asdf",
+        BankBranchCode:"Mumbai"
+      },
+      {
+        LeadId:"123sfdsf",
         CustomerName:"Rajat Rawat",
         DOB:"12/21/1997",
         Contact:"9897507488",
@@ -205,8 +283,8 @@ class LeadListView extends Component {
         Remarks:"Agrred",
         ExpectedPremium:"7500",
         AnnualIncome:"500000",
-        LastMeetingDate:"21/6/198",
-        NextMeetingDate:"21/6/198",
+        LastMeetingDate:"21/06/1998",
+        NextMeetingDate:"21/06/1998",
         ProductName:"Cancer Care",
         Location:"Mumbai",
         LastWeekComments:null,
@@ -214,11 +292,12 @@ class LeadListView extends Component {
         LGCode:"asdf",
         BankBranchCode:"Mumbai"
       }
+
     ]
 
-    applications.map((value,index)=>{
-      applications[index].Sno=index+1;
-    })
+    // applications.map((value,index)=>{
+    //   applications[index].Sno=index+1;
+    // })
 
     const lowerCaseQuery = this.state.query.toLowerCase();
 
@@ -248,9 +327,8 @@ class LeadListView extends Component {
                 name='query'
                 value={this.state.query}
                 onChange={this.onInputChange}
-                disableUnderline="true"
+                disableUnderline={true}
                 placeholder="Search by Lead ID"
-                disableUnderline="true"
                 startAdornment={
                   <InputAdornment position="start">
                     <Icon style={{color:"#e4e4e4"}}> search</Icon>
@@ -263,7 +341,7 @@ class LeadListView extends Component {
 
           <Grid container  className="LEAD_CONTAINER">
 
-            <Grid item xs={12}>
+            <Grid item xs={12} className="flex-row" style={{justifyContent:"center"}}>
               <EnhancedTable
                 week={week}
                 reloadPage={this.reloadPage}
@@ -298,7 +376,7 @@ function mapDispatchToProps(dispatch){
     actions: {
       openDialog: (dialogType, data, dataActions) => dispatch(DialogAction.open(dialogType, data, dataActions)),
       openSnackbar: (data) => dispatch(SnackbarAction.show(data)),
-      getLeadsInfo: (week,agentId,options) => dispatch(LeadAction.getLeadsInfo(week,agentId,options))
+      getLeadsInfo: (type,week,agentId,options) => dispatch(LeadAction.getLeadsInfo(type,week,agentId,options))
     }
   }
 }

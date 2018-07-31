@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
-import { COLORS, FONTS } from '../../constants';
+import { COLORS } from '../../constants';
 import { DialogAction, SnackbarAction, LeadAction } from '../../actions';
 import { ApplicationForm } from '../../classes';
-import { Application } from '../../classes';
-import moment from 'moment';
-import Auth from '../../helpers';
+// import { Application } from '../../classes';
+// import moment from 'moment';
+// import Auth from '../../helpers';
 
 const STYLES = {
  ADD_APP_FORM: {
    LABEL:{
      color:COLORS.BLACK,
-     fontSize:"12px",
+     fontSize:"14px",
      fontWeight:"500",
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
    },
    CONTAINER: {
      width: '240px',
@@ -28,7 +28,7 @@ const STYLES = {
    },
    HEADER: {
      color: COLORS.BLACK,
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
      paddingTop: '25px',
      fontSize: '18px',
    },
@@ -40,9 +40,9 @@ const STYLES = {
      borderRadius: '6px',
      fontSize: '14px',
      fontWeight: '500',
-     fontFamily: FONTS.MAINFONT,
+     fontFamily: "Lato",
      backgroundColor: COLORS.BUTTON_COLOR,
-     boxShadow: "0 12px 18px 0 rgba(168, 168, 168, 0.56)"
+     boxShadow: "0 10px 18px 0 rgba(168, 168, 168, 0.56)"
    }
  }
 };
@@ -106,7 +106,10 @@ class AddComments extends Component {
       }
     };
 
-    let {columnKey,LeadID} = this.props.dialogData;
+    let {LeadID} = this.props.dialogData;
+
+    // let {columnKey,LeadID} = this.props.dialogData;
+
 
     if(!!LeadID){
 
@@ -114,7 +117,7 @@ class AddComments extends Component {
 
         console.log(LeadID,text);
 
-        // this.props.actions.addLeadComments(text,LeadID,options);
+        this.props.actions.addLeadComments(text,LeadID,options);
 
         // formData.week=(columnKey === "LastWeekComments") ? CurrentWeek-1 : CurrentWeek;
         // formData.AgentID = Auth.isLoggedIn();
@@ -146,7 +149,9 @@ class AddComments extends Component {
   render() {
 
 
-    const { LeadID,columnKey } = this.props.dialogData;
+    // const { LeadID,columnKey } = this.props.dialogData;
+    const { LeadID } = this.props.dialogData;
+
     const { Comments } = this.state.form;
     return (
       <div style={STYLES.ADD_APP_FORM.CONTAINER}>

@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
-import { Accordian, TableHeader,EnhancedTable,BoxHeader } from '../../components';
+import { BoxHeader } from '../../components';
 import { DialogAction, SnackbarAction, DashboardAction } from '../../actions';
-import { CopyToClipboardHelper, Auth } from '../../helpers';
-import Avatar from 'material-ui/Avatar';
-import { PROFILE_ICON, PROFILE_LOGO, COLORS, FONTS,BACK_IMAGE,ADD_COMMENT_IMAGE} from '../../constants';
+import {  Auth } from '../../helpers';
+import { BACK_IMAGE,ADD_COMMENT_IMAGE,PROFILE_LOGO} from '../../constants';
 import Typography from 'material-ui/Typography';
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import { MenuItem } from 'material-ui/Menu';
+import { FormControl } from 'material-ui/Form';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import Select from 'material-ui/Select';
@@ -33,7 +31,7 @@ class Dashboard extends Component {
       SelectJointCalls:"weekly",
       SelectCampaigns:"weekly",
       SelectTraining:"weekly",
-      WeekToShow:moment().week(),
+      WeekToShow:moment().isoWeek(),
       WeekValue:"CurrentWeek"
     };
     this.reloadPage = this.reloadPage.bind(this);
@@ -42,11 +40,11 @@ class Dashboard extends Component {
   getAllDataApiCall = ()=>{
 
     // week number
-    let { WeekToShow } = this.state;
-    // agent ID
-    let { agentId } = this.props;
-    // timeline
-    let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
+    // let { WeekToShow } = this.state;
+    // // agent ID
+    // let { agentId } = this.props;
+    // // timeline
+    // let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
 
     let options = {
       afterSuccess: () => {
@@ -161,7 +159,7 @@ class Dashboard extends Component {
 
   goBackWeek = ()=>{
     this.setState((prevState,props)=>{
-      return {WeekToShow:moment().week()-1,WeekValue:"PreviousWeek"}
+      return {WeekToShow:moment().isoWeek()-1,WeekValue:"PreviousWeek"}
     });
 
     this.getAllDataApiCall();
@@ -170,7 +168,7 @@ class Dashboard extends Component {
 
   goForwardWeek = ()=>{
     this.setState((prevState,props)=>{
-      return {WeekToShow:moment().week()+1,WeekValue:"CurrentWeek"}
+      return {WeekToShow:moment().isoWeek(),WeekValue:"CurrentWeek"}
     });
 
     this.getAllDataApiCall();
@@ -195,9 +193,10 @@ class Dashboard extends Component {
 
     let { WeekToShow } = this.state;
     let { agentId } = this.props;
-
+    let { SelectLeads } = this.state;
     const { history } = this.props;
-    history.push('/lead/?agentId='+agentId+'&week='+WeekToShow);
+
+    history.push('/lead/?agentId='+agentId+'&week='+WeekToShow+'&type='+SelectLeads);
 
   }
 
@@ -208,17 +207,17 @@ class Dashboard extends Component {
 
 
     let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
-    let { agentStore, leadsStore, jointCallsStore,campaignEfficiencyStore ,managerCommentsStore,selfCommentsStore} = this.props;
+    // let { agentStore, leadsStore, jointCallsStore,campaignEfficiencyStore ,managerCommentsStore,selfCommentsStore} = this.props;
 
     let arraObject=[1,2,3];
 
-    let currentWeekNumber = moment().week();
+    let currentWeekNumber = moment().isoWeek();
     let PreviousWeekNumber = currentWeekNumber -1;
 
-    let CurrentWeekMondayArray = String(moment().isoWeekday(1)).split(" ");
-    let CurrentWeekSundayArray = String(moment().isoWeekday(7)).split(" ");
-    let PreviousWeekMondayArray = String(moment().week(PreviousWeekNumber).isoWeekday(1)).split(" ");
-    let PreviousWeekSundayArray = String(moment().week(PreviousWeekNumber).isoWeekday(7)).split(" ");
+    let CurrentWeekMondayArray = String(moment().week(currentWeekNumber).weekday(1)).split(" ");
+    let CurrentWeekSundayArray = String(moment().week(currentWeekNumber).weekday(7)).split(" ");
+    let PreviousWeekMondayArray = String(moment().week(PreviousWeekNumber).weekday(1)).split(" ");
+    let PreviousWeekSundayArray = String(moment().week(PreviousWeekNumber).weekday(7)).split(" ");
 
     let WeekToShowFrontendMondayArray = (this.state.WeekValue === "CurrentWeek") ? CurrentWeekMondayArray :PreviousWeekMondayArray;
     let WeekToShowFrontendSundayArray = (this.state.WeekValue === "CurrentWeek") ? CurrentWeekSundayArray :PreviousWeekSundayArray;
@@ -232,8 +231,8 @@ class Dashboard extends Component {
             <Grid item xs={12} sm={12} md={12} className="flex-row">
                   <Grid container className="DASHBOARD_UPPER_HEADER">
                     <Grid item xs={12} sm={6} md={6} lg={6}>
-                      <img src={PROFILE_LOGO} className="DASHBOARD_PROFILE_IMAGE"/>
-                      <p style={{padding:"0px",margin:"0px",marginTop:"15px"}}><h4 className="DASHBOARD_PROFILE_NAME"><b>Ankush Wagh,</b> Direct Loyality</h4></p>
+                      <img src={PROFILE_LOGO} className="DASHBOARD_PROFILE_IMAGE" alt="Profile Icon"/>
+                      <p style={{padding:"0px",margin:"0px",marginTop:"15px"}}><span className="DASHBOARD_PROFILE_NAME"><b>Ankush Wagh,</b> Direct Loyality</span></p>
                       <p className="DASHBOARD_PROFILE_DESIGNATION"> Financial Planning Manager</p>
                     </Grid>
                     <Grid item xs={12} sm={6} md={6} lg={6}>
@@ -250,7 +249,7 @@ class Dashboard extends Component {
 
                                 { (Auth.getUserDataByKey('Id') === Number(agentId) )?
                                     <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddSelfCommentDialog}>
-                                      <span><img src={ADD_COMMENT_IMAGE} style={{height:"7px",marginRight:"2px"}}/></span>
+                                      <span><img src={ADD_COMMENT_IMAGE} style={{height:"7px",marginRight:"2px"}} alt="Add Comment" /></span>
                                       <span className="DASHBOARD_COMMENTS_BUTTON">Click to Add Comment</span>
                                     </Button>
                                     :
@@ -266,10 +265,10 @@ class Dashboard extends Component {
 
                                   <span className="DASHBOARD_COMMENTS_MANAGER" >   I will be meeting atleast 25 leads this week. Seeing 10 other potential leads too.</span>
 
-                                  { (Auth.getUserDataByKey('Role') != "FLS" )?
+                                  { (Auth.getUserDataByKey('Role') !== "FLS" )?
                                       <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddManagerCommentDialog}>
                                         <span className="DASHBOARD_COMMENTS_BUTTON">Manager Comments </span>
-                                        <span><img src={BACK_IMAGE} style={{height:"7px",marginLeft:"2px"}}/></span>
+                                        <span><img src={BACK_IMAGE} style={{height:"7px",marginLeft:"2px"}} alt="Back_Image"/></span>
                                       </Button>
                                       :
                                     <span className="DASHBOARD_COMMENTS_SELF" >{" "}</span>
@@ -333,7 +332,7 @@ class Dashboard extends Component {
                                 <Grid item xs={4} className="flex-row flex-justify-end">
                                   <FormControl>
                                     <Select
-                                      disableUnderline="true"
+                                      disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectLeads}
                                       onChange={this.handleLeadChange}
@@ -382,7 +381,7 @@ class Dashboard extends Component {
 
                                  <Grid item xs={4} style={{marginBottom:"5px"}}> </Grid>
                                  <Grid item xs={12} className="flex-row flex-justify-center">
-                                   <Button variant="contained"  style={{minHeight:"2px",height:"25px",padding:"0px",textTransform:"none",width:"80%",fontSize:"12px",fontWeight:"500",color:"white",backgroundColor:"#1095ff",borderRadius:"30px",marginBottom:"5px"}} onClick={this.viewLeadDetails}>  view lead details </Button>
+                                   <Button  style={{minHeight:"2px",height:"25px",padding:"0px",textTransform:"none",width:"80%",fontSize:"12px",fontWeight:"500",color:"white",backgroundColor:"#1095ff",borderRadius:"30px",marginBottom:"5px"}} onClick={this.viewLeadDetails}>  view lead details </Button>
                                  </Grid>
                                </Grid>
                              </Grid>
@@ -401,7 +400,7 @@ class Dashboard extends Component {
                                 <Grid item xs={5} className="flex-row flex-justify-end" style={{paddingRight:"14px"}}>
                                   <FormControl>
                                     <Select
-                                      disableUnderline="true"
+                                      disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectJointCalls}
                                       onChange={this.handleJoinCallChange}
@@ -449,7 +448,7 @@ class Dashboard extends Component {
                               <Grid item xs={12} className="flex-row flex-justify-end" style={{paddingRight:"12px"}}>
                                   <FormControl>
                                     <Select
-                                      disableUnderline="true"
+                                      disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectCampaigns}
                                       onChange={this.handleCampaignChange}
@@ -464,7 +463,7 @@ class Dashboard extends Component {
 
                                {
                                  arraObject.map((data,index)=>
-                                 <Grid container>
+                                 <Grid container key={index}>
                                    <Grid item xs={12} style={{marginTop:"10px"}}>
                                      <Grid container>
                                        <Grid item xs={7} style={{paddingTop:"8px",fontSize:"14px",marginTop:"5px",paddingLeft:"12px",color:"#444444"}}> Campaign <span> 1 </span> (Total Leads: <span> 14 </span> )</Grid>
@@ -510,7 +509,7 @@ class Dashboard extends Component {
                                 <Grid item xs={12} className="flex-row flex-justify-end" style={{paddingRight:"14px"}}>
                                   <FormControl>
                                     <Select
-                                      disableUnderline="true"
+                                      disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectTraining}
                                       onChange={this.handleTrainingChange}

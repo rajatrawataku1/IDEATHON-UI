@@ -1,16 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import {Table,TableHead,TableBody, TableCell, TableFooter, TablePagination, TableRow, TableSortLabel} from 'material-ui';
 import Paper from 'material-ui/Paper';
-import Tooltip from 'material-ui/Tooltip';
+// import Tooltip from 'material-ui/Tooltip';
 import Button from 'material-ui/Button';
-import { DialogAction, SnackbarAction, LeadAction } from '../actions';
+import { DialogAction, SnackbarAction} from '../actions';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {  FONTS } from '../constants';
+// import {  FONTS } from '../constants';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import '../CSS/fixed-data-table-view.css';
 import '../CSS/enhancedTable.css';
+import { getTablerowHeight, getTableHeight, getTableWidth,TimeHelper} from '../helpers';
+
 
 class EnhancedTable extends React.Component {
   constructor(props) {
@@ -26,10 +28,15 @@ class EnhancedTable extends React.Component {
     this.props.actions.openDialog(dialogType, dialogData, dialogActions);
   }
 
+
   render() {
 
     const data = this.props.finalData;
     const {week} = this.props;
+
+    const  tableHeight = getTableHeight();
+    const  tableWidth = getTableWidth();
+    const  rowHeight =  getTablerowHeight();
 
 
     return (
@@ -42,14 +49,14 @@ class EnhancedTable extends React.Component {
           showScrollbarY={false}
           className="Enhanced_tableWrapper"
           touchScrollEnabled={true}
-          rowHeight={99}
+          rowHeight={rowHeight}
           headerHeight={50}
           rowsCount={data.length}
-          width={768}
-          maxHeight={768}
+          width={tableWidth}
+          maxHeight={tableHeight}
           {...this.props}>
 
-          <Column
+          {/* <Column
             columnKey="Sno"
               header={<Cell className="Enhanced_SimpleTableHeader" >Sno</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
@@ -57,17 +64,28 @@ class EnhancedTable extends React.Component {
                 {data[rowIndex][columnKey]}
               </Cell>}
             fixed={true}
-            width={100}
-          />
+            width={50}
+          /> */}
 
-          <Column
+          {/* <Column
             columnKey="LeadId"
             header={<Cell className="Enhanced_newTableHeaderImp">Lead ID</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={90}
+            fixed={true}
+          /> */}
+
+          <Column
+            columnKey="LeadId"
+            header={<Cell className="Enhanced_newTableHeaderImp">Lead ID</Cell>}
+            cell={({ rowIndex, columnKey, ...props }) =>
+              <Cell className="Enhanced_SimpleTableRow" {...props}>
+                {data[rowIndex][columnKey]}
+              </Cell>}
+            width={90}
             fixed={true}
           />
 
@@ -80,7 +98,7 @@ class EnhancedTable extends React.Component {
                 {data[rowIndex][columnKey]}
               </Cell>}
             fixed={true}
-            width={100}
+            width={110}
           />
 
           <Column
@@ -88,9 +106,9 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderNotImp" >DOB</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -110,7 +128,7 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -130,7 +148,7 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -140,7 +158,7 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -148,9 +166,9 @@ class EnhancedTable extends React.Component {
             header={<Cell  className="Enhanced_newTableHeaderNotImp" >Last Meeting Date</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -158,9 +176,9 @@ class EnhancedTable extends React.Component {
             header={<Cell  className="Enhanced_newTableHeaderNotImp" >Next Meeting Date</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -170,17 +188,17 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
             columnKey="LeadCreationDate"
-            header={<Cell className="Enhanced_newTableHeaderNotImp" >Lead Created date </Cell>}
+            header={<Cell className="Enhanced_newTableHeaderNotImp" >Lead Creation date </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -190,7 +208,7 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -200,7 +218,7 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -236,7 +254,7 @@ class EnhancedTable extends React.Component {
 
 
           <Column
-            columnKey="CurrentWeekComments"
+            columnKey="CommentCurrent"
             header={<Cell  className="Enhanced_newTableHeaderNotImp" >Current Week Comments</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
@@ -244,20 +262,20 @@ class EnhancedTable extends React.Component {
                 { (!!data[rowIndex][columnKey])?
                   data[rowIndex][columnKey]
                   :
-                  (moment().week() === Number(week)) ?
-                    <Button style={{backgroundColor:"#d8d8d8",color:"rgba(88,89,91,0.8)",marginLeft:"30px",textTransform:"none"}} variant="contained" onClick={()=>{this.showInputCommentsDialog(data[rowIndex].LeadID,columnKey)}} >
+                  (moment().isoWeek() === Number(week)) ?
+                    <Button style={{backgroundColor:"#d8d8d8",color:"rgba(88,89,91,0.8)",textTransform:"none"}}  onClick={()=>{this.showInputCommentsDialog(data[rowIndex].LeadId,columnKey)}} >
                       Add Comment
                     </Button>
                   :
-                  "No comments"
+                  <span style={{textAlign:"center"}}>No comments</span>
                 }
 
               </Cell>}
-            width={200}
+            width={250}
           />
 
           <Column
-            columnKey="LastWeekComments"
+            columnKey="CommentPrevious"
             header={<Cell  className="Enhanced_newTableHeaderNotImp" >Previous Week Comments</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
@@ -267,7 +285,7 @@ class EnhancedTable extends React.Component {
                   "No comments"
                 }
               </Cell>}
-            width={200}
+            width={250}
           />
 
           <Column
@@ -277,7 +295,7 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
           <Column
@@ -287,7 +305,7 @@ class EnhancedTable extends React.Component {
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
                 {data[rowIndex][columnKey]}
               </Cell>}
-            width={100}
+            width={150}
           />
 
         </Table>
