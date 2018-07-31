@@ -12,9 +12,10 @@ const LoginForm = ({ form, onInputChange, onInputBlur, onLoginClick }) => {
   const { username, password } = form;
 
   return (
-
-    <center>
-    <Grid container >
+  <center>
+    <Grid container>
+      <Grid item xs={12}>
+      </Grid>
       <Grid item xs={12}>
         <p className="LOGIN_HEADER_TEXT" >WAR Login</p> <br/>
       </Grid>
@@ -27,7 +28,7 @@ const LoginForm = ({ form, onInputChange, onInputBlur, onLoginClick }) => {
                   onChange={onInputChange}
                   onBlur={onInputBlur}
                   onKeyUp={onLoginClick}
-                  disableUnderline="true"
+                  disableUnderline={true}
                   placeholder="Username"
                   className="LOGIN_INPUT text-field-style"
                  />
@@ -45,7 +46,7 @@ const LoginForm = ({ form, onInputChange, onInputBlur, onLoginClick }) => {
                   onChange={onInputChange}
                   onBlur={onInputBlur}
                   onKeyUp={onLoginClick}
-                  disableUnderline="true"
+                  disableUnderline={true}
                   placeholder="Password"
                   className="LOGIN_INPUT text-field-style"
                  />

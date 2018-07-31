@@ -10,6 +10,7 @@ import { COLORS, APP_ADMIN , LANDING_IMAGE, FONTS} from '../../constants';
 
 const STYLES = {
   MAIN: {
+      paddingTop:"45%",
       flexGrow: 1,
       overflow:"show",
       fontFamily:"Lato"
@@ -150,7 +151,7 @@ class Login extends Component {
     return (
         <section style={STYLES.MAIN}>
           <Grid container>
-            <Grid item xs={12} sm={12} md={12} lg={12} style={{position:"absolute",top:"42%",width:"100%" }}>
+            <Grid item xs={12} sm={12} md={12} lg={12}>
               <LoginForm
                 form={form}
                 onInputChange={this.onInputChange}

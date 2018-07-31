@@ -5,3 +5,4 @@ export * from './TextHelper';
 export * from './CopyToClipboardHelper';
 export * from './ResponsiveTable';
 export * from './TimeHelper';
+export * from './TableColorFiller';

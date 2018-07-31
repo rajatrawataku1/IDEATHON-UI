@@ -230,7 +230,7 @@ class Dashboard extends Component {
           <Grid container className="DASHBOARD_CONTAINER">
             <Grid item xs={12} sm={12} md={12} className="flex-row">
                   <Grid container className="DASHBOARD_UPPER_HEADER">
-                    <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <Grid item xs={12} sm={6} md={6} lg={6} className="WHOLE_DESIGNATION_BOX">
                       <img src={PROFILE_LOGO} className="DASHBOARD_PROFILE_IMAGE" alt="Profile Icon"/>
                       <p style={{padding:"0px",margin:"0px",marginTop:"15px"}}><span className="DASHBOARD_PROFILE_NAME"><b>Ankush Wagh,</b> Direct Loyality</span></p>
                       <p className="DASHBOARD_PROFILE_DESIGNATION"> Financial Planning Manager</p>
@@ -279,6 +279,9 @@ class Dashboard extends Component {
                             </Grid>
                           </Grid>
                         </Grid>
+                        <Grid item xs={1}>
+                          <p className="DASHBOARD_COMMA">“</p>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -293,12 +296,12 @@ class Dashboard extends Component {
                      Current Week
                    </Typography>
                   </Grid>
-                  <Grid item xs={1} sm={4} className="flex-row flex-justify-end">
+                  <Grid item xs={2} sm={4} className="flex-row flex-justify-end">
                     <IconButton onClick={this.goBackWeek} disabled={arrow_left_State} color="secondary" aria-label="Show More" style={{borderRadius:"50%",marginTop:"-10px"}}>
                       <Icon style={{fontSize:"34px"}}>arrow_left</Icon>
                     </IconButton>
                   </Grid>
-                  <Grid item xs={10} sm={4} className="DASHBOARD_TIMINGS">
+                  <Grid item xs={8} sm={4} className="DASHBOARD_TIMINGS">
                     <Typography align="center" style={{fontSize:"18px",color:"#58595b",fontStyle:"italic"}}>
                       <span style={{padding:"0px",margin:"0px",fontSize:"18px",color:"#9b9b9b"}} >{WeekToShowFrontendMondayArray[0]} </span>
                       <span style={{padding:"0px",margin:"0px"}}> {WeekToShowFrontendMondayArray[1] + " "+WeekToShowFrontendMondayArray[2] + "-"}
@@ -306,7 +309,7 @@ class Dashboard extends Component {
                        <span style={{padding:"0px",margin:"0px"}} >{WeekToShowFrontendSundayArray[1]+" "+ WeekToShowFrontendSundayArray[2]}</span>
                     </Typography>
                   </Grid>
-                  <Grid item xs={1} sm={4}>
+                  <Grid item xs={2} sm={4}>
                     <IconButton onClick={this.goForwardWeek} disabled={arrow_right_State} color="secondary" aria-label="Show More" style={{borderRadius:"50%",marginTop:"-10px"}}>
                       <Icon style={{fontSize:"34px"}}>arrow_right</Icon>
                     </IconButton>

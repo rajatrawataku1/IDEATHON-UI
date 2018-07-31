@@ -46,8 +46,6 @@
     color: #58595b;
     margin:0px;
     padding:0px;
-    border-right:1px solid #bbbbbb;
-
   }
 
   .DASHBOARD_PROFILE_DESIGNATION{
@@ -55,16 +53,6 @@
     font-weight:500;
     color:#58595b;
     margin:0px;
-    border-right:1px solid #bbbbbb;
-
-  }
-
-  .DASHBOARD_SUB_PROFILE_DESIGNATION{
-    font-size:12px;
-    color:#58595b;
-    margin:0px;
-    padding-top:2px;
-    border-right:1px solid #bbbbbb;
   }
 
   .DASHBOARD_COMMA{
@@ -126,6 +114,12 @@
     text-decoration: none !important;
   }
 
+  .WHOLE_DESIGNATION_BOX{
+    border-right:1px solid #bbbbbb;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+
   /*  iphone 6/7/8 */
 
   @media screen and (max-width: 500px) {
@@ -138,17 +132,10 @@
       margin-bottom: 10px !important;
     }
 
-    .DASHBOARD_SUB_PROFILE_DESIGNATION{
+    .WHOLE_DESIGNATION_BOX{
       border: none;
     }
 
-    .DASHBOARD_PROFILE_NAME{
-      border: none;
-    }
-
-    .DASHBOARD_PROFILE_DESIGNATION{
-      border: none;
-    }
 
     .DASHBOARD_COMMA{
       padding:0px;

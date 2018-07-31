@@ -146,7 +146,8 @@ class ManagerComments extends Component {
           <FormControl error={Comments.dirty && Comments.error}  style={{ width: '100%' }}>
             <InputLabel style={STYLES.ADD_APP_FORM.LABEL} htmlFor='BranchName'>Manager Comment Here</InputLabel>
               <Input id='Comments'
-                    multiline="true"
+                    autoFocus={true}
+                    multiline={true}
                     rows="3"
                     type='text'
                     name='Comments'

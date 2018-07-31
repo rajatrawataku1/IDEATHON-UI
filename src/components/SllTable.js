@@ -4,7 +4,7 @@ import Button from 'material-ui/Button';
 import { DialogAction, SnackbarAction, SllAction } from '../actions';
 import { connect } from 'react-redux';
 import { Table, Column, Cell} from 'fixed-data-table-2';
-import { getTablerowHeight ,getTableHeight,getTableWidth,getExpandTableWidth} from '../helpers';
+import { getTablerowHeight ,getTableHeight,getTableWidth,getExpandTableWidth,getTheClass} from '../helpers';
 
 // import { StyleSheet, css }  from 'aphrodite';
 import moment from 'moment';
@@ -274,8 +274,17 @@ _rowExpandedGetter({rowIndex, width, height}) {
             columnKey="Name"
             header={<Cell className="Sll_Table_SimpleTableHeader">Name</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ? "Sll_SelectedCenterAlignedRowFirstName":"Sll_CenterAlignedRowFirstName" }   {...props}>
-                <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+            <Cell className={ this.state.collapsedRows.has(rowIndex) ? getTheClass(rowIndex,"Sll_SelectedCenterAlignedRowFirstName") :getTheClass(rowIndex,"Sll_CenterAlignedRowFirstName")}   {...props}>
+                {
+                  (rowIndex === 0)?
+
+                  <span> <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",Color:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+                  <br/> <br/>
+                  <span>(Self)</span>
+                  </span>
+                  :
+                  <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+                }
               </Cell>}
             width={90}
           />
@@ -284,7 +293,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
             columnKey="AgentId"
             header={<Cell className="Sll_Table_SimpleTableHeader"> ID</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ? "Sll_SelectedSimpleCenterAlignedRow":"Sll_SimpleCenterAlignedRow" }   {...props}>
+            <Cell className={ this.state.collapsedRows.has(rowIndex) ? getTheClass(rowIndex,"Sll_SelectedSimpleCenterAlignedRow"):getTheClass(rowIndex,"Sll_SimpleCenterAlignedRow") }   {...props}>
                 {data[rowIndex][columnKey]}
             </Cell>}
             width={80}
@@ -299,7 +308,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
               <span style={{color:"#cdcdcd"}} >{PreviousWeekSundayArray[0]}</span> <span>{PreviousWeekSundayArray[2]}</span> <span>{PreviousWeekSundayArray[1]}</span>
                     </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ?"Sll_SelectedSimpleLeftAlignedRow":"Sll_SimpleLeftAlignedRow" }   {...props}>
+            <Cell className={ this.state.collapsedRows.has(rowIndex) ? getTheClass(rowIndex,"Sll_SelectedSimpleLeftAlignedRow"):getTheClass(rowIndex,"Sll_SimpleLeftAlignedRow") }   {...props}>
 
                 {
 
@@ -337,7 +346,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
 
             </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className={ this.state.collapsedRows.has(rowIndex) ? "Sll_SelectedSimpleLeftAlignedRow":"Sll_SimpleLeftAlignedRow" }   {...props}>
+            <Cell className={ this.state.collapsedRows.has(rowIndex) ? getTheClass(rowIndex,"Sll_SelectedSimpleLeftAlignedRow"):getTheClass(rowIndex,"Sll_SimpleLeftAlignedRow") }   {...props}>
               {
 
                 ( !data[rowIndex]['CommentCurrentWeekManagerComment'] && !data[rowIndex]['CommentCurrentWeekSelfComment']) ?

@@ -150,15 +150,15 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 .FllTableStyle .public_fixedDataTable_topShadow{
-  width: auto;
-  /* width: 715px; */
+  /* width: auto; */
+  width: 715px;
   /* display:none; */
 }
 
 .FllTableStyle .public_fixedDataTable_bottomShadow{
-  width: auto;
+  /* width: auto; */
 
-  /* width: 715px; */
+  width: 715px;
 
   /* display:none; */
 }
@@ -183,6 +183,29 @@ input[type=number]::-webkit-outer-spin-button {
 
 .ScreensPosition{
   position: absolute;
-  top: 7%;
+  top: 50px;
   width: 100%;
+  margin-top: 10px;
+}
+
+.FirstRowOfColoumn{
+  background-color: rgba(156,217,255,0.8);
+}
+
+@media screen and (min-width: 770px) {
+
+  .FllTableStyle .public_fixedDataTable_topShadow{
+    width: auto;
+    /* width: 715px; */
+    /* display:none; */
+  }
+
+  .FllTableStyle .public_fixedDataTable_bottomShadow{
+    width: auto;
+
+    /* width: 715px; */
+
+    /* display:none; */
+  }
+
 }

@@ -143,7 +143,7 @@ class SelfComments extends Component {
           <FormControl error={Comments.dirty && Comments.error}  style={{ width: '100%' }}>
             <InputLabel style={STYLES.ADD_APP_FORM.LABEL} htmlFor='BranchName'>Enter Commitement </InputLabel>
               <Input id='Comments'
-                    multiline="true"
+                    multiline={true}
                     rows="3"
                     type='text'
                     name='Comments'

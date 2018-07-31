@@ -6,6 +6,7 @@ import { DialogAction } from '../../actions';
 import Slide from 'material-ui/transitions/Slide';
 import { COLORS } from '../../constants';
 
+
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
@@ -44,17 +45,17 @@ class AppDialog extends Component {
     if (!dialogType) { return false; }
 
     return(
-      <Dialog scroll="paper" open={open} onClose={this.onDialogClose} style={STYLES.ROOT}  transition={Transition} >
-        <div className="flex-row flex-align-center flex-justify-end" style={STYLES.CLOSE_ICON_CONTAINER}>
-          <i className="material-icons" style={STYLES.CLOSE_ICON} onClick={this.onDialogClose}>close</i>
-        </div>
-        <DialogByType
-          dialogType={dialogType}
-          dialogData={dialogData}
-          onDialogClose={this.onDialogClose}
-          dialogActions={dialogActions}
-        />
-      </Dialog>
+        <Dialog scroll="paper" open={open} onClose={this.onDialogClose} style={STYLES.ROOT} >
+          <div className="flex-row flex-align-center flex-justify-end" style={STYLES.CLOSE_ICON_CONTAINER}>
+            <i className="material-icons" style={STYLES.CLOSE_ICON} onClick={this.onDialogClose}>close</i>
+          </div>
+          <DialogByType
+            dialogType={dialogType}
+            dialogData={dialogData}
+            onDialogClose={this.onDialogClose}
+            dialogActions={dialogActions}
+          />
+        </Dialog>
     );
   }
 }

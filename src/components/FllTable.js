@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import moment from 'moment';
 import Grid from 'material-ui/Grid';
-import { getTablerowHeight ,getTableHeight,getTableWidth} from '../helpers';
+import { getTablerowHeight ,getTableHeight,getTableWidth,getTheClass} from '../helpers';
 import '../CSS/SllView.css';
 import '../CSS/fllTable.css';
 
@@ -95,13 +95,21 @@ class FllTable extends React.Component {
             maxHeight={tableHeight}
             {...this.props}>
 
-
           <Column
             columnKey="Name"
             header={<Cell className="Fll_Table_SimpleTableHeader"> Name</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
-              <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+            <Cell className={ getTheClass(rowIndex,"Fll_Table_CenterAlignedRow") }   {...props}>
+              {
+                (rowIndex === 0)?
+                <span>
+                  <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+                  <br/> <br/>
+                   <span>(self)</span>
+                </span>
+                :
+                <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+              }
             </Cell>}
             width={110}
           />
@@ -111,7 +119,7 @@ class FllTable extends React.Component {
             columnKey="AgentId"
             header={<Cell className="Fll_Table_SimpleTableHeader"> ID</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
+            <Cell className={ getTheClass(rowIndex,"Fll_Table_CenterAlignedRow") }   {...props}>
                 <a cursor="pointer" href={"/dashboard?agentId="+data[rowIndex][columnKey]}> {data[rowIndex][columnKey]}</a>
             </Cell>}
             width={90}
@@ -131,7 +139,7 @@ class FllTable extends React.Component {
               <span style={{color:"#cdcdcd"}} >{PreviousWeekSundayArray[0]}</span> <span>{PreviousWeekSundayArray[2]}</span> <span>{PreviousWeekSundayArray[1]}</span>
                     </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
+            <Cell className={ getTheClass(rowIndex,"Fll_Table_CenterAlignedRow") }   {...props}>
 
                 {
 
@@ -168,7 +176,7 @@ class FllTable extends React.Component {
 
             </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Fll_Table_CenterAlignedRow"   {...props}>
+            <Cell className={ getTheClass(rowIndex,"Fll_Table_CenterAlignedRow") } {...props}>
               {
 
                 ( !data[rowIndex]['CommentCurrentWeekManagerComment'] && !data[rowIndex]['CommentCurrentWeekSelfComment']) ?
