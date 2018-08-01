@@ -6,3 +6,5 @@ export * from './ApplicationForm';
 export * from './Lead';
 export * from './Fll';
 export * from './Sll';
+export * from './AgentInfo';
+export * from './DashboardLead';

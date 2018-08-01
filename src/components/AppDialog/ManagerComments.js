@@ -14,7 +14,7 @@ const STYLES = {
  ADD_APP_FORM: {
    LABEL:{
      color:COLORS.BLACK,
-     fontSize:"12px",
+     fontSize:"14px",
      fontWeight:"500",
      fontFamily: "Lato",
    },

@@ -1,4 +1,6 @@
 import { DASHBOARD_ACTION_TYPES } from '../action-types';
+import {AgentInfo,DashboardLead} from '../classes';
+
 import * as _ from 'lodash';
 
 export default function dashboardReducer(state = {}, action) {
@@ -11,7 +13,18 @@ export default function dashboardReducer(state = {}, action) {
       let responseBody,responseData;
       responseBody  = action.resBody;
       responseData = responseBody.data;
-      dashboardStore.agentStore = responseData;
+
+      console.log("Response Data : "+responseData);
+      let mappedData;
+
+      (!!responseData[0]) ?
+      mappedData = new AgentInfo(responseData[0])
+      :
+      mappedData = new AgentInfo()
+
+      console.log("Mapped Data : "+mappedData);
+
+      dashboardStore.agentStore = mappedData;
       break;
 
     }
@@ -26,7 +39,17 @@ export default function dashboardReducer(state = {}, action) {
       let responseBody,responseData;
       responseBody  = action.resBody;
       responseData = responseBody.data;
-      dashboardStore.leadsStore = responseData;
+
+      let mappedData;
+
+      (!!responseData[0]) ?
+      mappedData = new DashboardLead(responseData[0])
+      :
+      mappedData = new DashboardLead()
+
+      console.log("Mapped Data : "+mappedData);
+
+      dashboardStore.leadsStore = mappedData;
       break;
     }
 
@@ -58,19 +81,6 @@ export default function dashboardReducer(state = {}, action) {
 
     case DASHBOARD_ACTION_TYPES.GET_CAMPAIGN_EFFICIENCY_FAILURE:
       delete dashboardStore.campaignEfficiencyStore
-      break;
-
-    case DASHBOARD_ACTION_TYPES.GET_SELF_COMMENTS_SUCCESS:
-    {
-      let responseBody,responseData;
-      responseBody  = action.resBody;
-      responseData = responseBody.data;
-      dashboardStore.selfCommentsStore = responseData
-      break;
-    }
-
-    case DASHBOARD_ACTION_TYPES.GET_SELF_COMMENTS_FAILURE:
-      delete dashboardStore.selfCommentsStore
       break;
 
     case DASHBOARD_ACTION_TYPES.GET_MANAGER_COMMENTS_SUCCESS:

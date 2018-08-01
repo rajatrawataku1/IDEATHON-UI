@@ -14,7 +14,7 @@ const STYLES = {
  ADD_APP_FORM: {
    LABEL:{
      color:COLORS.BLACK,
-     fontSize:"12px",
+     fontSize:"14px",
      fontWeight:"500",
      fontFamily: "Lato",
    },
@@ -143,6 +143,7 @@ class SelfComments extends Component {
           <FormControl error={Comments.dirty && Comments.error}  style={{ width: '100%' }}>
             <InputLabel style={STYLES.ADD_APP_FORM.LABEL} htmlFor='BranchName'>Enter Commitement </InputLabel>
               <Input id='Comments'
+                    autoFocus={true}
                     multiline={true}
                     rows="3"
                     type='text'

@@ -140,7 +140,34 @@ function getCamapaignEfficiency(week,agentId,timeline,options={}){
 
 }
 
-// get self comments
+// get both comments
+
+function getCommitments(week,agentId,options={}){
+  let { afterSuccess, afterError } = options;
+
+  if (!(afterSuccess instanceof Function)) {
+    afterSuccess = undefined;
+  }
+
+  if (!(afterError instanceof Function)) {
+    afterError = undefined;
+  }
+
+  const actualPath = "/week-no/"+week+"/agent-id/"+agentId;
+
+  return {
+    [CALL_API]: {
+      method: 'get',
+      path: DASHBOARD_API.GET_SELF_COMMENTS+actualPath,
+      auth: Auth.getToken(),
+      successType: DASHBOARD_ACTION_TYPES.GET_SELF_COMMENTS_SUCCESS,
+      errorType: DASHBOARD_ACTION_TYPES.GET_SELF_COMMENTS_FAILURE,
+      afterSuccess,
+      afterError
+    }
+  };
+
+}
 
 function getSelfComments(week,agentId,options={}){
 

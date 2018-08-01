@@ -5,8 +5,8 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import { BoxHeader } from '../../components';
 import { DialogAction, SnackbarAction, DashboardAction } from '../../actions';
-import {  Auth } from '../../helpers';
-import { BACK_IMAGE,ADD_COMMENT_IMAGE,PROFILE_LOGO} from '../../constants';
+import {  Auth,LeadTableReordering } from '../../helpers';
+import { BACK_IMAGE,ADD_COMMENT_IMAGE,PROFILE_LOGO, LEFT_QUOTE, RIGHT_QUTOE} from '../../constants';
 import Typography from 'material-ui/Typography';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
@@ -37,14 +37,16 @@ class Dashboard extends Component {
     this.reloadPage = this.reloadPage.bind(this);
   }
 
-  getAllDataApiCall = ()=>{
+  getAllDataApiCall = (weekNumber)=>{
 
     // week number
     // let { WeekToShow } = this.state;
+    console.log("WeekNumber : ",weekNumber)
+
     // // agent ID
-    // let { agentId } = this.props;
+    let { agentId } = this.props;
     // // timeline
-    // let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
+    let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
 
     let options = {
       afterSuccess: () => {
@@ -56,10 +58,10 @@ class Dashboard extends Component {
     };
 
     // this.props.actions.getAgentInfo(agentId,options);
-    // this.props.actions.getLeadsInfo(WeekToShow,agentId,SelectLeads,options);
+    // this.props.actions.getLeadsInfo(weekNumber,agentId,SelectLeads,options);
     // this.props.actions.getJointCall(WeekToShow,agentId,SelectJointCalls,options);
     // this.props.actions.getCamapaignEfficiency(WeekToShow,agentId,SelectCampaigns,options);
-    // this.props.actions.getSelfComments(WeekToShow,agentId,options);
+    this.props.actions.getSelfComments(weekNumber,agentId,options);
     // this.props.actions.getManagerComments(WeekToShow,agentId,options);
 
     console.log("I have called the API");
@@ -73,7 +75,7 @@ class Dashboard extends Component {
       history.push('/');
     }else{
       console.log("I am gonna call API");
-      this.getAllDataApiCall();
+      this.getAllDataApiCall(moment().isoWeek());
     }
   }
 
@@ -83,7 +85,7 @@ class Dashboard extends Component {
       afterError: () => {}
     };
 
-    this.getAllDataApiCall();
+    this.getAllDataApiCall(moment().isoWeek());
   }
 
 
@@ -94,12 +96,15 @@ class Dashboard extends Component {
     this.props.actions.openDialog(dialogType, dialogData, dialogActions);
   }
 
-  handleLeadChange = (event)=>{
-    this.setState({SelectLeads:event.target.value});
+  handleSelectToggleChange = (event)=>{
+
+    let StateKey = event.target.name;
+
+    console.log(event.target)
 
     let {WeekToShow} = this.state;
-    let { id } = this.props;
-    let SelectLeads = event.target.value;
+    let { agentId } = this.props;
+    let SelectedTimeline = event.target.value;
 
     let options = {
       afterSuccess: () => {
@@ -110,69 +115,31 @@ class Dashboard extends Component {
       }
     };
 
-    this.props.actions.getLeadsInfo(WeekToShow,id,SelectLeads,options);
-  }
+    const {name} = event.target;
+    console.log(name);
 
-  handleJoinCallChange= (event)=>{
-    this.setState({SelectJointCalls:event.target.value});
-
-    let { WeekToShow } = this.state;
-
-    let { id } = this.props;
-    let SelectJointCalls = event.target.value;
-
-    let options = {
-      afterSuccess: () => {
-        console.log('success');
-      },
-      afterError: () => {
-        console.log('error');
-      }
-    };
-
-    this.props.actions.getJointCall(WeekToShow,id,SelectJointCalls,options);
-  }
-
-  handleCampaignChange = (event)=>{
-    this.setState({SelectCampaigns:event.target.value});
-
-    let {WeekToShow} = this.state;
-
-    let { id } = this.props;
-    let SelectCampaigns = event.target.value;
-
-    let options = {
-      afterSuccess: () => {
-        console.log('success');
-      },
-      afterError: () => {
-        console.log('error');
-      }
-    };
-
-    this.props.actions.getCamapaignEfficiency(WeekToShow,id,SelectCampaigns,options);
-  }
-
-  handleTrainingChange = (event)=>{
-    this.setState({SelectTraining:event.target.value});
+    if(name === "SelectLeads"){
+      this.setState({SelectLeads:SelectedTimeline});
+      this.props.actions.getLeadsInfo(WeekToShow,agentId,SelectedTimeline,options);
+    }else
+    if(name === "SelectJointCalls"){
+      this.setState({SelectJointCalls:SelectedTimeline});
+      this.props.actions.getJointCall(WeekToShow,agentId,SelectedTimeline,options);
+    }else
+    if(name === "SelectCampaigns"){
+      this.setState({SelectCampaigns:SelectedTimeline});
+      this.props.actions.getCamapaignEfficiency(WeekToShow,agentId,SelectedTimeline,options);
+    }
   }
 
   goBackWeek = ()=>{
-    this.setState((prevState,props)=>{
-      return {WeekToShow:moment().isoWeek()-1,WeekValue:"PreviousWeek"}
-    });
-
-    this.getAllDataApiCall();
-
+    this.setState({WeekToShow:moment().isoWeek()-1,WeekValue:"PreviousWeek"});
+    this.getAllDataApiCall(moment().isoWeek()-1);
   }
 
   goForwardWeek = ()=>{
-    this.setState((prevState,props)=>{
-      return {WeekToShow:moment().isoWeek(),WeekValue:"CurrentWeek"}
-    });
-
-    this.getAllDataApiCall();
-
+    this.setState({WeekToShow:moment().isoWeek(),WeekValue:"CurrentWeek"});
+    this.getAllDataApiCall(moment().isoWeek());
   }
 
   showAddSelfCommentDialog = ()=>{
@@ -197,17 +164,43 @@ class Dashboard extends Component {
     const { history } = this.props;
 
     history.push('/lead/?agentId='+agentId+'&week='+WeekToShow+'&type='+SelectLeads);
-
   }
 
   render() {
 
+    let dummyObject = [
+      {Status:"Unqualified",name:"Yell"},
+      {Status:"New",name:"Rajat Rawat"},
+      {Status:"Follow-Up",name:"Shivam Singh"},
+      {Status:"New",name:"Ramu Boy"},
+      {Status:"Follow-Up",name:"Swastik Shrivastava"},
+      {Status:"Hibernate",name:"Hua"},
+      {Status:"Invalid",name:"Wao"},
+      {Status:"New",name:"Yang"},
+      {Status:"Follow-Up",name:"Mehul Aggarawal"},    ]
+
+    LeadTableReordering(dummyObject)
 
     let { agentId } = this.props;
 
-
     let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
     // let { agentStore, leadsStore, jointCallsStore,campaignEfficiencyStore ,managerCommentsStore,selfCommentsStore} = this.props;
+    let { agentStore, leadsStore,commitmentsStore } = this.props;
+
+    //  for agent Info
+    let { AgentNum,EmployeeName,AgentChannel,AgentDesignation } = agentStore;
+
+    //  for Lead Info
+    let { Lead_Total,Lead_New,Lead_PositiveClosure,Lead_FollowUp,Lead_NegativeClosure,Lead_Invalid,Lead_LCR,Lead_LAR,Lead_MET } = leadsStore;
+    let Lead_Actual_LAR_Percent = Math.round( Number(Lead_LAR)*100);
+    let Lead_Actual_LCR_Percent = Math.round( Number(Lead_LCR)*100);
+    let Lead_Actual_MET_Percent = Math.round( Number(Lead_MET)*100);
+
+    // for commitements
+    console.log(commitmentsStore);
+
+    console.log("Agent Store : ",agentStore);
+    console.log("Leas Store : ",leadsStore);
 
     let arraObject=[1,2,3];
 
@@ -231,21 +224,35 @@ class Dashboard extends Component {
             <Grid item xs={12} sm={12} md={12} className="flex-row">
                   <Grid container className="DASHBOARD_UPPER_HEADER">
                     <Grid item xs={12} sm={6} md={6} lg={6} className="WHOLE_DESIGNATION_BOX">
-                      <img src={PROFILE_LOGO} className="DASHBOARD_PROFILE_IMAGE" alt="Profile Icon"/>
-                      <p style={{padding:"0px",margin:"0px",marginTop:"15px"}}><span className="DASHBOARD_PROFILE_NAME"><b>Ankush Wagh,</b> Direct Loyality</span></p>
-                      <p className="DASHBOARD_PROFILE_DESIGNATION"> Financial Planning Manager</p>
+                      {
+                        (!!AgentNum)?
+                          <span>
+                            <img src={PROFILE_LOGO} className="DASHBOARD_PROFILE_IMAGE" alt="Profile Icon"/>
+                            <p style={{padding:"0px",margin:"0px",marginTop:"15px"}}>
+                              <span className="DASHBOARD_PROFILE_NAME">
+                                <b>{EmployeeName+","}</b> {AgentChannel}
+                              </span>
+                            </p>
+                            <p className="DASHBOARD_PROFILE_DESIGNATION">{AgentDesignation}</p>
+                          </span>
+                        :
+                          <span>Unable to Fetch Agent Info</span>
+
+                      }
                     </Grid>
                     <Grid item xs={12} sm={6} md={6} lg={6}>
-                      <Grid container style={{marginLeft:"22px"}}>
+                      <Grid container style={{marginLeft:"17px"}}>
                         <Grid item xs={1}>
-                          <p className="DASHBOARD_COMMA"> “</p>
+                          <img src={LEFT_QUOTE} style={{height:"25px"}}alt="My Commitment"/>
+                          {/* <p className="DASHBOARD_COMMA"> “</p> */}
                         </Grid>
-                        <Grid item xs={10} className="DASHBOARD_COMMITMENT_CONTAINER">
+                        <Grid item xs={9} className="DASHBOARD_COMMITMENT_CONTAINER">
                           <Grid container>
                             <Grid item xs={12}>
                               <span className="DASHBOARD_MY_COMMITMENT" > MY COMMITMENT </span>
                             </Grid>
                             <Grid item xs={12} style={{marginTop:"-5px"}}>
+
 
                                 { (Auth.getUserDataByKey('Id') === Number(agentId) )?
                                     <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddSelfCommentDialog}>
@@ -256,23 +263,25 @@ class Dashboard extends Component {
                                   <span className="DASHBOARD_COMMENTS_SELF" >{" "}</span>
                                 }
 
-                              <span className="DASHBOARD_COMMENTS_SELF" >   I will be meeting atleast 25 leads this week. Seeing 10 other potential leads too.</span>
+                              {/* <span className="DASHBOARD_COMMENTS_SELF" >   I will be meeting atleast 25 leads this week. Seeing 10 other potential leads too.</span> */}
 
                             </Grid>
                             <Grid item xs={12} style={{textAlign:"right",paddingRight:"7px"}}>
                               <Grid container>
                                 <Grid item xs={12}>
 
-                                  <span className="DASHBOARD_COMMENTS_MANAGER" >   I will be meeting atleast 25 leads this week. Seeing 10 other potential leads too.</span>
+                                  {/* <span className="DASHBOARD_COMMENTS_MANAGER" >   I will be meeting atleast 25 leads this week. Seeing 10 other potential leads too.</span> */}
 
-                                  { (Auth.getUserDataByKey('Role') !== "FLS" )?
+                                  {/* { (Auth.getUserDataByKey('Role') !== "FLS" )?
                                       <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddManagerCommentDialog}>
-                                        <span className="DASHBOARD_COMMENTS_BUTTON">Manager Comments </span>
+                                        <span className="DASHBOARD_COMMENTS_BUTTON">Click to Add Manager Comments </span>
                                         <span><img src={BACK_IMAGE} style={{height:"7px",marginLeft:"2px"}} alt="Back_Image"/></span>
                                       </Button>
                                       :
                                     <span className="DASHBOARD_COMMENTS_SELF" >{" "}</span>
-                                  }
+                                  } */}
+
+
 
                                 </Grid>
                               </Grid>
@@ -280,7 +289,7 @@ class Dashboard extends Component {
                           </Grid>
                         </Grid>
                         <Grid item xs={1}>
-                          <p className="DASHBOARD_COMMA">“</p>
+                          <img src={RIGHT_QUTOE} style={{height:"25px",marginTop:"70px"}} alt="My Commitment"/>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -330,15 +339,16 @@ class Dashboard extends Component {
                           <Grid container style={{marginTop:"10px",marginBottom:"10px"}}>
                             <Grid item xs={12}>
                               <Grid container>
-                                <Grid item xs={6} style={{fontSize:"14px",marginTop:"5px",marginLeft:"12px",color:"#444444"}}> Lead funnel ( Total : <span> 14 </span> )</Grid>
-                                <Grid item xs={1} className="flex-row flex-justify-center" style={{marginTop:"-10px",fontSize:"40px",fontStyle:"italic",fontWeight:"bold",color:"#4a4a4a"}}> 14</Grid>
+                                <Grid item xs={6} style={{fontSize:"14px",marginTop:"5px",marginLeft:"12px",color:"#444444"}}> Lead funnel ( Total : <span> {Lead_Total} </span> )</Grid>
+                                <Grid item xs={1} className="flex-row flex-justify-center" style={{marginTop:"-10px",fontSize:"40px",fontStyle:"italic",fontWeight:"bold",color:"#4a4a4a"}}> {Lead_Total}</Grid>
                                 <Grid item xs={4} className="flex-row flex-justify-end">
                                   <FormControl>
                                     <Select
+                                      name="SelectLeads"
                                       disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectLeads}
-                                      onChange={this.handleLeadChange}
+                                      onChange={this.handleSelectToggleChange}
                                     >
                                       <MenuItem value={"weekly"}>WTD</MenuItem>
                                       <MenuItem value={"monthly"}>MTD</MenuItem>
@@ -364,10 +374,10 @@ class Dashboard extends Component {
                                  <Grid item xs={3} className="flex-row flex-justify-center"> <hr style={{width:"100%",border:"1px solid #92278f",backgroundColor:"#92278f"}}/></Grid>
                                  <Grid item xs={3} className="flex-row flex-justify-center"> <hr style={{width:"100%",border:"1px solid #ed1c24",backgroundColor:"#ed1c24"}}/></Grid>
 
-                                 <Grid item xs={3} className="flex-row flex-justify-center"> 7</Grid>
-                                 <Grid item xs={3} className="flex-row flex-justify-center"> 3</Grid>
-                                 <Grid item xs={3} className="flex-row flex-justify-center"> 2</Grid>
-                                 <Grid item xs={3} className="flex-row flex-justify-center"> 2</Grid>
+                                 <Grid item xs={3} className="flex-row flex-justify-center"> {Lead_New}</Grid>
+                                 <Grid item xs={3} className="flex-row flex-justify-center"> {Lead_FollowUp}</Grid>
+                                 <Grid item xs={3} className="flex-row flex-justify-center"> {Lead_PositiveClosure}</Grid>
+                                 <Grid item xs={3} className="flex-row flex-justify-center"> {Lead_NegativeClosure}</Grid>
 
                                  <Grid item xs={12} style={{marginBottom:"5px"}}></Grid>
                                  <Grid item xs={4} className="flex-row flex-justify-center"> LAR</Grid>
@@ -378,9 +388,9 @@ class Dashboard extends Component {
                                  <Grid item xs={4} className="flex-row flex-justify-center"> <hr style={{width:"100%",border:"1px solid #f7941d",backgroundColor:"#f7941d"}} /></Grid>
                                  <Grid item xs={4} className="flex-row flex-justify-center"> <hr style={{width:"100%",border:"1px solid #3cb878",backgroundColor:"#3cb878"}}/></Grid>
 
-                                 <Grid item xs={4} className="flex-row flex-justify-center"> 43%</Grid>
-                                 <Grid item xs={4} className="flex-row flex-justify-center"> 46%</Grid>
-                                 <Grid item xs={4} className="flex-row flex-justify-center"> 15%</Grid>
+                                 <Grid item xs={4} className="flex-row flex-justify-center"> {Lead_Actual_LAR_Percent+"%"}</Grid>
+                                 <Grid item xs={4} className="flex-row flex-justify-center"> {Lead_Actual_MET_Percent+"%"}</Grid>
+                                 <Grid item xs={4} className="flex-row flex-justify-center"> {Lead_Actual_LCR_Percent+"%"}</Grid>
 
                                  <Grid item xs={4} style={{marginBottom:"5px"}}> </Grid>
                                  <Grid item xs={12} className="flex-row flex-justify-center">
@@ -403,10 +413,11 @@ class Dashboard extends Component {
                                 <Grid item xs={5} className="flex-row flex-justify-end" style={{paddingRight:"14px"}}>
                                   <FormControl>
                                     <Select
+                                      name="SelectJointCalls"
                                       disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectJointCalls}
-                                      onChange={this.handleJoinCallChange}
+                                      onChange={this.handleSelectToggleChange}
                                     >
                                       <MenuItem value={"weekly"}>WTD</MenuItem>
                                       <MenuItem value={"monthly"}>MTD</MenuItem>
@@ -451,10 +462,11 @@ class Dashboard extends Component {
                               <Grid item xs={12} className="flex-row flex-justify-end" style={{paddingRight:"12px"}}>
                                   <FormControl>
                                     <Select
+                                      name="SelectCampaigns"
                                       disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectCampaigns}
-                                      onChange={this.handleCampaignChange}
+                                      onChange={this.handleSelectToggleChange}
                                     >
                                       <MenuItem value={"weekly"}>WTD</MenuItem>
                                       <MenuItem value={"monthly"}>MTD</MenuItem>
@@ -512,10 +524,11 @@ class Dashboard extends Component {
                                 <Grid item xs={12} className="flex-row flex-justify-end" style={{paddingRight:"14px"}}>
                                   <FormControl>
                                     <Select
+                                      name="SelectTraining"
                                       disableUnderline={true}
                                       style={{color:"#444444",paddingTop:"2px",paddingLeft:"10px",fontWeight:"bold",fontSize:"10px",borderRadius:"4px",border:"solid 1px #e3e3e3"}}
                                       value={SelectTraining}
-                                      onChange={this.handleTrainingChange}
+                                      onChange={this.handleSelectToggleChange}
                                     >
                                       <MenuItem value={"weekly"}>WTD</MenuItem>
                                       <MenuItem value={"monthly"}>MTD</MenuItem>
@@ -585,6 +598,8 @@ function mapStateToProps(state) {
     jointCallsStore: !!state.dashboardStore.jointCallsStore ? state.dashboardStore.jointCallsStore : {},
     campaignEfficiencyStore: !!state.dashboardStore.campaignEfficiencyStore ? state.dashboardStore.campaignEfficiencyStore : [],
 
+    commitmentsStore: !!state.dashboardStore.commentsStore ? state.dashboardStore.commentsStore : {},
+
     selfCommentsStore: !!state.dashboardStore.selfCommentsStore ? state.dashboardStore.selfCommentsStore : {},
     managerCommentsStore: !!state.dashboardStore.managerCommentsStore ? state.dashboardStore.managerCommentsStore : {},
 
@@ -602,6 +617,8 @@ function mapDispatchToProps(dispatch) {
     getLeadsInfo: (week,agentId,timeline,options) =>dispatch(DashboardAction.getLeadsInfo(week,agentId,timeline,options)),
     getJointCall: (week,agentId,timeline,options) =>dispatch(DashboardAction.getJointCall(week,agentId,timeline,options)),
     getCamapaignEfficiency: (week,agentId,timeline,options) =>dispatch(DashboardAction.getCamapaignEfficiency(week,agentId,timeline,options)),
+
+    getCommitments: (week,agentId,options) =>dispatch(DashboardAction.getCommitments(week,agentId,options)),
 
     getSelfComments: (week,agentId,options) =>dispatch(DashboardAction.getSelfComments(week,agentId,options)),
     getManagerComments: (week,agentId,options) =>dispatch(DashboardAction.getManagerComments(week,agentId,options)),
