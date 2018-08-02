@@ -9,6 +9,7 @@ export const DashboardAction = {
   getJointCall,
   getCamapaignEfficiency,
   getSelfComments,
+  getCommitments,
   getManagerComments,
   setSelfComments,
   setManagerComments,
@@ -158,10 +159,10 @@ function getCommitments(week,agentId,options={}){
   return {
     [CALL_API]: {
       method: 'get',
-      path: DASHBOARD_API.GET_SELF_COMMENTS+actualPath,
+      path: DASHBOARD_API.GET_COMMITMENS+actualPath,
       auth: Auth.getToken(),
-      successType: DASHBOARD_ACTION_TYPES.GET_SELF_COMMENTS_SUCCESS,
-      errorType: DASHBOARD_ACTION_TYPES.GET_SELF_COMMENTS_FAILURE,
+      successType: DASHBOARD_ACTION_TYPES.GET_COMMITMENTS_SUCCESS,
+      errorType: DASHBOARD_ACTION_TYPES.GET_COMMITMENTS_FAILURE,
       afterSuccess,
       afterError
     }

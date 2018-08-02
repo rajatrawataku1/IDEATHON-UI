@@ -13,7 +13,7 @@ const KEY_MAP = {
   MeetinDoneOn:"x_meeting_done_on",
   MeetingSheduledDate:"x_meeting_sched_for",
   Location:"x_prop_pol_hol_city",
-  PropPolHolState:"x_prop_pol_hol_state",
+  State:"x_prop_pol_hol_state",
   LeadCreationDate:"ld_created_date",
   LastUpdateeDAte:"ld_last_upd_dt",
   SourceId:"src_id",
@@ -29,6 +29,12 @@ const KEY_MAP = {
   LgCode:"lg_code",
   LdJointCall:"ld_joint_call",
   LdMeetingStatus:"ld_meeting_status",
+  MeetingRemarks:"meeting_remarks",
+  ProductName:"last_prod_discussed",
+  CreatedAt:"created_at",
+  CreatedBy:"created_by",
+  UpdatedAt:"updated_at",
+  UpdatedBy:"updated_by"
 }
 
 const KEY_MAP_COMMENT_API='comment';
@@ -55,7 +61,7 @@ export class Lead {
       // console.log( apiObj[KEY_MAP_COMMENT_API]);
       // console.log(apiObj[KEY_MAP_COMMENT_API][KEY_MAP_COMMENT_CURRENT_API][keyCommentCurrentApi]);
     console.log("####"+apiObj[KEY_MAP_COMMENT_API][keyCommentApi]);
-    
+
     (!!apiObj[KEY_MAP_COMMENT_API] && !!apiObj[KEY_MAP_COMMENT_API][keyCommentApi])
       ?
       _this[keyFinal] = apiObj[KEY_MAP_COMMENT_API][keyCommentApi]

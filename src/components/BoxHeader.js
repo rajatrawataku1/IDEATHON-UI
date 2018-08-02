@@ -15,6 +15,8 @@ const STYLES = {
     fontSize:"14px"
   },
   CONTAINER:{
+    position:"sticky",
+    top:"0px",
     width:"100%",
     backgroundImage:"linear-gradient(to right, #556080, #ffffff)",
     padding:"12px 12px 12px 12px"
@@ -45,7 +47,7 @@ const BoxHeader = ({LeftHeading, RightHeading}) => {
 
   return (
 
-      <Grid container style={STYLES.CONTAINER}>
+      <Grid container style={STYLES.CONTAINER} >
         <Grid item xs={6} className="flex-row flex-justify-start" style={STYLES.LABEL}>
           {LeftHeading}
         </Grid>

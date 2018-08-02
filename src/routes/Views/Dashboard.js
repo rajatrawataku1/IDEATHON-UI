@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import { BoxHeader } from '../../components';
 import { DialogAction, SnackbarAction, DashboardAction } from '../../actions';
-import {  Auth,LeadTableReordering } from '../../helpers';
+import {  Auth } from '../../helpers';
 import { BACK_IMAGE,ADD_COMMENT_IMAGE,PROFILE_LOGO, LEFT_QUOTE, RIGHT_QUTOE} from '../../constants';
 import Typography from 'material-ui/Typography';
 import { MenuItem } from 'material-ui/Menu';
@@ -59,9 +59,9 @@ class Dashboard extends Component {
 
     // this.props.actions.getAgentInfo(agentId,options);
     // this.props.actions.getLeadsInfo(weekNumber,agentId,SelectLeads,options);
-    // this.props.actions.getJointCall(WeekToShow,agentId,SelectJointCalls,options);
+    this.props.actions.getJointCall(weekNumber,agentId,SelectJointCalls,options);
     // this.props.actions.getCamapaignEfficiency(WeekToShow,agentId,SelectCampaigns,options);
-    this.props.actions.getSelfComments(weekNumber,agentId,options);
+    // this.props.actions.getCommitments(weekNumber,agentId,options);
     // this.props.actions.getManagerComments(WeekToShow,agentId,options);
 
     console.log("I have called the API");
@@ -168,24 +168,11 @@ class Dashboard extends Component {
 
   render() {
 
-    let dummyObject = [
-      {Status:"Unqualified",name:"Yell"},
-      {Status:"New",name:"Rajat Rawat"},
-      {Status:"Follow-Up",name:"Shivam Singh"},
-      {Status:"New",name:"Ramu Boy"},
-      {Status:"Follow-Up",name:"Swastik Shrivastava"},
-      {Status:"Hibernate",name:"Hua"},
-      {Status:"Invalid",name:"Wao"},
-      {Status:"New",name:"Yang"},
-      {Status:"Follow-Up",name:"Mehul Aggarawal"},    ]
-
-    LeadTableReordering(dummyObject)
-
     let { agentId } = this.props;
 
     let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
     // let { agentStore, leadsStore, jointCallsStore,campaignEfficiencyStore ,managerCommentsStore,selfCommentsStore} = this.props;
-    let { agentStore, leadsStore,commitmentsStore } = this.props;
+    let { agentStore, leadsStore,commitmentsStore,jointCallsStore } = this.props;
 
     //  for agent Info
     let { AgentNum,EmployeeName,AgentChannel,AgentDesignation } = agentStore;
@@ -197,7 +184,12 @@ class Dashboard extends Component {
     let Lead_Actual_MET_Percent = Math.round( Number(Lead_MET)*100);
 
     // for commitements
-    console.log(commitmentsStore);
+
+    let { CommentManagerComment,CommentSelfComment } = commitmentsStore;
+    console.log(CommentManagerComment,CommentSelfComment);
+
+    //  for Joint Call
+    console.log(jointCallsStore);
 
     console.log("Agent Store : ",agentStore);
     console.log("Leas Store : ",leadsStore);
@@ -236,60 +228,78 @@ class Dashboard extends Component {
                             <p className="DASHBOARD_PROFILE_DESIGNATION">{AgentDesignation}</p>
                           </span>
                         :
-                          <span>Unable to Fetch Agent Info</span>
-
+                          <Grid container>
+                            <Grid item xs={12} className="flex-row flex-justify-center">
+                              <span>Unable to Fetch Agent Info</span>
+                            </Grid>
+                          </Grid>
                       }
                     </Grid>
                     <Grid item xs={12} sm={6} md={6} lg={6}>
                       <Grid container style={{marginLeft:"17px"}}>
                         <Grid item xs={1}>
-                          <img src={LEFT_QUOTE} style={{height:"25px"}}alt="My Commitment"/>
-                          {/* <p className="DASHBOARD_COMMA"> “</p> */}
+                          {
+                            (!!commitmentsStore.CommentsAgentID && !!CommentSelfComment )?
+                              <img src={LEFT_QUOTE} style={{height:"25px"}}alt="My Commitment"/>
+                            :
+                            <span></span>
+                          }
                         </Grid>
-                        <Grid item xs={9} className="DASHBOARD_COMMITMENT_CONTAINER">
+                        <Grid item xs={10} className="DASHBOARD_COMMITMENT_CONTAINER">
                           <Grid container>
                             <Grid item xs={12}>
                               <span className="DASHBOARD_MY_COMMITMENT" > MY COMMITMENT </span>
                             </Grid>
                             <Grid item xs={12} style={{marginTop:"-5px"}}>
-
-
-                                { (Auth.getUserDataByKey('Id') === Number(agentId) )?
-                                    <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddSelfCommentDialog}>
-                                      <span><img src={ADD_COMMENT_IMAGE} style={{height:"7px",marginRight:"2px"}} alt="Add Comment" /></span>
-                                      <span className="DASHBOARD_COMMENTS_BUTTON">Click to Add Comment</span>
-                                    </Button>
+                                {
+                                  (!!commitmentsStore.CommentsAgentID)?
+                                    (!!CommentSelfComment)?
+                                      <span className="DASHBOARD_COMMENTS_SELF" >{CommentSelfComment}</span>
                                     :
-                                  <span className="DASHBOARD_COMMENTS_SELF" >{" "}</span>
+                                    (Auth.getUserDataByKey('Id') === Number(agentId)) ?
+                                        <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddSelfCommentDialog}>
+                                          <span><img src={ADD_COMMENT_IMAGE} style={{height:"7px",marginRight:"2px"}} alt="Add Comment" /></span>
+                                          <span className="DASHBOARD_COMMENTS_BUTTON">Click to Add Comment</span>
+                                        </Button>
+                                    :
+                                    <span className="DASHBOARD_COMMENTS_SELF" >{" "}</span>
+                                  :
+                                  <span className="DASHBOARD_COMMENTS_SELF" ></span>
                                 }
-
-                              {/* <span className="DASHBOARD_COMMENTS_SELF" >   I will be meeting atleast 25 leads this week. Seeing 10 other potential leads too.</span> */}
-
                             </Grid>
                             <Grid item xs={12} style={{textAlign:"right",paddingRight:"7px"}}>
                               <Grid container>
                                 <Grid item xs={12}>
-
-                                  {/* <span className="DASHBOARD_COMMENTS_MANAGER" >   I will be meeting atleast 25 leads this week. Seeing 10 other potential leads too.</span> */}
-
-                                  {/* { (Auth.getUserDataByKey('Role') !== "FLS" )?
-                                      <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddManagerCommentDialog}>
-                                        <span className="DASHBOARD_COMMENTS_BUTTON">Click to Add Manager Comments </span>
-                                        <span><img src={BACK_IMAGE} style={{height:"7px",marginLeft:"2px"}} alt="Back_Image"/></span>
-                                      </Button>
+                                  {
+                                    (!!commitmentsStore.CommentsAgentID)?
+                                      (!!CommentManagerComment)?
+                                        <Grid container>
+                                          <Grid item xs={11}>
+                                            <span className="DASHBOARD_COMMENTS_MANAGER" >
+                                              {CommentManagerComment}
+                                            </span>
+                                          </Grid>
+                                          <Grid item xs={1}>
+                                            <img src={RIGHT_QUTOE} style={{height:"25px",marginTop:"5px",marginLeft:"5px"}} alt="My Commitment"/>
+                                          </Grid>
+                                        </Grid>
                                       :
-                                    <span className="DASHBOARD_COMMENTS_SELF" >{" "}</span>
-                                  } */}
-
-
-
+                                      (Auth.getUserDataByKey('Role') === "SLL" || Auth.getUserDataByKey('Role') === "FLL") ?
+                                        <Button size="small" className="DASHBOARD_MANAGER_BUTON" onClick={this.showAddManagerCommentDialog}>
+                                          <span className="DASHBOARD_COMMENTS_BUTTON">Click to Add Manager Comments </span>
+                                          <span><img src={BACK_IMAGE} style={{height:"7px",marginLeft:"2px"}} alt="Back_Image"/></span>
+                                        </Button>
+                                      :
+                                      <span className="DASHBOARD_COMMENTS_SELF" >{" "}</span>
+                                    :
+                                    <span className="DASHBOARD_COMMENTS_MANAGER" ></span>
+                                  }
                                 </Grid>
                               </Grid>
                             </Grid>
                           </Grid>
                         </Grid>
                         <Grid item xs={1}>
-                          <img src={RIGHT_QUTOE} style={{height:"25px",marginTop:"70px"}} alt="My Commitment"/>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -456,7 +466,7 @@ class Dashboard extends Component {
                             </Grid>
                         </Grid>
 
-                        <Grid item xs={12} style={{backgroundColor:"white",height:"200px",overflow:"scroll",border:"1px solid #d8d8d8",marginBottom:"9px"}}>
+                        <Grid item xs={12} style={{position:"relative",backgroundColor:"white",height:"200px",overflow:"scroll",border:"1px solid #d8d8d8",marginBottom:"9px"}}>
                           <BoxHeader LeftHeading="Campaign Efficiency" RightHeading="Leads"/>
                             <Grid container style={{marginTop:"10px",marginBottom:"10px"}}>
                               <Grid item xs={12} className="flex-row flex-justify-end" style={{paddingRight:"12px"}}>
@@ -579,6 +589,7 @@ class Dashboard extends Component {
                 {/* Right Side */}
                   <Grid item xs={6}>
 
+
                   </Grid>
               </Grid>
 
@@ -598,7 +609,7 @@ function mapStateToProps(state) {
     jointCallsStore: !!state.dashboardStore.jointCallsStore ? state.dashboardStore.jointCallsStore : {},
     campaignEfficiencyStore: !!state.dashboardStore.campaignEfficiencyStore ? state.dashboardStore.campaignEfficiencyStore : [],
 
-    commitmentsStore: !!state.dashboardStore.commentsStore ? state.dashboardStore.commentsStore : {},
+    commitmentsStore: !!state.dashboardStore.commitmentsStore ? state.dashboardStore.commitmentsStore : {},
 
     selfCommentsStore: !!state.dashboardStore.selfCommentsStore ? state.dashboardStore.selfCommentsStore : {},
     managerCommentsStore: !!state.dashboardStore.managerCommentsStore ? state.dashboardStore.managerCommentsStore : {},

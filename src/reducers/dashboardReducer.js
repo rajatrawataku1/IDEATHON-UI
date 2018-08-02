@@ -1,5 +1,5 @@
 import { DASHBOARD_ACTION_TYPES } from '../action-types';
-import {AgentInfo,DashboardLead} from '../classes';
+import {AgentInfo,DashboardLead,Commitments} from '../classes';
 
 import * as _ from 'lodash';
 
@@ -82,6 +82,24 @@ export default function dashboardReducer(state = {}, action) {
     case DASHBOARD_ACTION_TYPES.GET_CAMPAIGN_EFFICIENCY_FAILURE:
       delete dashboardStore.campaignEfficiencyStore
       break;
+
+    case DASHBOARD_ACTION_TYPES.GET_COMMITMENTS_SUCCESS:
+    {
+      let responseBody,responseData;
+      responseBody  = action.resBody;
+      responseData = responseBody.data;
+
+      let mappedData = new Commitments(responseData);
+
+      console.log("Mapped Data : ",mappedData);
+      dashboardStore.commitmentsStore = mappedData
+      break;
+    }
+
+    case DASHBOARD_ACTION_TYPES.GET_COMMITMENTS_FAILURE:
+      delete dashboardStore.commitmentsStore
+      break;
+
 
     case DASHBOARD_ACTION_TYPES.GET_MANAGER_COMMENTS_SUCCESS:
     {
