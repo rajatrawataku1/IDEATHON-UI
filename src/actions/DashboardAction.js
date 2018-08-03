@@ -8,11 +8,10 @@ export const DashboardAction = {
   getLeadsInfo,
   getJointCall,
   getCamapaignEfficiency,
-  getSelfComments,
   getCommitments,
-  getManagerComments,
   setSelfComments,
   setManagerComments,
+  deleteStore
 }
 
 // Get Agent Info
@@ -85,6 +84,8 @@ function getLeadsInfo(week,agentId,timeline,options={}){
 
 function getJointCall(week,agentId,timeline,options={}){
 
+  console.log("I am inside it");
+
   let { afterSuccess, afterError } = options;
 
   if (!(afterSuccess instanceof Function)) {
@@ -96,6 +97,9 @@ function getJointCall(week,agentId,timeline,options={}){
   }
 
   const actualPath = "/week-no/"+week+"/agent-id/"+agentId+"/report-type/"+timeline;
+
+  console.log(DASHBOARD_API.GET_JOIN_CALL+actualPath);
+
 
   return {
     [CALL_API]: {
@@ -198,36 +202,6 @@ function getSelfComments(week,agentId,options={}){
 
 }
 
-// get Manager Comments
-
-function getManagerComments(week,agentId,options={}){
-
-  let { afterSuccess, afterError } = options;
-
-  if (!(afterSuccess instanceof Function)) {
-    afterSuccess = undefined;
-  }
-
-  if (!(afterError instanceof Function)) {
-    afterError = undefined;
-  }
-
-  const actualPath = "/week-no/"+week+"/agent-id/"+agentId;
-
-  return {
-    [CALL_API]: {
-      method: 'get',
-      path: DASHBOARD_API.GET_MANAGER_COMMENTS+actualPath,
-      auth: Auth.getToken(),
-      successType: DASHBOARD_ACTION_TYPES.GET_MANAGER_COMMENTS_SUCCESS,
-      errorType: DASHBOARD_ACTION_TYPES.GET_MANAGER_COMMENTS_FAILURE,
-      afterSuccess,
-      afterError
-    }
-  };
-
-}
-
 // set self comments
 
 function setSelfComments(week,text,agentId,options={}){
@@ -296,3 +270,10 @@ function setManagerComments(week,text,managerId,agentId,options){
   };
 
 }
+
+function deleteStore(){
+  return {
+    type:DASHBOARD_ACTION_TYPES.DELETE_INNER_STORE
+  }
+}
+//

@@ -1,5 +1,5 @@
 import { DASHBOARD_ACTION_TYPES } from '../action-types';
-import {AgentInfo,DashboardLead,Commitments} from '../classes';
+import {AgentInfo,DashboardLead,Commitments,JointCall,CampaignEfficiency} from '../classes';
 
 import * as _ from 'lodash';
 
@@ -62,7 +62,17 @@ export default function dashboardReducer(state = {}, action) {
       let responseBody,responseData;
       responseBody  = action.resBody;
       responseData = responseBody.data;
-      dashboardStore.jointCallsStore = responseData;
+
+      let mappedData;
+
+      (!!responseData[0])?
+      mappedData = new JointCall(responseData[0])
+      :
+      mappedData= new JointCall()
+
+      console.log(mappedData);
+
+      dashboardStore.jointCallsStore = mappedData;
       break;
     }
 
@@ -75,7 +85,20 @@ export default function dashboardReducer(state = {}, action) {
       let responseBody,responseData;
       responseBody  = action.resBody;
       responseData = responseBody.data;
-      dashboardStore.campaignEfficiencyStore = responseData;
+
+      console.log(responseData[0]);
+      let mappedData = [];
+
+      (!!responseData[0])?
+        Object.keys(responseData[0]).forEach((key)=>{
+            mappedData.push(new CampaignEfficiency(key,responseData[0][key]))
+        })
+      :
+      console.log("I am not defined");
+
+      console.log(mappedData);
+
+      dashboardStore.campaignEfficiencyStore = mappedData;
       break;
     }
 
@@ -100,20 +123,6 @@ export default function dashboardReducer(state = {}, action) {
       delete dashboardStore.commitmentsStore
       break;
 
-
-    case DASHBOARD_ACTION_TYPES.GET_MANAGER_COMMENTS_SUCCESS:
-    {
-      let responseBody,responseData;
-      responseBody  = action.resBody;
-      responseData = responseBody.data;
-      dashboardStore.managerCommentsStore = responseData
-      break;
-    }
-
-    case DASHBOARD_ACTION_TYPES.GET_MANAGER_COMMENTS_FAILURE:
-      delete dashboardStore.managerCommentsStore
-      break;
-
     case DASHBOARD_ACTION_TYPES.SET_SELF_COMMENTS_SUCESS:
     {
       let responseBody,responseData;
@@ -135,6 +144,16 @@ export default function dashboardReducer(state = {}, action) {
 
     case DASHBOARD_ACTION_TYPES.SET_MANAGER_COMMENTS_FAILURE:
       break;
+
+    case DASHBOARD_ACTION_TYPES.DELETE_INNER_STORE:
+    {
+      delete dashboardStore.agentStore;
+      delete dashboardStore.leadsStore;
+      delete dashboardStore.jointCallsStore;
+      delete dashboardStore.campaignEfficiencyStore;
+      delete dashboardStore.commitmentsStore;
+      break;
+    }
 
     default:
       return state;

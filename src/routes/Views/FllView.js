@@ -164,8 +164,8 @@ class FllView extends Component {
     const applications= [
       {
         AgentId:"101",
-        CommentCurrentWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.",
-        CommentCurrentWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.",
+        CommentCurrentWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
+        CommentCurrentWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
         CommentPreviousWeekManagerComment:" my previous manager comment",
         CommentPreviousWeekSelfComment:"my previous self comment",
         Name:"Rajat Rawat"
@@ -502,7 +502,6 @@ class FllView extends Component {
 function mapStateToProps(state) {
   return {
     fllInfo: !!state.fllStore.fllInfo ? state.fllStore.fllInfo : [],
-    applications: !!state.applicationStore.applications ? state.applicationStore.applications : []
   };
 }
 

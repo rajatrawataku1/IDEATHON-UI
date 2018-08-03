@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import moment from 'moment';
 import Grid from 'material-ui/Grid';
-import { getTablerowHeight ,getTableHeight,getTableWidth,getTheClass} from '../helpers';
+import { getTablerowHeight ,getTableHeight,getTableWidth,getTheClass,Auth} from '../helpers';
 import '../CSS/SllView.css';
 import '../CSS/fllTable.css';
 
@@ -101,7 +101,7 @@ class FllTable extends React.Component {
             cell={({ rowIndex, columnKey, ...props }) =>
             <Cell className={ getTheClass(rowIndex,"Fll_Table_CenterAlignedRow") }   {...props}>
               {
-                (rowIndex === 0)?
+                (rowIndex === 0 && Auth.getUserDataByKey("Id") === data[rowIndex]["AgentId"])?
                 <span>
                   <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
                   <br/> <br/>
@@ -219,7 +219,6 @@ function mapDispatchToProps(dispatch) {
     actions: {
       openDialog: (dialogType, data, dataActions) => dispatch(DialogAction.open(dialogType, data, dataActions)),
       openSnackbar: (data) => dispatch(SnackbarAction.show(data)),
-      getAllApps: (options) => dispatch(ApplicationAction.getApplications(options))
     }
   }
 }

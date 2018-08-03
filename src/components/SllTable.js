@@ -5,6 +5,8 @@ import { DialogAction, SnackbarAction, SllAction } from '../actions';
 import { connect } from 'react-redux';
 import { Table, Column, Cell} from 'fixed-data-table-2';
 import { getTablerowHeight ,getTableHeight,getTableWidth,getExpandTableWidth,getTheClass} from '../helpers';
+import { Auth } from '../helpers';
+import {Fade} from 'material-ui/transitions';
 
 // import { StyleSheet, css }  from 'aphrodite';
 import moment from 'moment';
@@ -16,8 +18,9 @@ import Grid from 'material-ui/Grid';
 
 class SllTable extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
+      checkedInnerTable:true,
       scrollToRow: null,
       collapsedRows: new Set(),
       orderBy: 'BranchId'
@@ -35,7 +38,7 @@ class SllTable extends React.Component {
   let scrollToRow = rowIndex;
   if (shallowCopyOfCollapsedRows.has(rowIndex)) {
     shallowCopyOfCollapsedRows.delete(rowIndex);
-    scrollToRow = null
+    scrollToRow = null;
   } else {
     shallowCopyOfCollapsedRows= new Set();
     shallowCopyOfCollapsedRows.add(rowIndex);
@@ -75,104 +78,108 @@ _rowExpandedGetter({rowIndex, width, height}) {
   // let tableHeight = getTableHeight();
   let tableWidth = getTableWidth();
   let expandTableWidth = getExpandTableWidth();
+  let {checkedInnerTable}  = this.state;
 
     return (
-      <div>
-        <div className="Sll_Table_expandStyles">
-          <Table
-            showScrollbarX={true}
-            showScrollbarY={true}
-            rowsCount={data.length}
-            rowHeight={tablerowHeight}
-            headerHeight={5}
-            className="SllTableStyle SllTableStyleInner"
-            touchScrollEnabled={true}
-            width={tableWidth-expandTableWidth}
-            height={400}
-            stopScrollPropagation={true}
-            {...this.props}>
 
-          <Column
-            columnKey="Name"
-            cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Sll_CenterAlignedRowFirstName"  {...props}>
-              <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+      <Fade in={checkedInnerTable}>
+        <div>
+          <div className="Sll_Table_expandStyles">
+            <Table
+              showScrollbarX={true}
+              showScrollbarY={true}
+              rowsCount={data.length}
+              rowHeight={tablerowHeight}
+              headerHeight={5}
+              className="SllTableStyle SllTableStyleInner"
+              touchScrollEnabled={true}
+              width={tableWidth-expandTableWidth}
+              height={400}
+              stopScrollPropagation={true}
+              {...this.props}>
+
+            <Column
+              columnKey="Name"
+              cell={({ rowIndex, columnKey, ...props }) =>
+              <Cell className="Sll_CenterAlignedRowFirstName"  {...props}>
+                <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecorationColor:"#0067AC",textDecoration:"underline"}} >{data[rowIndex][columnKey]}</a>
+                </Cell>}
+              width={90}
+            />
+
+            <Column
+              columnKey="AgentId"
+              cell={({ rowIndex, columnKey, ...props }) =>
+              <Cell className="Sll_SimpleCenterAlignedRow" {...props}>
+                  {data[rowIndex][columnKey]}
               </Cell>}
-            width={90}
-          />
+              width={80}
+            />
 
-          <Column
-            columnKey="AgentId"
-            cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Sll_SimpleCenterAlignedRow" {...props}>
-                {data[rowIndex][columnKey]}
-            </Cell>}
-            width={80}
-          />
+            <Column
+              columnKey="LastWeekComments"
+              cell={({ rowIndex, columnKey, ...props }) =>
+              <Cell className="Sll_SimpleLeftAlignedRow"   {...props}>
 
-          <Column
-            columnKey="LastWeekComments"
-            cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Sll_SimpleLeftAlignedRow"   {...props}>
+                  {
 
+                    ( !data[rowIndex]['CommentPreviousWeekSelfComment'] && !data[rowIndex]['CommentPreviousWeekManagerComment']) ?
+                      <span style={{textAlign:"center"}}>No Comments</span>
+                    :
+                    <div>
+                      <Grid container>
+                        <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-start"}}>
+                          <span> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span> <br/> <br/>
+                        </Grid>
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-end"}}>
+                          <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
+                        </Grid>
+                      </Grid>
+                    </div>
+
+                  }
+
+                </Cell>}
+              width={235}
+              flexGrow={2}
+            />
+
+            <Column
+              columnKey="CurrentWeekComments"
+              cell={({ rowIndex, columnKey, ...props }) =>
+              <Cell className="Sll_SimpleLeftAlignedRow"  {...props}>
                 {
 
-                  ( !data[rowIndex]['CommentPreviousWeekSelfComment'] && !data[rowIndex]['CommentPreviousWeekManagerComment']) ?
+                  ( !data[rowIndex]['CommentCurrentWeekManagerComment'] && !data[rowIndex]['CommentCurrentWeekSelfComment']) ?
                     <span style={{textAlign:"center"}}>No Comments</span>
                   :
                   <div>
                     <Grid container>
                       <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-start"}}>
-                        <span> {data[rowIndex]['CommentPreviousWeekSelfComment']} </span> <br/> <br/>
+                        <span > {data[rowIndex]['CommentCurrentWeekSelfComment']} </span> <br/> <br/>
                       </Grid>
                       <Grid item xs={2}></Grid>
                       <Grid item xs={2}></Grid>
                       <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-end"}}>
-                        <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentPreviousWeekManagerComment']} </span>
+                        <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
                       </Grid>
                     </Grid>
                   </div>
 
                 }
 
-              </Cell>}
-            width={235}
-            flexGrow={2}
-          />
+                </Cell>}
+              width={235}
+              flexGrow={2}
 
-          <Column
-            columnKey="CurrentWeekComments"
-            cell={({ rowIndex, columnKey, ...props }) =>
-            <Cell className="Sll_SimpleLeftAlignedRow"  {...props}>
-              {
+            />
 
-                ( !data[rowIndex]['CommentCurrentWeekManagerComment'] && !data[rowIndex]['CommentCurrentWeekSelfComment']) ?
-                  <span style={{textAlign:"center"}}>No Comments</span>
-                :
-                <div>
-                  <Grid container>
-                    <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-start"}}>
-                      <span > {data[rowIndex]['CommentCurrentWeekSelfComment']} </span> <br/> <br/>
-                    </Grid>
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={10} className="flex-row" style={{justifyContent:"flex-end"}}>
-                      <span className="SLL_Previous_Comment"> {data[rowIndex]['CommentCurrentWeekManagerComment']} </span>
-                    </Grid>
-                  </Grid>
-                </div>
-
-              }
-
-              </Cell>}
-            width={235}
-            flexGrow={2}
-
-          />
-
-        </Table>
+          </Table>
+          </div>
         </div>
-      </div>
+      </Fade>
     );
   }
 
@@ -208,6 +215,10 @@ _rowExpandedGetter({rowIndex, width, height}) {
     this.props.actions.openDialog(dialogType, dialogData, dialogActions);
   }
 
+  onExpandClose = ()=>{
+    this.props.actions.deleteExpandSllInfo();
+  }
+
   onExpandClickHandler = (agentId)=>{
 
     console.log(agentId);
@@ -222,7 +233,9 @@ _rowExpandedGetter({rowIndex, width, height}) {
       }
     };
 
-    this.props.getExpandSllInfo(agentId,options);
+    this.props.actions.deleteExpandSllInfo();
+    this.props.actions.getExpandSllInfo(agentId,options);
+
   }
 
   rowClickHandler = (AgentId)=>{
@@ -276,14 +289,14 @@ _rowExpandedGetter({rowIndex, width, height}) {
             cell={({ rowIndex, columnKey, ...props }) =>
             <Cell className={ this.state.collapsedRows.has(rowIndex) ? getTheClass(rowIndex,"Sll_SelectedCenterAlignedRowFirstName") :getTheClass(rowIndex,"Sll_CenterAlignedRowFirstName")}   {...props}>
                 {
-                  (rowIndex === 0)?
+                  (rowIndex === 0 && Auth.getUserDataByKey("Id") === data[rowIndex]["AgentId"])?
 
                   <span> <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",Color:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
                   <br/> <br/>
                   <span>(Self)</span>
                   </span>
                   :
-                  <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
+                  <a href={"/dashboard?agentId="+data[rowIndex]["AgentId"]} style={{cursor:"pointer",color:"#0067AC",textDecoration:"underline",textDecorationColor:"#0067AC"}} >{data[rowIndex][columnKey]}</a>
                 }
               </Cell>}
             width={90}
@@ -383,7 +396,7 @@ _rowExpandedGetter({rowIndex, width, height}) {
                   (rowIndex !==0) ?
                     <a style={{cursor:"pointer"}} onClick={() => this._handleCollapseClick(rowIndex)}>
                       {collapsedRows.has(rowIndex) ?
-                        <Button mini style={{ color: "white", boxShadow: "none",border:"1px solid rgb(151,151,151)", backgroundColor: "rgb(151,151,151)" }}  variant="fab"  aria-label="Add" >
+                        <Button onClick={()=>{this.onExpandClose()}} mini style={{ color: "white", boxShadow: "none",border:"1px solid rgb(151,151,151)", backgroundColor: "rgb(151,151,151)" }}  variant="fab"  aria-label="Add" >
                          <Icon style={{fontSize:"40px"}}>arrow_drop_up</Icon>
                         </Button>
                          :
@@ -421,7 +434,8 @@ function mapDispatchToProps(dispatch) {
     actions: {
       openDialog: (dialogType, data, dataActions) => dispatch(DialogAction.open(dialogType, data, dataActions)),
       openSnackbar: (data) => dispatch(SnackbarAction.show(data)),
-      getExpandSllInfo: (sllId,options) => dispatch(SllAction.getExpandSllInfo(sllId,options))
+      getExpandSllInfo: (sllId,options) => dispatch(SllAction.getExpandSllInfo(sllId,options)),
+      deleteExpandSllInfo:()=>dispatch(SllAction.deleteExpandSllInfo())
     }
   }
 }

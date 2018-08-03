@@ -8,6 +8,13 @@ import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 
+const LocationMapper = {
+  Dashboard:"Dashboard",
+  Leads:"Leads View",
+  View:"View"
+}
+
+
 class HeaderLeft extends React.Component {
 
   // constructor(props){
@@ -19,6 +26,7 @@ class HeaderLeft extends React.Component {
     history.goBack();
   }
 
+
   render(){
 
     const { location } = this.props
@@ -27,7 +35,7 @@ class HeaderLeft extends React.Component {
 
       <Grid container>
         {
-          (location.pathname === '/view') ?
+          (location.pathname.indexOf("view") !== -1) ?
             <Grid item xs={1}>
             </Grid>
           :
@@ -38,11 +46,36 @@ class HeaderLeft extends React.Component {
             {/* #58595b */}
             {/* <img src={LEFT_ARROW} className="LEFT_ARROW_STYLE"/> */}
           </Grid>
+        }
+
+        {
+          (location.pathname.indexOf("dashboard") !== -1) ?
+            <Grid item xs={10}>
+              <p className="HEADER_LEFT_PAGE_HEADING" >  {LocationMapper.Dashboard} </p>
+            </Grid>
+          :
+          <span></span>
+        }
+
+        {
+          (location.pathname.indexOf("lead") !== -1) ?
+            <Grid item xs={10}>
+              <p className="HEADER_LEFT_PAGE_HEADING" >  {LocationMapper.Leads} </p>
+            </Grid>
+          :
+          <span></span>
 
         }
-        <Grid item xs={10}>
-          <p className="HEADER_LEFT_PAGE_HEADING" > Next page heading  </p>
-        </Grid>
+
+        {
+          (location.pathname.indexOf("view") !== -1) ?
+            <Grid item xs={10}>
+              <p className="HEADER_LEFT_PAGE_HEADING" >  {LocationMapper.View} </p>
+            </Grid>
+          :
+          <span></span>
+        }
+
       </Grid>
 
     )

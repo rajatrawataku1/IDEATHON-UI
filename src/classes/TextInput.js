@@ -53,6 +53,7 @@ export class TextInput {
     const filter = onChangeFilter[this.type] || (() => {});
     this.value = filter(value);
     this.dirty = true;
+    this.checkValidity();
   }
 
   onBlur() {
@@ -70,10 +71,10 @@ export class TextInput {
     this.errorMessage = message;
   }
 
-  setRequiredError() {
+  setRequiredError(errorText) {
     this.dirty = true;
     this.error = true;
-    this.errorMessage = 'Field Cannot be Empty';
+    this.errorMessage = errorText;
   }
 
   setValid() {
@@ -125,29 +126,40 @@ const onChangeFilter = {
    }
    return value;
  }
+
 };
 
 const onValidityCheck = {
   [TEXT_INPUT_TYPES.ALPHA_NUMERIC]: function(_this) {
+
+
     if (_this._invalidInput) { return; }
     if (_this.required && !_this.value) {
-      return _this.setRequiredError();
+      return _this.setRequiredError("Field Cannot be Empty");
     }
+
     _this.setValid();
   },
 
   [TEXT_INPUT_TYPES.ALPHA_NUMERIC_SPACE]: function(_this) {
     if (_this._invalidInput) { return; }
     if (_this.required && !_this.value) {
-      return _this.setRequiredError();
+      return _this.setRequiredError("Field Cannot be Empty");
     }
+
+    console.log(_this.value.length);
+
+    if(_this.value.length >90){
+      return _this.setRequiredError("Maximum 80 Characters Allowed");
+    }
+
     _this.setValid();
   },
 
   [TEXT_INPUT_TYPES.TEXT]: function(_this) {
     if (_this._invalidInput) { return; }
     if (_this.required && !_this.value) {
-      return _this.setRequiredError();
+      return _this.setRequiredError("Field Cannot be Empty");
     }
     _this.setValid();
   },
@@ -155,7 +167,7 @@ const onValidityCheck = {
   [TEXT_INPUT_TYPES.PASSWORD]: function(_this) {
     if (_this._invalidInput) { return; }
     if (_this.required && !_this.value) {
-      return _this.setRequiredError();
+      return _this.setRequiredError("Field Cannot be Empty");
     }
     _this.setValid();
   },
@@ -163,7 +175,7 @@ const onValidityCheck = {
   [TEXT_INPUT_TYPES.ARRAY]: function(_this) {
     if (_this._invalidInput) { return; }
     if (_this.required && !_this.value.length) {
-      return _this.setRequiredError();
+      return _this.setRequiredError("Field Cannot be Empty");
     }
     _this.setValid();
   },

@@ -15,6 +15,7 @@ const STYLES = {
     fontSize:"14px"
   },
   CONTAINER:{
+    zIndex:"10",
     position:"sticky",
     top:"0px",
     width:"100%",

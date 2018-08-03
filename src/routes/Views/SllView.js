@@ -59,7 +59,6 @@ class SllView extends Component {
   }
 
 
-
   reloadPage() {
     let options = {
       afterSuccess: () => {},
@@ -107,7 +106,7 @@ class SllView extends Component {
         AgentId:"101",
         CommentCurrentWeekManagerComment:" my current",
         CommentCurrentWeekSelfComment:"my current ",
-        CommentPreviousWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
+        CommentPreviousWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.",
         CommentPreviousWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
         Name:"Rajat Rawat"
       },
@@ -185,8 +184,8 @@ class SllView extends Component {
         AgentId:"101",
         CommentCurrentWeekManagerComment:" my current",
         CommentCurrentWeekSelfComment:"my current ",
-        CommentPreviousWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
-        CommentPreviousWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I hey there I am going to work hard",
+        CommentPreviousWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
+        CommentPreviousWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
         Name:"Rajat Rawat"
       },
       {

@@ -119,7 +119,7 @@ class LeadListView extends Component {
         ProductName:"Cancer Care",
         Location:"Mumbai",
         CommentCurrent:"",
-        CommentPrevious:"I will be able to take it and will make it happen as soon as possible",
+        CommentPrevious:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
         LGCode:"asdf",
         BankBranchCode:"Mumbai",
         MeetinDoneOn:"2018-07-22T18:30:00.000Z"

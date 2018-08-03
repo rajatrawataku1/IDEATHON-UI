@@ -96,7 +96,7 @@ class App extends Component {
               open={snackbarStatus}
               autoHideDuration={2000}
               onClose={this.onSnackbarClose}
-              SnackbarContentProps={{
+              ContentProps={{
                 'aria-describedby': 'message-id',
               }}
               message={<span id="message-id">{snackbarText}</span>}

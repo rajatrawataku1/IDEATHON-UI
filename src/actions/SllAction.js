@@ -5,7 +5,8 @@ import { Auth } from '../helpers';
 
 export const SllAction = {
   getSllInfo,
-  getExpandSllInfo
+  getExpandSllInfo,
+  deleteExpandSllInfo
 }
 
 // Get Sll Info
@@ -62,5 +63,13 @@ function getExpandSllInfo(sllId,options={}){
       afterError
     }
   };
+
+}
+
+function deleteExpandSllInfo(){
+
+  return {
+    type:SLL_ACTION_TYPES.DELETE_INNER_STORE
+  }
 
 }

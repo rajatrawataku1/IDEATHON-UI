@@ -84,6 +84,10 @@ export default function SllReducer(state = {}, action) {
       delete sllStore.sllExpandInfo;
       break;
 
+    case SLL_ACTION_TYPES.DELETE_INNER_STORE:
+      delete sllStore.sllExpandInfo
+      break;
+
     default:
       return state;
   }
