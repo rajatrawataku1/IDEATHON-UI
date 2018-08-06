@@ -26,7 +26,6 @@ function getLeadsInfo(type,week,agentId,options={}){
   const actualPath = "/type/"+type+"/week-no/"+week+"/agent-id/"+agentId;
 
 
-  // console.log(LEAD_API.GET_LEADS_INFO+actualPath);
 
   return {
     [CALL_API]: {

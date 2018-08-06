@@ -21,8 +21,6 @@ function getFllInfo(fllId,options={}){
     afterError = undefined;
   }
 
-  console.log("###########################");
-  console.log(FLL_API.GET_FLL_INFO+'/'+fllId);
 
 
   return {

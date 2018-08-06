@@ -1,5 +1,5 @@
 const DEAFULT_CONFIG = {
-  // API_ENDPOINT: 'http://192.168.43.111:8000'
+  API_ENDPOINT: 'http://192.168.43.111:8000'
   // API_ENDPOINT: 'https://lbs-dev.api-hdfclife.com'
   // API_ENDPOINT: 'http://170.20.10.6:8000'
 

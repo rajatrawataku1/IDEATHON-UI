@@ -1,10 +1,8 @@
 import React from 'react';
-// import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Grid from 'material-ui/Grid';
 import Input from 'material-ui/Input';
-// import { COLORS, FONTS } from '../../constants';
 import '../../CSS/loginForm.css';
 
 

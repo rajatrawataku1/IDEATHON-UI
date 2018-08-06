@@ -13,7 +13,6 @@ export default function SllReducer(state = {}, action) {
     {
       responseBody  = action.resBody;
       responseData = responseBody.data;
-      console.log(Auth.getUserDataByKey('Id'));
 
       let finaArray =  [
         {  AgentId:Auth.getUserDataByKey('Id'),
@@ -32,10 +31,8 @@ export default function SllReducer(state = {}, action) {
         apps.push(new Sll(app))
       })
 
-      console.log(apps);
 
       finaArray.push(...apps);
-      console.log(finaArray);
       sllStore.sllInfo = finaArray;
 
     }
@@ -52,17 +49,6 @@ export default function SllReducer(state = {}, action) {
       responseBody  = action.resBody;
       responseData = responseBody.data;
 
-      // console.log(Auth.getUserDataByKey('Id'));
-      //
-      // var finaArray =  [
-      //   {  AgentId:Auth.getUserDataByKey('Id'),
-      //      Name: Auth.getUserDataByKey('Name'),
-      //      CommentCurrentWeekManagerComment:"",
-      //      CommentCurrentWeekSelfComment:"",
-      //      CommentPreviousWeekManagerComment:"",
-      //      CommentPreviousWeekSelfComment:"",
-      //   }
-      // ]
 
       let allUnderHim = responseData[1];
 
@@ -71,10 +57,7 @@ export default function SllReducer(state = {}, action) {
         apps.push(new Sll(app))
       })
 
-      console.log(apps);
 
-      // finaArray.push(...apps);
-      // console.log(finaArray);
       sllStore.sllExpandInfo = apps;
 
     }

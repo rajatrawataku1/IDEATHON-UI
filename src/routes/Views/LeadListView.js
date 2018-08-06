@@ -73,7 +73,6 @@ class LeadListView extends Component {
 
   onInputChange= (event)=>{
     let  { value } = event.target;
-    console.log(value);
     this.setState({ query:value });
   }
 

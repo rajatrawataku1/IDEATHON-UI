@@ -63,7 +63,6 @@ function getLeadsInfo(week,agentId,timeline,options={}){
 
   const actualPath = "/week-no/"+week+"/agent-id/"+agentId+"/report-type/"+timeline;
 
-  console.log(DASHBOARD_API.GET_LEADS_INFO+actualPath);
 
   return {
     [CALL_API]: {
@@ -84,7 +83,6 @@ function getLeadsInfo(week,agentId,timeline,options={}){
 
 function getJointCall(week,agentId,timeline,options={}){
 
-  console.log("I am inside it");
 
   let { afterSuccess, afterError } = options;
 
@@ -98,7 +96,6 @@ function getJointCall(week,agentId,timeline,options={}){
 
   const actualPath = "/week-no/"+week+"/agent-id/"+agentId+"/report-type/"+timeline;
 
-  console.log(DASHBOARD_API.GET_JOIN_CALL+actualPath);
 
 
   return {

@@ -8,7 +8,6 @@ import { getTablerowHeight ,getTableHeight,getTableWidth,getExpandTableWidth,get
 import { Auth } from '../helpers';
 import {Fade} from 'material-ui/transitions';
 
-// import { StyleSheet, css }  from 'aphrodite';
 import moment from 'moment';
 import Icon from 'material-ui/Icon';
 import '../CSS/SllView.css';
@@ -221,8 +220,6 @@ _rowExpandedGetter({rowIndex, width, height}) {
 
   onExpandClickHandler = (agentId)=>{
 
-    console.log(agentId);
-    //  call the action to update the action call
 
     let options = {
       afterSuccess: () => {
@@ -240,7 +237,6 @@ _rowExpandedGetter({rowIndex, width, height}) {
 
   rowClickHandler = (AgentId)=>{
 
-    console.log(AgentId);
   }
 
   render() {
@@ -261,7 +257,6 @@ _rowExpandedGetter({rowIndex, width, height}) {
     let tableHeight = getTableHeight();
     let tableWidth = getTableWidth();
 
-    // console.log(CurrentWeekMondayArray,CurrentWeekSundayArray,PreviousWeekMondayArray,PreviousWeekSundayArray);
 
     return (
 

@@ -1,13 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import {Table,TableHead,TableBody, TableCell, TableFooter, TablePagination, TableRow, TableSortLabel} from 'material-ui';
 import Paper from 'material-ui/Paper';
-// import Tooltip from 'material-ui/Tooltip';
 import Button from 'material-ui/Button';
 import { DialogAction, SnackbarAction} from '../actions';
 import { connect } from 'react-redux';
 import moment from 'moment';
-// import {  FONTS } from '../constants';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import '../CSS/fixed-data-table-view.css';
 import '../CSS/enhancedTable.css';

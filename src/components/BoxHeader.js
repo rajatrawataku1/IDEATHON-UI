@@ -1,8 +1,4 @@
 import React from 'react';
-// import { Link } from "react-router-dom";
-// import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-// import {SHOW_MORE,PROFILE_LOGO, PROFILE_ICON, COLORS, FONTS} from '../constants';
-// import { Auth } from '../helpers';
 import Grid from 'material-ui/Grid';
 
 const STYLES = {

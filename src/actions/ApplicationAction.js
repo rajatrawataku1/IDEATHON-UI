@@ -16,8 +16,6 @@ function updateBranch(form,options={}){
   const {id} = form;
   delete form.id;
   let body= form;
-  console.log(body);
-  console.log(id);
   if (!(afterSuccess instanceof Function)) {
     afterSuccess = undefined;
   }
@@ -54,7 +52,6 @@ function deleteBranch(form,options={}){
     afterError = undefined;
   }
 
-  console.log(APPLICATION_API.DELETE+'/'+branchId);
 
   return {
     [CALL_API]: {
@@ -76,7 +73,6 @@ function create(form, options={}) {
   let { afterSuccess, afterError } = options,
   body = form;
 
-  console.log(body);
 
   if (!(afterSuccess instanceof Function)) {
     afterSuccess = undefined;

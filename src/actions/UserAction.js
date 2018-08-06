@@ -23,9 +23,8 @@ function login(form, options={}) {
   if (!(afterError instanceof Function)) {
     afterError = undefined;
   }
-  console.log("###############");
-  console.log(USER_API.LOGIN);
 
+  
   return {
     [CALL_API]: {
       method: 'post',

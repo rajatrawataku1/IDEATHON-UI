@@ -1,15 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Menu, { MenuItem } from 'material-ui/Menu';
-// import {SHOW_MORE,PROFILE_LOGO, PROFILE_ICON, COLORS, FONTS} from '../constants';
 import { Auth } from '../helpers';
-// import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 
 const HeaderRightProfile = ({onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl}) => {
-  // const userName = (!!Auth.isLoggedIn() && Auth.getUserDataByKey('Name')) || '';
-  // const altImageText = ['user-profile', userName].join('-');
 
   const UserName = Auth.getUserDataByKey('Name');
 

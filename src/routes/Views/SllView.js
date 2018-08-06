@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-// import Paper from 'material-ui/Paper';
-// import Button from 'material-ui/Button';
 import {SllTable } from '../../components';
 import { DialogAction, SnackbarAction, SllAction } from '../../actions';
 import { Auth } from '../../helpers';
-// import Avatar from 'material-ui/Avatar';
-
-// import { PROFILE_ICON, PROFILE_LOGO, COLORS, FONTS} from '../../constants';
-
-// import Typography from 'material-ui/Typography';
-  // import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-// import { FormControl, FormHelperText } from 'material-ui/Form';
-// import Select from 'material-ui/Select';
 import orderBy from "lodash/orderBy";
 import Input, {InputAdornment } from 'material-ui/Input';
 import Icon from 'material-ui/Icon';
-// import Fade from 'material-ui/transitions/Fade';
 
 
 class SllView extends Component {
@@ -51,8 +40,7 @@ class SllView extends Component {
     };
 
     if(!!sllId){
-      console.log(sllId);
-      // this.props.actions.getSllInfo(sllId,options);
+      this.props.actions.getSllInfo(sllId,options);
     }else{
       console.log("cant make request");
     }
@@ -78,7 +66,6 @@ class SllView extends Component {
 
   onInputChange= (event)=>{
     let  { value } = event.target;
-    // console.log(value);
     this.setState({ query:value });
   }
 

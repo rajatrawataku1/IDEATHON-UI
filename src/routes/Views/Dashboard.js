@@ -42,10 +42,6 @@ class Dashboard extends Component {
 
   getAllDataApiCall = (weekNumber)=>{
 
-    // week number
-    // let { WeekToShow } = this.state;
-    console.log("WeekNumber : ",weekNumber)
-
     // // agent ID
     let { agentId } = this.props;
     // // timeline
@@ -66,17 +62,13 @@ class Dashboard extends Component {
     this.props.actions.getCamapaignEfficiency(weekNumber,agentId,SelectCampaigns,options);
     this.props.actions.getCommitments(weekNumber,agentId,options);
 
-    console.log("I have called the API");
   }
 
   componentDidMount() {
     const { history } = this.props;
-    console.log(Auth.isLoggedIn());
     if(!Auth.isLoggedIn()){
-      console.log("I am logged out: dashboard");
       history.push('/');
     }else{
-      console.log("I am gonna call API");
       this.getAllDataApiCall(moment().isoWeek());
     }
   }
@@ -102,7 +94,6 @@ class Dashboard extends Component {
 
     let StateKey = event.target.name;
 
-    console.log(event.target)
 
     let {WeekToShow} = this.state;
     let { agentId } = this.props;
@@ -118,7 +109,6 @@ class Dashboard extends Component {
     };
 
     const {name} = event.target;
-    console.log(name);
 
     if(name === "SelectLeads"){
       this.setState({SelectLeads:SelectedTimeline});
@@ -202,7 +192,6 @@ class Dashboard extends Component {
     let showAgentInfo = this.showFunctionStore(agentStore);
     let { AgentNum,EmployeeName,AgentChannel,AgentDesignation,AgentLevel } = agentStore;
 
-    console.log(AgentLevel);
 
     //  for Lead Info
     let showLeadStore = this.showFunctionStore(leadsStore);
@@ -215,20 +204,11 @@ class Dashboard extends Component {
     let showcommitmentsStore = this.showFunctionStore(commitmentsStore);
     let { CommentManagerComment,CommentSelfComment } = commitmentsStore;
 
-    console.log(CommentManagerComment,CommentSelfComment);
 
     //  for Joint Call
-    console.log(jointCallsStore);
     let showjointCallsStore = this.showFunctionStore(jointCallsStore);
     let { JointCallTarget,JointCallActual,JointCallPositiveClosure } = jointCallsStore;
     let ratioJointCall = (!JointCallTarget) ? 0:1;
-    console.log(JointCallTarget,JointCallActual,JointCallPositiveClosure);
-
-    // for campaign Efficiency
-    // campaignEfficiencyStore=[];
-    // showjointCallsStore=1;
-    // showLeadStore=1;
-    // showAgentInfo=1;
 
 
     let wholeCampaginEfficiency = (campaignEfficiencyStore === undefined) ? 1:0;
@@ -238,8 +218,6 @@ class Dashboard extends Component {
       showcampaignEfficiencyStore = (campaignEfficiencyStore.length>0)?1:0;
     }
 
-    console.log("Agent Store : ",agentStore);
-    console.log("Leads Store : ",leadsStore);
 
     let arraObject=[1,2,3];
 

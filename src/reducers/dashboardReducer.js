@@ -14,7 +14,6 @@ export default function dashboardReducer(state = {}, action) {
       responseBody  = action.resBody;
       responseData = responseBody.data;
 
-      console.log("Response Data : "+responseData);
       let mappedData;
 
       (!!responseData[0]) ?
@@ -22,7 +21,6 @@ export default function dashboardReducer(state = {}, action) {
       :
       mappedData = new AgentInfo()
 
-      console.log("Mapped Data : "+mappedData);
 
       dashboardStore.agentStore = mappedData;
       break;
@@ -47,7 +45,6 @@ export default function dashboardReducer(state = {}, action) {
       :
       mappedData = new DashboardLead()
 
-      console.log("Mapped Data : "+mappedData);
 
       dashboardStore.leadsStore = mappedData;
       break;
@@ -70,7 +67,6 @@ export default function dashboardReducer(state = {}, action) {
       :
       mappedData= new JointCall()
 
-      console.log(mappedData);
 
       dashboardStore.jointCallsStore = mappedData;
       break;
@@ -86,7 +82,6 @@ export default function dashboardReducer(state = {}, action) {
       responseBody  = action.resBody;
       responseData = responseBody.data;
 
-      console.log(responseData[0]);
       let mappedData = [];
 
       (!!responseData[0])?
@@ -96,7 +91,6 @@ export default function dashboardReducer(state = {}, action) {
       :
       console.log("I am not defined");
 
-      console.log(mappedData);
 
       dashboardStore.campaignEfficiencyStore = mappedData;
       break;
@@ -114,7 +108,6 @@ export default function dashboardReducer(state = {}, action) {
 
       let mappedData = new Commitments(responseData);
 
-      console.log("Mapped Data : ",mappedData);
       dashboardStore.commitmentsStore = mappedData
       break;
     }

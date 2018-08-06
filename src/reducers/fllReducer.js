@@ -12,27 +12,19 @@ export default function fllReducer(state = {}, action) {
         responseBody  = action.resBody;
         responseData = responseBody.data;
 
-        // console.log("####################################");
-        // console.log(responseData);
 
         var selfArr =  responseData[0];
         var otherArr = responseData[1];
 
-        // console.log("####################################");
-        // console.log(selfArr);
-        // console.log("####################################");
-        // console.log(otherArr);
 
         selfArr.push(...otherArr);
 
-        console.log(selfArr);
 
         let apps = [];
         selfArr.forEach((app) => {
           apps.push(new Fll(app))
         })
 
-        console.log(apps);
         fllStore.fllInfo = apps;
       break;
 

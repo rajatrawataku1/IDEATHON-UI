@@ -23,7 +23,6 @@ export function LeadTableReordering(Data){
     finalLeadData.push(...filteredData);
   });
 
-  console.log("Lead Filetered Data",finalLeadData);
   return finalLeadData;
 
 }

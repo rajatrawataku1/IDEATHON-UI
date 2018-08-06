@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import {Table,TableHead,TableBody, TableCell, TableFooter, TablePagination, TableRow, TableSortLabel} from 'material-ui';
 import Paper from 'material-ui/Paper';
 import Tooltip from 'material-ui/Tooltip';
 import Button from 'material-ui/Button';
@@ -275,7 +274,6 @@ _rowExpandedGetter({rowIndex, width, height}) {
     let PreviousWeekMondayArray = String(moment().week(PreviousWeekNumber).isoWeekday(1)).split(" ");
     let PreviousWeekSundayArray = String(moment().week(PreviousWeekNumber).isoWeekday(7)).split(" ");
 
-    console.log(CurrentWeekMondayArray,CurrentWeekSundayArray,PreviousWeekMondayArray,PreviousWeekSundayArray);
     return (
 
       <Paper style={classes.root}>
