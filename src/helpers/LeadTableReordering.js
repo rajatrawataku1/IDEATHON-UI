@@ -24,5 +24,6 @@ export function LeadTableReordering(Data){
   });
 
   console.log("Lead Filetered Data",finalLeadData);
+  return finalLeadData;
 
 }

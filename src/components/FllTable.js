@@ -53,6 +53,9 @@ class FllTable extends React.Component {
   render() {
     let data = this.props.finalData;
 
+
+    console.log(data);
+
 // logic to create header Coloumn
     let currentWeekNumber = moment().week();
     let PreviousWeekNumber = currentWeekNumber -1;

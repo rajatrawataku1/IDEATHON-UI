@@ -17,7 +17,7 @@ export default class View extends Component {
       <div>
         {
           // <SllView/>
-          (Auth.getUserDataByKey('Role') === 'SLL')? <SllView/> : <SllView/>
+          (Auth.getUserDataByKey('Role') === 'SLL')? <FllView/> : <FllView/>
         }
       </div>
     )

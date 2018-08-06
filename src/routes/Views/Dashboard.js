@@ -200,7 +200,9 @@ class Dashboard extends Component {
 
     //  for agent Info
     let showAgentInfo = this.showFunctionStore(agentStore);
-    let { AgentNum,EmployeeName,AgentChannel,AgentDesignation } = agentStore;
+    let { AgentNum,EmployeeName,AgentChannel,AgentDesignation,AgentLevel } = agentStore;
+
+    console.log(AgentLevel);
 
     //  for Lead Info
     let showLeadStore = this.showFunctionStore(leadsStore);
@@ -470,7 +472,12 @@ class Dashboard extends Component {
 
                                    <Grid item xs={4} style={{marginBottom:"5px"}}> </Grid>
                                    <Grid item xs={12} className="flex-row flex-justify-center">
-                                     <Button  style={{minHeight:"2px",height:"25px",padding:"0px",textTransform:"none",width:"80%",fontSize:"12px",fontWeight:"500",color:"white",backgroundColor:"#1095ff",borderRadius:"30px",marginBottom:"5px"}} onClick={this.viewLeadDetails}>  view lead details </Button>
+                                     {
+                                       (!!AgentLevel && AgentLevel === "FLS") ?
+                                        <Button  style={{minHeight:"2px",height:"25px",padding:"0px",textTransform:"none",width:"80%",fontSize:"12px",fontWeight:"500",color:"white",backgroundColor:"#1095ff",borderRadius:"30px",marginBottom:"5px"}} onClick={this.viewLeadDetails}>  view lead details </Button>
+                                       :
+                                       <span></span>
+                                     }
                                    </Grid>
                                  </Grid>
                                </Grid>

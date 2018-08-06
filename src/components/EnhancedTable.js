@@ -28,6 +28,15 @@ class EnhancedTable extends React.Component {
     this.props.actions.openDialog(dialogType, dialogData, dialogActions);
   }
 
+  getRowData(data){
+      let value="-";
+      (!!data) ?
+        value=data
+      :
+      value='-'
+      return value;
+  }
+
 
   render() {
 
@@ -83,22 +92,21 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderImp">Lead ID</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_SimpleTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={90}
             fixed={true}
           />
-
 
           <Column
             columnKey="CustomerName"
             header={<Cell className="Enhanced_newTableHeaderImp">Customer Name</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             fixed={true}
-            width={110}
+            width={130}
           />
 
           <Column
@@ -106,7 +114,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderTwoImp" >DOB</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
+                {this.getRowData(TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey]))}
               </Cell>}
             width={150}
           />
@@ -116,7 +124,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderTwoImp" >Age</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={100}
           />
@@ -126,7 +134,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderTwoImp" >Contact Num</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={150}
           />
@@ -138,9 +146,9 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderAdditionalImp" >Product Name</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
-            width={100}
+            width={200}
           />
 
           <Column
@@ -148,7 +156,7 @@ class EnhancedTable extends React.Component {
             header={<Cell  className="Enhanced_newTableHeaderAdditionalImp" >Location</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={150}
           />
@@ -158,7 +166,7 @@ class EnhancedTable extends React.Component {
             header={<Cell  className="Enhanced_newTableHeaderAdditionalImp" >Income</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={150}
           />
@@ -168,7 +176,7 @@ class EnhancedTable extends React.Component {
             header={<Cell  className="Enhanced_newTableHeaderAdditionalImp" >Last Meeting Date</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
+                {this.getRowData(TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey]))}
               </Cell>}
             width={150}
           />
@@ -178,7 +186,7 @@ class EnhancedTable extends React.Component {
             header={<Cell  className="Enhanced_newTableHeaderAdditionalImp" >Next Meeting Date</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
+                {this.getRowData(TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey]))}
               </Cell>}
             width={150}
           />
@@ -189,7 +197,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderAdditionalImp" >Lead Creation date </Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey])}
+                {this.getRowData(TimeHelper.giveMeFormattedTime(data[rowIndex][columnKey]))}
               </Cell>}
             width={150}
           />
@@ -199,7 +207,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderAdditionalImp" >Campaign Code</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={150}
           />
@@ -209,7 +217,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderAdditionalImp" >Agent Num</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={150}
           />
@@ -219,7 +227,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderAdditionalImp" >No. Meeting</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={100}
           />
@@ -230,7 +238,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderLeadInformationImp" >Lead Status</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow" {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={100}
           />
@@ -241,7 +249,7 @@ class EnhancedTable extends React.Component {
             header={<Cell  className="Enhanced_newTableHeaderLeadInformationImp" >Joint Call (Y/N)</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={100}
           />
@@ -251,7 +259,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderLeadInformationImp" >Met/Not Met</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={100}
           />
@@ -261,7 +269,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderLeadInformationImp" >Remarks</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={100}
           />
@@ -271,7 +279,7 @@ class EnhancedTable extends React.Component {
             header={<Cell className="Enhanced_newTableHeaderLeadInformationImp" >Expected Premium</Cell>}
             cell={({ rowIndex, columnKey, ...props }) =>
               <Cell className="Enhanced_AdvanceTableRow"  {...props}>
-                {data[rowIndex][columnKey]}
+                {this.getRowData(data[rowIndex][columnKey])}
               </Cell>}
             width={150}
           />

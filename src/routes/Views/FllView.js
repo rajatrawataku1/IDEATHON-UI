@@ -127,9 +127,9 @@ class FllView extends Component {
       afterError: () => {}
     };
 
-    // const fllId = Auth.getUserDataByKey('Id');
+    const fllId = Auth.getUserDataByKey('Id');
 
-    // this.props.actions.getFllInfo(fllId,options);
+    this.props.actions.getFllInfo(fllId,options);
   }
 
 
@@ -154,88 +154,88 @@ class FllView extends Component {
 
      // use this to send data further
 
-    // const { fllInfo } = this.props ? this.props : [];
+    const { fllInfo } = this.props ? this.props : [];
 
-    // const applications = fllInfo;
+    const applications = fllInfo;
 
     // BranchId: Number(value.BranchId)
 
 
-    const applications= [
-      {
-        AgentId:"101",
-        CommentCurrentWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
-        CommentCurrentWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
-        CommentPreviousWeekManagerComment:" my previous manager comment",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Rajat Rawat"
-      },
-      {
-        AgentId:"102",
-        CommentCurrentWeekManagerComment:" my current manager comment",
-        CommentCurrentWeekSelfComment:"my current self Comment",
-        CommentPreviousWeekManagerComment:" my previous manager comment",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Shivam Singh"
-      },
-      {
-        AgentId:"103",
-        CommentCurrentWeekManagerComment:" my current manager comment",
-        CommentCurrentWeekSelfComment:"my current self Comment",
-        CommentPreviousWeekManagerComment:" my previous manager comment",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Swastik Shrivastava"
-      },
-      {
-        AgentId:"103",
-        CommentCurrentWeekManagerComment:" my current manager comment",
-        CommentCurrentWeekSelfComment:"my current self Comment",
-        CommentPreviousWeekManagerComment:" my previous manager comment",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Swastik Shrivastava"
-      },
-      {
-        AgentId:"103",
-        CommentCurrentWeekManagerComment:" my current manager comment",
-        CommentCurrentWeekSelfComment:"my current self Comment",
-        CommentPreviousWeekManagerComment:" my previous manager comment",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Swastik Shrivastava"
-      },
-      {
-        AgentId:"103",
-        CommentCurrentWeekManagerComment:"",
-        CommentCurrentWeekSelfComment:"",
-        CommentPreviousWeekManagerComment:"",
-        CommentPreviousWeekSelfComment:"",
-        Name:"Swastik Shrivastava"
-      },
-      {
-        AgentId:"103",
-        CommentCurrentWeekManagerComment:" my current",
-        CommentCurrentWeekSelfComment:"my current self Comment",
-        CommentPreviousWeekManagerComment:" my previous ",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Swastik Shrivastava"
-      },
-      {
-        AgentId:"103",
-        CommentCurrentWeekManagerComment:" my current manager comment",
-        CommentCurrentWeekSelfComment:"my current self Comment",
-        CommentPreviousWeekManagerComment:" my previous manager comment",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Swastik Shrivastava"
-      },
-      {
-        AgentId:"103",
-        CommentCurrentWeekManagerComment:" my current manager comment",
-        CommentCurrentWeekSelfComment:"my current self Comment",
-        CommentPreviousWeekManagerComment:" my previous manager comment",
-        CommentPreviousWeekSelfComment:"my previous self comment",
-        Name:"Swastik Shrivastava"
-      }
-
-    ]
+    // const applications= [
+    //   {
+    //     AgentId:"101",
+    //     CommentCurrentWeekManagerComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
+    //     CommentCurrentWeekSelfComment:"I will be meeting atleast 25 leads this week.Seeing 10 other potential leads too.I am gonna",
+    //     CommentPreviousWeekManagerComment:" my previous manager comment",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Rajat Rawat"
+    //   },
+    //   {
+    //     AgentId:"102",
+    //     CommentCurrentWeekManagerComment:" my current manager comment",
+    //     CommentCurrentWeekSelfComment:"my current self Comment",
+    //     CommentPreviousWeekManagerComment:" my previous manager comment",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Shivam Singh"
+    //   },
+    //   {
+    //     AgentId:"103",
+    //     CommentCurrentWeekManagerComment:" my current manager comment",
+    //     CommentCurrentWeekSelfComment:"my current self Comment",
+    //     CommentPreviousWeekManagerComment:" my previous manager comment",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Swastik Shrivastava"
+    //   },
+    //   {
+    //     AgentId:"103",
+    //     CommentCurrentWeekManagerComment:" my current manager comment",
+    //     CommentCurrentWeekSelfComment:"my current self Comment",
+    //     CommentPreviousWeekManagerComment:" my previous manager comment",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Swastik Shrivastava"
+    //   },
+    //   {
+    //     AgentId:"103",
+    //     CommentCurrentWeekManagerComment:" my current manager comment",
+    //     CommentCurrentWeekSelfComment:"my current self Comment",
+    //     CommentPreviousWeekManagerComment:" my previous manager comment",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Swastik Shrivastava"
+    //   },
+    //   {
+    //     AgentId:"103",
+    //     CommentCurrentWeekManagerComment:"",
+    //     CommentCurrentWeekSelfComment:"",
+    //     CommentPreviousWeekManagerComment:"",
+    //     CommentPreviousWeekSelfComment:"",
+    //     Name:"Swastik Shrivastava"
+    //   },
+    //   {
+    //     AgentId:"103",
+    //     CommentCurrentWeekManagerComment:" my current",
+    //     CommentCurrentWeekSelfComment:"my current self Comment",
+    //     CommentPreviousWeekManagerComment:" my previous ",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Swastik Shrivastava"
+    //   },
+    //   {
+    //     AgentId:"103",
+    //     CommentCurrentWeekManagerComment:" my current manager comment",
+    //     CommentCurrentWeekSelfComment:"my current self Comment",
+    //     CommentPreviousWeekManagerComment:" my previous manager comment",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Swastik Shrivastava"
+    //   },
+    //   {
+    //     AgentId:"103",
+    //     CommentCurrentWeekManagerComment:" my current manager comment",
+    //     CommentCurrentWeekSelfComment:"my current self Comment",
+    //     CommentPreviousWeekManagerComment:" my previous manager comment",
+    //     CommentPreviousWeekSelfComment:"my previous self comment",
+    //     Name:"Swastik Shrivastava"
+    //   }
+    //
+    // ]
 
     // const applications=[
     //   {
