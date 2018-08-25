@@ -22,7 +22,7 @@ import moment from 'moment';
 import {CardActions, CardContent, CardHeader,CardMedia} from 'material-ui/Card';
 import Card from  'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
-import MoreVertIcon from 'material-ui/MoreVert';
+import ShoppingCart from 'material-ui/Icon';
 
 
 const urlPropsQueryConfig = {
@@ -104,12 +104,109 @@ class Dashboard extends Component {
     let { productData } = this.props;
     let {tabValue} = this.state;
 
-    console.log(productData);
+    let { amazon,bigbasket,grofers,paytm,tata} = productData;
 
-    return (
+    let finalAmazon = (!!amazon) ? amazon :[];
+    let finalbigBasket = (!!bigbasket) ? bigbasket :[];
+    let finalgrofers = (!!grofers) ? grofers :[];
+    let finalpaytm = (!!paytm) ? paytm :[];
+    let finaltata = (!!tata) ? tata : [];
+
+
+    // productData=[
+    //   {
+    //     title:"Rajat Rawat",
+    //     link:"https://app.zeplin.io/project/5ab9e881fc00c7309625e097/screen/5ab9e911575f076233923c0e",
+    //     image:"https://images-na.ssl-images-amazon.com/images/I/61VpNg3AmgL._SX466_.jpg",
+    //     description:"I am gonna do this hey we have that format as well",
+    //   },
+    //   {
+    //     title:"Rohan Chougule",
+    //     link:"https://app.zeplin.io/project/5ab9e881fc00c7309625e097/screen/5ab9e911575f076233923c0e",
+    //     image:"https://images-na.ssl-images-amazon.com/images/I/61VpNg3AmgL._SX466_.jpg",
+    //     description:"I am gonna do this hey we have that format as well",
+    //   },
+    // ]
+    //
+
+
+    return(
+
         <section  className="DASHBOARD_MAIN">
           <Grid container className="DASHBOARD_CONTAINER">
-            <Grid item xs={12} sm={12} md={12} className="flex-row">
+          
+          {
+            (finaltata.length != 0) ?
+
+            <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+
+            <Card className="AmazonChart">
+
+              <Grid container>
+              <Grid item xs={3} sm={3} md={3} className="flex-row flex-justify-center">
+                <h1> Tata Sampann </h1>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} className="flex-row">
+                <Grid container className="DASHBOARD_CONTAINER">
+                {
+                  finaltata.map(key=>{
+                    return (
+
+                      <Grid item xs={6}>
+                      <Card style={{height:"370px",overflow:"scroll",margin:"5px"}}>
+                          <CardHeader
+                            avatar={
+                              <Avatar aria-label="Recipe" >
+                                R
+                              </Avatar>
+                            }
+                            action={
+                              <IconButton onClick={()=>{window.open(key.link,"_blank")}}>
+                                <Icon style={{color:"#e4e4e4",marginTop:"10px"}}> shopping_cart</Icon>
+                              </IconButton>
+                            }
+                            title={key.title}
+                          />
+                          <CardMedia
+                            style={{height:"30px",padding:"25.59%"}}
+                            image={key.image}
+                          />
+                          <CardContent>
+                            <Typography component="p">
+                              { key.description}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+
+                    )
+                  })
+                }
+
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12}> <br/>
+              </Grid>
+
+              </Grid>
+
+            </Card>
+
+
+            </Grid>
+
+            :
+            <span> </span>
+
+          }
+
+
+
+          {
+            (finalAmazon.length != 0) ?
+
+            <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
 
             <Card className="AmazonChart">
 
@@ -117,57 +214,257 @@ class Dashboard extends Component {
               <Grid item xs={3} sm={3} md={3} className="flex-row flex-justify-center">
                 <h1> Amazon</h1>
               </Grid>
+              <Grid item xs={12} sm={12} md={12} className="flex-row">
+                <Grid container className="DASHBOARD_CONTAINER">
+                {
+                  finalAmazon.map(key=>{
+                    return (
+
+                      <Grid item xs={6}>
+                      <Card style={{height:"370px",overflow:"scroll",margin:"5px"}}>
+                          <CardHeader
+                            avatar={
+                              <Avatar aria-label="Recipe" >
+                                R
+                              </Avatar>
+                            }
+                            action={
+                              <IconButton onClick={()=>{window.open(key.link,"_blank")}}>
+                                <Icon style={{color:"#e4e4e4",marginTop:"10px"}}> shopping_cart</Icon>
+                              </IconButton>
+                            }
+                            title={key.title}
+                          />
+                          <CardMedia
+                            style={{height:"30px",padding:"25.59%"}}
+                            image={key.image}
+                          />
+                          <CardContent>
+                            <Typography component="p">
+                              { key.description}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+
+                    )
+                  })
+                }
+
+                </Grid>
+              </Grid>
 
               <Grid item xs={12}> <br/>
               </Grid>
 
-              <Grid item xs={1}>
               </Grid>
-
-              <Grid item xs={8} sm={8} md={8} className="flex-row">
-                <Grid container className="DASHBOARD_CONTAINER">
-                  <Grid item xs={4}>
-                  <Card>
-                      <CardHeader
-                        avatar={
-                          <Avatar aria-label="Recipe" >
-                            R
-                          </Avatar>
-                        }
-                        action={
-                          <IconButton>
-                            <MoreVertIcon />
-                          </IconButton>
-                        }
-                        title="Shrimp and Chorizo Paella"
-                        subheader="September 14, 2016"
-                      />
-                      <CardMedia
-                        className={classes.media}
-                        image="/static/images/cards/paella.jpg"
-                        title="Contemplative Reptile"
-                      />
-                      <CardContent>
-                        <Typography component="p">
-                          This impressive paella is a perfect party dish and a fun meal to cook together with your
-                          guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                        </Typography>
-                      </CardContent>
-
-                    </Card>
-                  </Grid>
-                </Grid>
-              </Grid>
-              </Grid>
-
-
-
-
 
             </Card>
 
 
             </Grid>
+
+            :
+            <span> </span>
+
+          }
+
+
+          {
+            (finalbigBasket.length != 0) ?
+
+            <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+
+            <Card className="AmazonChart">
+
+              <Grid container>
+              <Grid item xs={3} sm={3} md={3} className="flex-row flex-justify-center">
+                <h1> Big Basket</h1>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} className="flex-row">
+                <Grid container className="DASHBOARD_CONTAINER">
+                {
+                  finalbigBasket.map(key=>{
+                    return (
+
+                      <Grid item xs={6}>
+                      <Card style={{height:"370px",overflow:"scroll",margin:"5px"}}>
+                          <CardHeader
+                            avatar={
+                              <Avatar aria-label="Recipe" >
+                                R
+                              </Avatar>
+                            }
+                            action={
+                              <IconButton onClick={()=>{window.open(key.link,"_blank")}}>
+                                <Icon style={{color:"#e4e4e4",marginTop:"10px"}}> shopping_cart</Icon>
+                              </IconButton>
+                            }
+                            title={key.title}
+                          />
+                          <CardMedia
+                            style={{height:"30px",padding:"25.59%"}}
+                            image={key.image}
+                          />
+                          <CardContent>
+                            <Typography component="p">
+                              { key.description}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+
+                    )
+                  })
+                }
+
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12}> <br/>
+              </Grid>
+
+              </Grid>
+
+            </Card>
+            </Grid>
+
+            :
+            <span> </span>
+
+          }
+
+
+          {
+            (finalgrofers.length != 0) ?
+
+            <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+
+            <Card className="AmazonChart">
+
+              <Grid container>
+              <Grid item xs={3} sm={3} md={3} className="flex-row flex-justify-center">
+                <h1> Grofers </h1>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} className="flex-row">
+                <Grid container className="DASHBOARD_CONTAINER">
+                {
+                  finalgrofers.map(key=>{
+                    return (
+
+                      <Grid item xs={6}>
+                      <Card style={{height:"370px",overflow:"scroll",margin:"5px"}}>
+                          <CardHeader
+                            avatar={
+                              <Avatar aria-label="Recipe" >
+                                R
+                              </Avatar>
+                            }
+                            action={
+                              <IconButton onClick={()=>{window.open(key.link,"_blank")}}>
+                                <Icon style={{color:"#e4e4e4",marginTop:"10px"}}> shopping_cart</Icon>
+                              </IconButton>
+                            }
+                            title={key.title}
+                          />
+                          <CardMedia
+                            style={{height:"30px",padding:"25.59%"}}
+                            image={key.image}
+                          />
+                          <CardContent>
+                            <Typography component="p">
+                              { key.description}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+
+                    )
+                  })
+                }
+
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12}> <br/>
+              </Grid>
+
+              </Grid>
+
+            </Card>
+            </Grid>
+
+            :
+            <span> </span>
+
+          }
+
+
+        {
+          (finalpaytm.length != 0) ?
+
+          <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+
+          <Card className="AmazonChart">
+
+            <Grid container>
+            <Grid item xs={3} sm={3} md={3} className="flex-row flex-justify-center">
+              <h1> Paytm Mall </h1>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} className="flex-row">
+              <Grid container className="DASHBOARD_CONTAINER">
+              {
+                finalpaytm.map(key=>{
+                  return (
+
+                    <Grid item xs={6}>
+                    <Card style={{height:"370px",overflow:"scroll",margin:"5px"}}>
+                        <CardHeader
+                          avatar={
+                            <Avatar aria-label="Recipe" >
+                              R
+                            </Avatar>
+                          }
+                          action={
+                            <IconButton onClick={()=>{window.open(key.link,"_blank")}}>
+                              <Icon style={{color:"#e4e4e4",marginTop:"10px"}}> shopping_cart</Icon>
+                            </IconButton>
+                          }
+                          title={key.title}
+                        />
+                        <CardMedia
+                          style={{height:"30px",padding:"25.59%"}}
+                          image={key.image}
+                        />
+                        <CardContent>
+                          <Typography component="p">
+                            { key.description}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+
+                  )
+                })
+              }
+
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12}> <br/>
+            </Grid>
+
+            </Grid>
+
+          </Card>
+          </Grid>
+
+          :
+          <span> </span>
+
+        }
+
+
           </Grid>
         </section>
     );

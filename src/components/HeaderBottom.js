@@ -21,7 +21,9 @@ const STYLES = {
     paddingTop:"2px",
     paddingBottom:"2px",
     fontFamily:"Lato",
-    zIndex:"2"
+    zIndex:"2",
+    backgroundColor:"rgb(242, 242, 242)",
+    boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important"
     // padding: '50px 121px 30px 115px',
   },
   LOGO_IMAGE:{
@@ -36,6 +38,10 @@ const HeaderBottom = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAn
   return (
     <div style={STYLES.ROOT}>
       <Grid container>
+      <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+      <br/>
+      </Grid>
+
         <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
         © 2018  Team Troy
         </Grid>
