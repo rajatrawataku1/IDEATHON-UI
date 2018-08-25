@@ -18,16 +18,22 @@ const STYLES = {
     height:"auto",
     overflow: 'hidden',
     flexGrow: '1',
-    backgroundColor:COLORS.HEADER_COLOR,
+    backgroundColor: "#00853E",
     paddingTop:"2px",
     paddingBottom:"2px",
     fontFamily:"Lato",
-    zIndex:"2"
+    zIndex:"2",
+    boxShadow:"0px 10px 20px 0px rgba(0, 0, 0, 0.5)",
+
     // padding: '50px 121px 30px 115px',
   },
   LOGO_IMAGE:{
+    zIndex:"100",
+    boxShadow:"0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important",
     height:"75px",
-    padding:"10px"
+    paddingLeft:"15px",
+    paddingBottom:"15px",
+    paddingTop:"0px"
   }
 }
 const Header = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl }) => {
@@ -45,11 +51,11 @@ const Header = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl
         <Grid item xs={2} sm={2} md={2} className="flex-row">
         </Grid>
         <Grid item xs={6} sm={6} md={6} className="flex-row flex-justify-end flex-align-center button_margin">
-          <Button variant="outlined" color="primary" className="CUSTOMER_BUTTON">
+          <Button variant="outlined" className="CUSTOMER_BUTTON">
              Customer
           </Button>
 
-          <Button variant="contained" color="primary" className="VENDOR_BUTTON">
+          <Button variant="raised" className="VENDOR_BUTTON">
              Vendor
           </Button>
         </Grid>

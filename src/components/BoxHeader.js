@@ -15,7 +15,8 @@ const STYLES = {
     position:"sticky",
     top:"0px",
     width:"100%",
-    backgroundImage:"linear-gradient(to right, #556080, #ffffff)",
+    backgroundColor: "#007943 !important",
+    // backgroundImage:"linear-gradient(to right, #556080, #ffffff)",
     padding:"12px 12px 12px 12px"
   },
   PROFILE: {
