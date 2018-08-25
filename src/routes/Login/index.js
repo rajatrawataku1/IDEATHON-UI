@@ -56,8 +56,8 @@ class Login extends Component {
     super(props);
     this.state = {
       form: {
-        product: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC, '', true),
-        pinCode: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC, '', true)
+        product: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC_SPACE, '', true),
+        pinCode: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC_SPACE, '', true)
       }
     };
 
@@ -132,7 +132,7 @@ class Login extends Component {
 
           // this view will be the final product
 
-          history.push("/view");
+          history.push("/dashboard");
 
           // routing depending upon the type of role
           //

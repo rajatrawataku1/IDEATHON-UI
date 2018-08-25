@@ -33,9 +33,7 @@ const Routes = () => {
     <main className="ScreensPosition">
       <Switch>
         <Route exact path="/" component={Login} />
-        <PrivateRoute  path="/dashboard" component={Dashboard} />
-        <PrivateRoute  path="/lead" component={LeadListView} />
-        <PrivateRoute exact  path="/view" component={View} />
+        <Route exact path="/dashboard" component={Dashboard} />
         <WrongRoute path="*" component={Login}/>
       </Switch>
     </main>

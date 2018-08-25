@@ -71,7 +71,7 @@ const LoginForm = ({ form, onInputChange, onInputBlur, onLoginClick }) => {
       </Grid>
 
       <Grid item xs={12}>
-      <Button variant="extendedFab" aria-label="search" className="search_now_button">
+      <Button onClick={onLoginClick} variant="extendedFab" aria-label="search" className="search_now_button">
        Explore
        <Icon style={{color:"#e4e4e4",marginLeft:"5px"}}> send</Icon>
      </Button>

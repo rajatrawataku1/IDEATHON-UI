@@ -12,6 +12,9 @@ export const UserAction = {
 
 
 function getAllProducts(form, options={}) {
+
+  let { product,pinCode } = form;
+
   let { afterSuccess, afterError } = options;
   if (!(afterSuccess instanceof Function)) {
     afterSuccess = undefined;
@@ -21,11 +24,14 @@ function getAllProducts(form, options={}) {
     afterError = undefined;
   }
 
+  let FinalPath = USER_API.GET_ALL_PRODUCTS +'?productName='+product.value;
+
+  console.log(FinalPath);
 
   return {
     [CALL_API]: {
       method: 'get',
-      path: USER_API.GET_ALL_PRODUCTS,
+      path: FinalPath,
       successType: USER_ACTION_TYPES.GET_ALL_PRODUCTS_SUCCESS,
       errorType: USER_ACTION_TYPES.GET_ALL_PRODUCTS_FAILURE,
       afterSuccess,
