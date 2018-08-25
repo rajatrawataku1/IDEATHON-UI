@@ -11,11 +11,11 @@ export const UserAction = {
 
 function login(form, options={}) {
   let { afterSuccess, afterError } = options;
-  let body = {
-    "username": form.username.value,
-    "password": form.password.value
-  };
-
+  // let body = {
+  //   "username": form.username.value,
+  //   "password": form.password.value
+  // };
+  //
   if (!(afterSuccess instanceof Function)) {
     afterSuccess = undefined;
   }
@@ -23,13 +23,24 @@ function login(form, options={}) {
   if (!(afterError instanceof Function)) {
     afterError = undefined;
   }
+  //
+  //
+  // return {
+  //   [CALL_API]: {
+  //     method: 'post',
+  //     path: USER_API.LOGIN,
+  //     body,
+  //     successType: USER_ACTION_TYPES.LOGIN_SUCCESS,
+  //     errorType: USER_ACTION_TYPES.LOGIN_FAILURE,
+  //     afterSuccess,
+  //     afterError
+  //   }
+  // };
 
-  
   return {
     [CALL_API]: {
-      method: 'post',
+      method: 'get',
       path: USER_API.LOGIN,
-      body,
       successType: USER_ACTION_TYPES.LOGIN_SUCCESS,
       errorType: USER_ACTION_TYPES.LOGIN_FAILURE,
       afterSuccess,

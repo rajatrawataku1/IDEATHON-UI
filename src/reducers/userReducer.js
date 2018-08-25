@@ -9,13 +9,16 @@ export default function userReducer(state = {}, action) {
     case USER_ACTION_TYPES.LOGIN_SUCCESS:
       const { resBody } = action,
         data = resBody.data;
-      //
-        // let dummyData={
-        //   id:"00081234",
-        //   role:"SLL",
-        //   name:"Aman Tanwar",
-        //   token: "ksdjjs"
-        // }
+
+
+        console.log(resBody);
+        
+        let dummyData={
+          id:"00081234",
+          role:"SLL",
+          name:"Aman Tanwar",
+          token: "ksdjjs"
+        }
 
         Auth.register(dummyData);
         userStore = Auth.getUser();

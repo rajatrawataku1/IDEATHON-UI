@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.5.1",
     "aphrodite": "^2.2.2",
     "crypto": "^1.0.1",
     "fixed-data-table-2": "^0.8.13",
