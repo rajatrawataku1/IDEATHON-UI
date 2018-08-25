@@ -10,13 +10,13 @@ export default class View extends Component {
   // }
 
   render() {
-
-
     return (
       <div>
         {
-          // <SllView/>
+
           (Auth.getUserDataByKey('Role') === 'SLL')? <SllView/> : <FllView/>
+
+          // (Auth.getUserDataByKey('Role') === 'SLL')? <SllView/> : <FllView/>
         }
       </div>
     )

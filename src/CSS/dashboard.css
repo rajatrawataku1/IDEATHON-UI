@@ -182,3 +182,15 @@
     padding: 20px;
 
   }
+
+  .onlineStore{
+    color:#00853E !important;
+    border:1px solid #ccc !important;
+    margin-right: 10px !important;
+  }
+
+  .offlineStore{
+    background-color: white !important;
+    color:#00853E !important;
+    /* border:1px solid #00853E !important; */
+  }

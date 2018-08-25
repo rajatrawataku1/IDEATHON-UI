@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import { BoxHeader } from '../../components';
-import { DialogAction, SnackbarAction, DashboardAction } from '../../actions';
+import { DialogAction, SnackbarAction, UserAction } from '../../actions';
 import {  Auth } from '../../helpers';
 import { BACK_IMAGE,ADD_COMMENT_IMAGE,PROFILE_LOGO, LEFT_QUOTE, RIGHT_QUTOE} from '../../constants';
 import Typography from 'material-ui/Typography';
@@ -26,9 +26,9 @@ import ShoppingCart from 'material-ui/Icon';
 
 
 const urlPropsQueryConfig = {
-  agentId: { type: UrlQueryParamTypes.string}
+  productName: { type: UrlQueryParamTypes.string},
+  pinCodeUrl: { type: UrlQueryParamTypes.string}
 };
-
 
 function ProductContainer(finalData) {
 
@@ -45,41 +45,49 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tabValue:0
+      tabValue:0,
+      online:1,
+      offline:0
     };
   }
 
-  // getAllDataApiCall = (weekNumber)=>{
-  //
-  //   // // agent ID
-  //   let { agentId } = this.props;
-  //   // // timeline
-  //   let { SelectLeads, SelectJointCalls, SelectCampaigns, SelectTraining } = this.state;
-  //
-  //   let options = {
-  //     afterSuccess: () => {
-  //       console.log('success');
-  //     },
-  //     afterError: () => {
-  //       console.log('error');
-  //     }
-  //   };
-  //
-  //   this.props.actions.getAgentInfo(agentId,options);
-  //   this.props.actions.getLeadsInfo(weekNumber,agentId,SelectLeads,options);
-  //   this.props.actions.getJointCall(weekNumber,agentId,SelectJointCalls,options);
-  //   this.props.actions.getCamapaignEfficiency(weekNumber,agentId,SelectCampaigns,options);
-  //   this.props.actions.getCommitments(weekNumber,agentId,options);
-  //
-  // }
 
   componentDidMount() {
-    // const { history } = this.props;
-    // if(!Auth.isLoggedIn()){
-    //   history.push('/');
-    // }else{
-    //   this.getAllDataApiCall(moment().isoWeek());
-    // }
+      let _this = this;
+
+      let { productName,pinCodeUrl } = this.props;
+
+      console.log(productName);
+
+
+      let form = {
+        product:productName,
+        pinCode:pinCodeUrl
+      };
+
+      const options = {
+          afterSuccess: () => {
+            _this.props.actions.openSnackbar('Product Fetching Successfull');
+          },
+          afterError: () => {
+            _this.props.actions.openSnackbar('Product Fetching Failed');
+          }
+        };
+
+      this.props.actions.getAllProducts(form, options);
+
+      const options2 = {
+          afterSuccess: () => {
+            _this.props.actions.openSnackbar('Outlets Fetching Successfull');
+          },
+          afterError: () => {
+            _this.props.actions.openSnackbar('Outlets Fetching Failed');
+          }
+        };
+
+     this.props.actions.getOutlets(form, options2);
+
+
   }
 
   // reloadPage() {
@@ -102,6 +110,8 @@ class Dashboard extends Component {
   render() {
 
     let { productData } = this.props;
+    let { outletData } = this.props;
+
     let {tabValue} = this.state;
 
     let { amazon,bigbasket,grofers,paytm,tata} = productData;
@@ -112,6 +122,10 @@ class Dashboard extends Component {
     let finalpaytm = (!!paytm) ? paytm :[];
     let finaltata = (!!tata) ? tata : [];
 
+    let finaloutletData = (!!outletData ) ? outletData : [];
+    let {offline, online} = this.state ;
+
+    console.log(productData);
 
     // productData=[
     //   {
@@ -134,9 +148,50 @@ class Dashboard extends Component {
 
         <section  className="DASHBOARD_MAIN">
           <Grid container className="DASHBOARD_CONTAINER">
-          
+
+          <Grid item xs={12}>
+            <br/>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Grid container>
+              <Grid item xs={6} className="flex-row flex-justify-center">
+                {
+                  ( Object.keys(productData).length !=0)
+                  ?
+                    <Button variant="outlined" style={{textTransform:"none"}} className="onlineStore" onClick ={()=>{ this.setState({online:1,offline:0}) }}>
+                      Search Result for online Stores
+                    </Button>
+                  :
+                    <span> </span>
+
+                }
+              </Grid>
+
+              <Grid item xs={6} className="flex-row flex-justify-center">
+
+              {
+                (finaloutletData.length !=0)
+                ?
+                  <Button variant="raised" className="offlineStore" onClick={ ()=>{ this.setState({offline:1,online:0}) }} >
+                    See Result for offline Stores
+                  </Button>
+                :
+                  <span> </span>
+              }
+
+
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item xs={12}>
+            <br/>
+          </Grid>
+
+
           {
-            (finaltata.length != 0) ?
+            (finaltata.length != 0 && online) ?
 
             <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
 
@@ -149,7 +204,8 @@ class Dashboard extends Component {
               <Grid item xs={12} sm={12} md={12} className="flex-row">
                 <Grid container className="DASHBOARD_CONTAINER">
                 {
-                  finaltata.map(key=>{
+                  finaltata.map((key,index)=>{
+
                     return (
 
                       <Grid item xs={6}>
@@ -157,7 +213,7 @@ class Dashboard extends Component {
                           <CardHeader
                             avatar={
                               <Avatar aria-label="Recipe" >
-                                R
+                                  {key.title.charAt(0)}
                               </Avatar>
                             }
                             action={
@@ -201,10 +257,8 @@ class Dashboard extends Component {
 
           }
 
-
-
           {
-            (finalAmazon.length != 0) ?
+            (finalAmazon.length != 0 && online) ?
 
             <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
 
@@ -225,7 +279,7 @@ class Dashboard extends Component {
                           <CardHeader
                             avatar={
                               <Avatar aria-label="Recipe" >
-                                R
+                                {key.title.charAt(0)}
                               </Avatar>
                             }
                             action={
@@ -271,7 +325,7 @@ class Dashboard extends Component {
 
 
           {
-            (finalbigBasket.length != 0) ?
+            (finalbigBasket.length != 0 && online) ?
 
             <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
 
@@ -292,7 +346,7 @@ class Dashboard extends Component {
                           <CardHeader
                             avatar={
                               <Avatar aria-label="Recipe" >
-                                R
+                                { key.title.charAt(0) }
                               </Avatar>
                             }
                             action={
@@ -336,7 +390,7 @@ class Dashboard extends Component {
 
 
           {
-            (finalgrofers.length != 0) ?
+            (finalgrofers.length != 0 && online) ?
 
             <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
 
@@ -357,7 +411,7 @@ class Dashboard extends Component {
                           <CardHeader
                             avatar={
                               <Avatar aria-label="Recipe" >
-                                R
+                                { key.title.charAt(0) }
                               </Avatar>
                             }
                             action={
@@ -401,7 +455,7 @@ class Dashboard extends Component {
 
 
         {
-          (finalpaytm.length != 0) ?
+          (finalpaytm.length != 0 && online) ?
 
           <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
 
@@ -422,7 +476,7 @@ class Dashboard extends Component {
                         <CardHeader
                           avatar={
                             <Avatar aria-label="Recipe" >
-                              R
+                            { key.title.charAt(0) }
                             </Avatar>
                           }
                           action={
@@ -464,8 +518,73 @@ class Dashboard extends Component {
 
         }
 
+        {
+          ( finaloutletData.length!=0 && offline) ?
 
+          <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+
+          <Card className="AmazonChart">
+
+            <Grid container>
+            <Grid item xs={3} sm={3} md={3} className="flex-row flex-justify-center">
+              <h1> Offline Stores </h1>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} className="flex-row">
+              <Grid container className="DASHBOARD_CONTAINER">
+              {
+                finaloutletData.map(key=>{
+                  return (
+
+                    <Grid item xs={6}>
+                    <Card style={{height:"200px",overflow:"scroll",margin:"5px"}}>
+                        <CardHeader
+                          avatar={
+                            <Avatar aria-label="Recipe" >
+                            { key.name.charAt(0) }
+                            </Avatar>
+                          }
+
+                          title={key.name}
+                        />
+
+                        <CardContent>
+                          <Typography component="p">
+                            <Grid container>
+                              <Grid item xs={8}>
+                                {key.address}
+                              </Grid>
+                              <Grid item xs={4} className="flex-row flex-justify-end">
+                              <Button mini variant="fab" aria-label="Add" onClick={ ()=>{ window.open("https://www.google.com/maps/search/"+key.address,"_blank")}}>
+                                 <Icon> location_on </Icon>
+                               </Button>
+                              </Grid>
+                            </Grid>
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+
+                  )
+                })
+              }
+
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12}> <br/>
+            </Grid>
+
+            </Grid>
+
+          </Card>
           </Grid>
+
+          :
+          <span> </span>
+
+        }
+
+        </Grid>
         </section>
     );
   }
@@ -473,6 +592,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
+      outletData: !!state.userStore.outletData ? state.userStore.outletData : [],
       productData: !!state.userStore.productData ? state.userStore.productData : {},
   };
 }
@@ -490,7 +610,9 @@ function mapDispatchToProps(dispatch) {
     // getCamapaignEfficiency: (week,agentId,timeline,options) =>dispatch(DashboardAction.getCamapaignEfficiency(week,agentId,timeline,options)),
 
     // getCommitments: (week,agentId,options) =>dispatch(DashboardAction.getCommitments(week,agentId,options)),
-    deleteStore: ()=>dispatch(DashboardAction.deleteStore())
+    openSnackbar: (data) => dispatch(SnackbarAction.show(data)),
+    getAllProducts: (form, options) => dispatch(UserAction.getAllProducts(form, options)),
+    getOutlets: (pincode, options) => dispatch(UserAction.getOutlets(pincode, options)),
     }
   }
 }

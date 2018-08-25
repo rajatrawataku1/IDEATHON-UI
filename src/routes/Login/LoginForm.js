@@ -17,7 +17,7 @@ const LoginForm = ({ form, onInputChange, onInputBlur, onLoginClick }) => {
        <br/>
       </Grid>
       <Grid item xs={12}>
-        <p className="LOGIN_HEADER_TEXT">WAR Login</p> <br/> <br/>
+        <p className="LOGIN_HEADER_TEXT">Lets Begin...</p> <br/> <br/>
       </Grid>
 
 

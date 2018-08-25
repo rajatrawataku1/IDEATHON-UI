@@ -65,6 +65,8 @@ class Login extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputBlur = this.onInputBlur.bind(this);
     this.onLoginClick = this.onLoginClick.bind(this);
+    this.getOutlestDataToo = this.getOutlestDataToo.bind(this);
+
   }
 
   componentDidMount() {
@@ -88,6 +90,38 @@ class Login extends Component {
     // }
   }
   // Form Input Change Event Handler
+
+  getOutlestDataToo(pinCode){
+
+    const _this = this;
+
+    const options = {
+
+      afterSuccess: () => {
+
+        _this.props.actions.openSnackbar('Outlets Fetched Successfully');
+
+        // this view will be the final product
+        // routing depending upon the type of role
+        //
+        // console.log(Auth.getUserDataByKey('Role'));
+        // if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
+        //   console.log("I am fll or sll");
+        //   history.push("/view");
+        // } else {
+        //   console.log("I am fls");
+        //   history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
+        // }
+      },
+      afterError: () => {
+        _this.props.actions.openSnackbar('Outlets Fetching Failed');
+      }
+    };
+
+    this.props.actions.getOutlets(pinCode, options);
+
+  }
+
   onInputChange(event) {
     const { form } = this.state,
       { value, name } = event.target,
@@ -125,33 +159,42 @@ class Login extends Component {
       return _this.props.actions.openSnackbar('Product Fetching Failed. Fill the form fields');
     }
 
-    const { form } = this.state,
-      options = {
-        afterSuccess: () => {
-          _this.props.actions.openSnackbar('Product Fetching Successfull');
+    const { form } = this.state;
+    history.push("/dashboard?productName="+form.product.value+"&pinCodeUrl="+form.pinCode.value);
 
-          // this view will be the final product
 
-          history.push("/dashboard");
+    // const { form } = this.state,
+    //   options = {
+    //     afterSuccess: () => {
+    //       _this.props.actions.openSnackbar('Product Fetching Successfull');
+    //
+    //       // this view will be the final product
+    //
+    //       let { productName,pinCodeUrl } = this.props;
+    //
+    //       history.push("/dashboard?productName="+productName+"?pinCodeUrl="+pinCodeUrl);
+    //
+    //       // routing depending upon the type of role
+    //       //
+    //       // console.log(Auth.getUserDataByKey('Role'));
+    //       // if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
+    //       //   console.log("I am fll or sll");
+    //       //   history.push("/view");
+    //       // } else {
+    //       //   console.log("I am fls");
+    //       //   history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
+    //       // }
+    //
+    //     },
+    //     afterError: () => {
+    //       _this.props.actions.openSnackbar('Product Fetching Failed');
+    //     }
+    //   };
+    //
+    // this.props.actions.getAllProducts(form, options);
 
-          // routing depending upon the type of role
-          //
-          // console.log(Auth.getUserDataByKey('Role'));
-          // if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
-          //   console.log("I am fll or sll");
-          //   history.push("/view");
-          // } else {
-          //   console.log("I am fls");
-          //   history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
-          // }
+    // this.getOutlestDataToo(form.pinCode);
 
-        },
-        afterError: () => {
-          _this.props.actions.openSnackbar('Product Fetching Failed');
-        }
-      };
-
-    this.props.actions.getAllProducts(form, options);
   }
 
   // Validate Login Form Inputs and Return 'valid' Flag Value
@@ -203,7 +246,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       openSnackbar: (data) => dispatch(SnackbarAction.show(data)),
-      getAllProducts: (form, options) => dispatch(UserAction.getAllProducts(form, options))
+      getAllProducts: (form, options) => dispatch(UserAction.getAllProducts(form, options)),
+      getOutlets: (pincode, options) => dispatch(UserAction.getOutlets(pincode, options))
     }
   }
 }

@@ -24,7 +24,6 @@ export default function dashboardReducer(state = {}, action) {
 
       dashboardStore.agentStore = mappedData;
       break;
-
     }
 
     case DASHBOARD_ACTION_TYPES.GET_AGENT_INFO_FAILURE:
