@@ -1,4 +1,5 @@
 export { default as Header } from './Header';
+export { default as HeaderBottom } from './HeaderBottom';
 export { default as AppDialog } from './AppDialog';
 export { default as TableHeader } from './TableHeader';
 export { default as TableRows } from './TableRows';

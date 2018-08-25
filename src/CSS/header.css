@@ -43,6 +43,25 @@
   color:#58595b;
 }
 
+/*  ideathon */
+
+.CUSTOMER_BUTTON{
+  border:1px solid red !important;
+  margin-right: 10px !important;
+}
+
+.VENDOR_BUTTON{
+  background-color: #3f51b5 !important;
+  color:white !important;
+  border:1px solid #3f51b5 !important;
+}
+
+.button_margin{
+  padding-right: 10px !important;
+}
+
+/*  */
+
 /* Iphone 6/7/8 screen  */
 
 @media screen and (max-width: 500px) {

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, withRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import Snackbar from 'material-ui/Snackbar';
-import { Header, AppDialog } from './components';
+import { Header,HeaderBottom, AppDialog } from './components';
 import { SnackbarAction, UserAction } from './actions';
 import Routes from './routes';
 import './App.css';
@@ -84,6 +84,8 @@ class App extends Component {
               headerAnchorEl={headerAnchorEl}
               />
             <Routes />
+
+            <HeaderBottom/>
             <AppDialog
               open={dialogStatus}
               nudge={dialogData}

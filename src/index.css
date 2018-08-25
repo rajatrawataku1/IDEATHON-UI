@@ -105,6 +105,12 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: center;
 }
 
+.search_now_button{
+  box-shadow: 0 10px 10px 0 #ccc ;
+  color: white !important;
+  background-color: #007943 !important;
+}
+
 .tableHeaderWithNoBorder{
   background: white;
 }

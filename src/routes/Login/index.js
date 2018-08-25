@@ -7,10 +7,27 @@ import { SnackbarAction, UserAction } from '../../actions';
 import { Auth } from '../../helpers';
 import { TextInput, TEXT_INPUT_TYPES } from '../../classes';
 import { COLORS, APP_ADMIN , LANDING_IMAGE, FONTS} from '../../constants';
+import Paper from 'material-ui/Paper';
 
 const STYLES = {
+
+  OTHER_DIV:{
+    position:"absolute",
+    top:"42px",
+    left:"0%",
+    width:"100%",
+    height:"350px",
+    flexGrow: 1,
+    overflow:"show",
+    fontFamily:"Lato",
+    backgroundColor:"#f2f2f2"
+  },
+
   MAIN: {
-      paddingTop:"45%",
+      position:"absolute",
+      top:"250px",
+      left:"50%",
+      transform:"translate(-50%,0%)",
       flexGrow: 1,
       overflow:"show",
       fontFamily:"Lato"
@@ -39,8 +56,8 @@ class Login extends Component {
     super(props);
     this.state = {
       form: {
-        username: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC, '', true),
-        password: new TextInput(TEXT_INPUT_TYPES.PASSWORD, '', true)
+        product: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC, '', true),
+        pinCode: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC, '', true)
       }
     };
 
@@ -51,24 +68,24 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    const { history } = this.props;
-    console.log('CDM: login');
-    if(Auth.isLoggedIn()) {
-
-      console.log(Auth.getUserDataByKey('Role'));
-      if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
-        console.log("I am fll or sll");
-        history.push("/view");
-
-      } else {
-        console.log("I am fls");
-        history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
-      }
-
-    } else {
-      console.log('LOGGED OUT');
-      Auth.deregister();
-    }
+    // const { history } = this.props;
+    // console.log('CDM: login');
+    // if(Auth.isLoggedIn()) {
+    //
+    //   console.log(Auth.getUserDataByKey('Role'));
+    //   if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
+    //     console.log("I am fll or sll");
+    //     history.push("/view");
+    //
+    //   } else {
+    //     console.log("I am fls");
+    //     history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
+    //   }
+    //
+    // } else {
+    //   console.log('LOGGED OUT');
+    //   Auth.deregister();
+    // }
   }
   // Form Input Change Event Handler
   onInputChange(event) {
@@ -105,30 +122,36 @@ class Login extends Component {
     // Validate Login Form and Call API to Login User
     const loginValid = this._validateLogin();
     if(!loginValid) {
-      return _this.props.actions.openSnackbar('Login Failed. Fill the form fields');
+      return _this.props.actions.openSnackbar('Product Fetching Failed. Fill the form fields');
     }
 
     const { form } = this.state,
       options = {
         afterSuccess: () => {
-          _this.props.actions.openSnackbar('Login Successfull');
+          _this.props.actions.openSnackbar('Product Fetching Successfull');
+
+          // this view will be the final product
+
+          history.push("/view");
 
           // routing depending upon the type of role
-          console.log(Auth.getUserDataByKey('Role'));
-          if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
-            console.log("I am fll or sll");
-            history.push("/view");
-          } else {
-            console.log("I am fls");
-            history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
-          }
+          //
+          // console.log(Auth.getUserDataByKey('Role'));
+          // if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
+          //   console.log("I am fll or sll");
+          //   history.push("/view");
+          // } else {
+          //   console.log("I am fls");
+          //   history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
+          // }
 
         },
         afterError: () => {
-          _this.props.actions.openSnackbar('Login Failed');
+          _this.props.actions.openSnackbar('Product Fetching Failed');
         }
       };
-    this.props.actions.login(form, options);
+
+    this.props.actions.getAllProducts(form, options);
   }
 
   // Validate Login Form Inputs and Return 'valid' Flag Value
@@ -149,18 +172,25 @@ class Login extends Component {
   render() {
     const { form } = this.state;
     return (
-        <section style={STYLES.MAIN}>
-          <Grid container>
-            <Grid item xs={12} sm={12} md={12} lg={12}>
-              <LoginForm
-                form={form}
-                onInputChange={this.onInputChange}
-                onInputBlur={this.onInputBlur}
-                onLoginClick={this.onLoginClick}
-                />
+      <div>
+        <div style={STYLES.OTHER_DIV}>
+        </div>
+        <Paper style={STYLES.MAIN}>
+          <section>
+            <Grid container className="flex-row flex-justify-center">
+              <Grid item xs={10} sm={10} md={10} lg={10}>
+                <LoginForm
+                  form={form}
+                  onInputChange={this.onInputChange}
+                  onInputBlur={this.onInputBlur}
+                  onLoginClick={this.onLoginClick}
+                  />
+              </Grid>
             </Grid>
-          </Grid>
-        </section>
+          </section>
+        </Paper>
+      </div>
+
     );
   }
 }
@@ -173,7 +203,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       openSnackbar: (data) => dispatch(SnackbarAction.show(data)),
-      login: (form, options) => dispatch(UserAction.login(form, options))
+      getAllProducts: (form, options) => dispatch(UserAction.getAllProducts(form, options))
     }
   }
 }

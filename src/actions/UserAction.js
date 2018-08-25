@@ -6,8 +6,34 @@ import { Auth } from '../helpers';
 export const UserAction = {
   login,
   logout,
-  getMyProfile
+  getMyProfile,
+  getAllProducts
 }
+
+
+function getAllProducts(form, options={}) {
+  let { afterSuccess, afterError } = options;
+  if (!(afterSuccess instanceof Function)) {
+    afterSuccess = undefined;
+  }
+
+  if (!(afterError instanceof Function)) {
+    afterError = undefined;
+  }
+
+
+  return {
+    [CALL_API]: {
+      method: 'get',
+      path: USER_API.GET_ALL_PRODUCTS,
+      successType: USER_ACTION_TYPES.GET_ALL_PRODUCTS_SUCCESS,
+      errorType: USER_ACTION_TYPES.GET_ALL_PRODUCTS_FAILURE,
+      afterSuccess,
+      afterError
+    }
+  };
+}
+
 
 function login(form, options={}) {
   let { afterSuccess, afterError } = options;

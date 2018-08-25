@@ -13,12 +13,11 @@ import { COLORS } from '../constants'
 const STYLES = {
   ROOT: {
     position:"fixed",
-    top:"0",
+    bottom:"0",
     width:"100%",
     height:"auto",
     overflow: 'hidden',
     flexGrow: '1',
-    backgroundColor:COLORS.HEADER_COLOR,
     paddingTop:"2px",
     paddingBottom:"2px",
     fontFamily:"Lato",
@@ -30,32 +29,22 @@ const STYLES = {
     padding:"10px"
   }
 }
-const Header = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl }) => {
+const HeaderBottom = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl }) => {
   const isLoggedIn = Auth.isLoggedIn();
   // const isLoggedIn = true;
 
   return (
-
     <div style={STYLES.ROOT}>
       <Grid container>
-      <Grid item xs={4} sm={4} md={4} className="flex-row flex-justify-left">
-        <Link to="/"><img style={STYLES.LOGO_IMAGE} src={TATA_LOGO} alt="hdfc-life-logo"/></Link>
-      </Grid>
-
-        <Grid item xs={2} sm={2} md={2} className="flex-row">
+        <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+        © 2018  Team Troy
         </Grid>
-        <Grid item xs={6} sm={6} md={6} className="flex-row flex-justify-end flex-align-center button_margin">
-          <Button variant="outlined" color="primary" className="CUSTOMER_BUTTON">
-             Customer
-          </Button>
-
-          <Button variant="contained" color="primary" className="VENDOR_BUTTON">
-             Vendor
-          </Button>
+        <Grid item xs={12} sm={12} md={12} className="flex-row flex-justify-center">
+        <br/>
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default Header;
+export default HeaderBottom;

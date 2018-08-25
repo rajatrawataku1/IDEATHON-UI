@@ -2,60 +2,84 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Grid from 'material-ui/Grid';
-import Input from 'material-ui/Input';
 import '../../CSS/loginForm.css';
+import Input, { InputAdornment } from 'material-ui/Input';
+import Icon from 'material-ui/Icon';
 
 
 const LoginForm = ({ form, onInputChange, onInputBlur, onLoginClick }) => {
-  const { username, password } = form;
+  const { product, pinCode } = form;
 
   return (
   <center>
     <Grid container>
       <Grid item xs={12}>
+       <br/>
       </Grid>
       <Grid item xs={12}>
-        <p className="LOGIN_HEADER_TEXT" >WAR Login</p> <br/>
+        <p className="LOGIN_HEADER_TEXT">WAR Login</p> <br/> <br/>
       </Grid>
+
+
       <Grid item xs={12}>
-        <FormControl  error={username.dirty && username.error} style={{ width: '69%',marginBottom:"15px"}}>
-            <Input id='username'
-                  type='username'
-                  name='username'
-                  value={username.value}
+        <FormControl  error={product.dirty && product.error} style={{ width: '100%',marginBottom:"15px"}}>
+            <Input id='product'
+                  type='product'
+                  name='product'
+                  value={product.value}
                   onChange={onInputChange}
                   onBlur={onInputBlur}
                   onKeyUp={onLoginClick}
                   disableUnderline={true}
-                  placeholder="Username"
-                  className="LOGIN_INPUT text-field-style"
+                  placeholder="Enter product name"
+                  className="LOGIN_INPUT"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Icon style={{color:"#e4e4e4"}}> search</Icon>
+                    </InputAdornment>
+                  }
                  />
-                <FormHelperText>{username.errorMessage}</FormHelperText>
+                <FormHelperText>{product.errorMessage}</FormHelperText>
         </FormControl>
       </Grid>
 
       <Grid item xs={12}>
-
-        <FormControl  error={password.dirty && password.error} style={{ width: '69%' }}>
-            <Input id='password'
-                  type='password'
-                  name='password'
-                  value={password.value}
+        <FormControl  error={pinCode.dirty && pinCode.error} style={{ width: '100%' }}>
+            <Input id='pinCode'
+                  type='pinCode'
+                  name='pinCode'
+                  value={pinCode.value}
                   onChange={onInputChange}
                   onBlur={onInputBlur}
                   onKeyUp={onLoginClick}
                   disableUnderline={true}
-                  placeholder="Password"
-                  className="LOGIN_INPUT text-field-style"
+                  placeholder="Enter Pin Code"
+                  className="LOGIN_INPUT"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Icon style={{color:"#e4e4e4"}}> my_location</Icon>
+                    </InputAdornment>
+                  }
                  />
-                <FormHelperText>{password.errorMessage}</FormHelperText>
+                <FormHelperText>{pinCode.errorMessage}</FormHelperText>
         </FormControl>
 
       </Grid>
 
       <Grid item xs={12}>
-        <Button onClick={onLoginClick} variant="raised" color="primary"  className="LOGIN_BUTTON">login</Button>
+      <br/>
+      </Grid>
 
+      <Grid item xs={12}>
+      <Button variant="extendedFab" aria-label="search" className="search_now_button">
+       Explore
+       <Icon style={{color:"#e4e4e4",marginLeft:"5px"}}> send</Icon>
+     </Button>
+
+      </Grid>
+
+      <Grid item xs={12}>
+      <br/>
       </Grid>
 
     </Grid>

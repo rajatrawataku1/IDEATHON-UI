@@ -11,3 +11,4 @@ export const BACK_IMAGE = "../../images/back.png";
 export const ADD_COMMENT_IMAGE = "../../images/add.png";
 export const LEFT_QUOTE = "./images/left-quote.png";
 export const RIGHT_QUTOE = "./images/right-quote.png";
+export const TATA_LOGO = "./images/TATA_LOGO.png";
