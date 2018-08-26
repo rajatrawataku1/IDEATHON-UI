@@ -8,6 +8,33 @@ export default function userReducer(state = {}, action) {
 
   switch (action.type) {
 
+    case USER_ACTION_TYPES.SET_VENDOR_NEW_SUCCESS:
+    {
+        console.log("Success");
+        break;
+    }
+
+    case USER_ACTION_TYPES.SET_VENDOR_NEW_FAILURE:
+    {
+      console.log("Failure");
+      break;
+    }
+
+    case USER_ACTION_TYPES.SET_VENDOR_FULL_SUCCESS:
+    {
+        console.log("Success");
+        break;
+    }
+
+    case USER_ACTION_TYPES.SET_VENDOR_FULL_FAILURE:
+    {
+      console.log("Failure");
+      break;
+    }
+
+
+
+
     case USER_ACTION_TYPES.GET_ALL_PRODUCTS_SUCCESS:
     {
       const { resBody } = action,

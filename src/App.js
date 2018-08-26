@@ -37,6 +37,13 @@ class App extends Component {
     this.showHeaderMenu = this.showHeaderMenu.bind(this);
     this.closeHeaderMenu = this.closeHeaderMenu.bind(this);
     this.onLogoutClick = this.onLogoutClick.bind(this);
+    this.moveToVendorPage = this.moveToVendorPage.bind(this);
+
+  }
+
+  moveToVendorPage(){
+    const { history } = this.props;
+    window.open("/vendorNew","_self");
   }
 
   showHeaderMenu = event => {
@@ -82,6 +89,7 @@ class App extends Component {
               showHeaderMenu={this.showHeaderMenu}
               closeHeaderMenu={this.closeHeaderMenu}
               headerAnchorEl={headerAnchorEl}
+              moveToVendorPage={this.moveToVendorPage}
               />
             <Routes />
 

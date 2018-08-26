@@ -6,7 +6,6 @@ import '../../CSS/loginForm.css';
 import Input, { InputAdornment } from 'material-ui/Input';
 import Icon from 'material-ui/Icon';
 
-
 const LoginForm = ({ form, onInputChange, onInputBlur, onLoginClick }) => {
   const { product, pinCode } = form;
 

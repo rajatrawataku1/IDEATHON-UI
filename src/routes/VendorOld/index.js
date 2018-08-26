@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 
-import LoginForm from './LoginForm';
+import VendorFull  from './VendorFull';
 import { SnackbarAction, UserAction } from '../../actions';
 import { Auth } from '../../helpers';
 import { TextInput, TEXT_INPUT_TYPES } from '../../classes';
@@ -13,7 +13,7 @@ const STYLES = {
 
   OTHER_DIV:{
     position:"absolute",
-    top:"42px",
+    top:"32px",
     left:"0%",
     width:"100%",
     height:"350px",
@@ -25,7 +25,7 @@ const STYLES = {
 
   MAIN: {
       position:"absolute",
-      top:"250px",
+      top:"230px",
       left:"50%",
       transform:"translate(-50%,0%)",
       flexGrow: 1,
@@ -51,13 +51,16 @@ const STYLES = {
    }
 }
 
-class Login extends Component {
+class VendorOld extends Component {
   constructor(props) {
     super(props);
     this.state = {
       form: {
-        product: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC_SPACE, '', true),
-        pinCode: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC_SPACE, '', true)
+        retailerName: new TextInput(TEXT_INPUT_TYPES.ALPHA_NUMERIC_SPACE, '', true),
+        phoneNumber: new TextInput(TEXT_INPUT_TYPES.NUMBER, '', true),
+        pinCodeRetailer: new TextInput(TEXT_INPUT_TYPES.NUMBER, '', true),
+        income: new TextInput(TEXT_INPUT_TYPES.NUMBER, '', true),
+        year: new TextInput(TEXT_INPUT_TYPES.NUMBER, '', true),
       }
     };
 
@@ -65,7 +68,6 @@ class Login extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputBlur = this.onInputBlur.bind(this);
     this.onLoginClick = this.onLoginClick.bind(this);
-    this.getOutlestDataToo = this.getOutlestDataToo.bind(this);
 
   }
 
@@ -91,36 +93,6 @@ class Login extends Component {
   }
   // Form Input Change Event Handler
 
-  getOutlestDataToo(pinCode){
-
-    const _this = this;
-
-    const options = {
-
-      afterSuccess: () => {
-
-        _this.props.actions.openSnackbar('Outlets Fetched Successfully');
-
-        // this view will be the final product
-        // routing depending upon the type of role
-        //
-        // console.log(Auth.getUserDataByKey('Role'));
-        // if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
-        //   console.log("I am fll or sll");
-        //   history.push("/view");
-        // } else {
-        //   console.log("I am fls");
-        //   history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
-        // }
-      },
-      afterError: () => {
-        _this.props.actions.openSnackbar('Outlets Fetching Failed');
-      }
-    };
-
-    this.props.actions.getOutlets(pinCode, options);
-
-  }
 
   onInputChange(event) {
     const { form } = this.state,
@@ -159,41 +131,34 @@ class Login extends Component {
       return _this.props.actions.openSnackbar('Product Fetching Failed. Fill the form fields');
     }
 
-    const { form } = this.state;
-    history.push("/dashboard?productName="+form.product.value+"&pinCodeUrl="+form.pinCode.value);
+    const { form } = this.state,
+      options = {
+        afterSuccess: () => {
+          _this.props.actions.openSnackbar('Submitted Successfully');
+
+          setTimeout(function(){
+            history.push("/");
+          },2000);
 
 
-    // const { form } = this.state,
-    //   options = {
-    //     afterSuccess: () => {
-    //       _this.props.actions.openSnackbar('Product Fetching Successfull');
-    //
-    //       // this view will be the final product
-    //
-    //       let { productName,pinCodeUrl } = this.props;
-    //
-    //       history.push("/dashboard?productName="+productName+"?pinCodeUrl="+pinCodeUrl);
-    //
-    //       // routing depending upon the type of role
-    //       //
-    //       // console.log(Auth.getUserDataByKey('Role'));
-    //       // if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
-    //       //   console.log("I am fll or sll");
-    //       //   history.push("/view");
-    //       // } else {
-    //       //   console.log("I am fls");
-    //       //   history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
-    //       // }
-    //
-    //     },
-    //     afterError: () => {
-    //       _this.props.actions.openSnackbar('Product Fetching Failed');
-    //     }
-    //   };
-    //
-    // this.props.actions.getAllProducts(form, options);
+          // routing depending upon the type of role
+          //
+          // console.log(Auth.getUserDataByKey('Role'));
+          // if(!!Auth.getUserDataByKey('Role') && (Auth.getUserDataByKey('Role') === 'FLL' || Auth.getUserDataByKey('Role') === 'SLL' )) {
+          //   console.log("I am fll or sll");
+          //   history.push("/view");
+          // } else {
+          //   console.log("I am fls");
+          //   history.push("/dashboard?agentId="+Auth.getUserDataByKey('Id'));
+          // }
 
-    // this.getOutlestDataToo(form.pinCode);
+        },
+        afterError: () => {
+          _this.props.actions.openSnackbar('Error in form Submission');
+        }
+      };
+
+    this.props.actions.setvendorFull(form, options);
 
   }
 
@@ -222,7 +187,7 @@ class Login extends Component {
           <section>
             <Grid container className="flex-row flex-justify-center">
               <Grid item xs={10} sm={10} md={10} lg={10}>
-                <LoginForm
+                <VendorFull
                   form={form}
                   onInputChange={this.onInputChange}
                   onInputBlur={this.onInputBlur}
@@ -246,9 +211,9 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       openSnackbar: (data) => dispatch(SnackbarAction.show(data)),
-      getOutlets: (pincode, options) => dispatch(UserAction.getOutlets(pincode, options))
+      setvendorFull: (form, options) => dispatch(UserAction.setvendorFull(form, options))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(VendorOld);

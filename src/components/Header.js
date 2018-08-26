@@ -36,7 +36,8 @@ const STYLES = {
     paddingTop:"0px"
   }
 }
-const Header = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl }) => {
+
+const Header = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl, moveToVendorPage }) => {
   const isLoggedIn = Auth.isLoggedIn();
   // const isLoggedIn = true;
 
@@ -55,7 +56,7 @@ const Header = ({ onLogoutClick, showHeaderMenu, closeHeaderMenu, headerAnchorEl
              Customer
           </Button>
 
-          <Button variant="raised" className="VENDOR_BUTTON">
+          <Button variant="raised" className="VENDOR_BUTTON" onClick={moveToVendorPage}>
              Vendor
           </Button>
         </Grid>

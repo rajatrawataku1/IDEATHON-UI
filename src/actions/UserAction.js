@@ -8,7 +8,80 @@ export const UserAction = {
   logout,
   getMyProfile,
   getAllProducts,
-  getOutlets
+  getOutlets,
+  setvendorNew,
+  setvendorFull
+}
+
+
+function setvendorFull(form, options={}) {
+
+  let { afterSuccess, afterError } = options;
+
+  if (!(afterSuccess instanceof Function)) {
+    afterSuccess = undefined;
+  }
+
+  if (!(afterError instanceof Function)) {
+    afterError = undefined;
+  }
+
+  let { phoneNumber, retailerName, pinCodeRetailer, income, year } = form;
+
+  let body = {
+    name:retailerName.value,
+    pincode:pinCodeRetailer.value,
+    phone: phoneNumber.value,
+    income:income.value,
+    year:year.value
+  }
+
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: USER_API.SET_VENDOR_FULL,
+      body,
+      successType: USER_ACTION_TYPES.SET_VENDOR_FULL_SUCCESS,
+      errorType: USER_ACTION_TYPES.SET_VENDOR_FULL_FAILURE,
+      afterSuccess,
+      afterError
+    }
+  };
+
+}
+
+function setvendorNew(form, options={}) {
+
+  let { afterSuccess, afterError } = options;
+
+  if (!(afterSuccess instanceof Function)) {
+    afterSuccess = undefined;
+  }
+
+  if (!(afterError instanceof Function)) {
+    afterError = undefined;
+  }
+
+  let { phoneNumber, retailerName, pinCodeRetailer } = form;
+
+  let body = {
+    name:retailerName.value,
+    pincode:pinCodeRetailer.value,
+    phone: phoneNumber.value
+  }
+
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: USER_API.SET_VENDOR_NEW,
+      body,
+      successType: USER_ACTION_TYPES.SET_VENDOR_NEW_SUCCESS,
+      errorType: USER_ACTION_TYPES.SET_VENDOR_NEW_FAILURE,
+      afterSuccess,
+      afterError
+    }
+  };
+
 }
 
 function getOutlets(form, options={}) {
@@ -58,6 +131,7 @@ function getAllProducts(form, options={}) {
   if (!(afterError instanceof Function)) {
     afterError = undefined;
   }
+
 
   let FinalPath = USER_API.GET_ALL_PRODUCTS +'?productName='+product;
 
